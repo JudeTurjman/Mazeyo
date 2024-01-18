@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="Bright_Orange">#FFAC1C</color>
+    <color name="Bronze">#CD7F32</color>
+    <color name="Golden_Yellow">#FFC000</color>
+    <color name="Mango">#F4BB44</color>
+    <color name="Orange">#FFA500</color>
+    <color name="Red_Orange">#FF4433</color>
+    <color name="Sienna">#A0522D</color>
+    <color name="Amber">#FFBF00</color>
+    <color name="Tangerine">#F08000	</color>
+</resources>
