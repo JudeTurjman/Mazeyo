@@ -1,19 +1,44 @@
 package com.jude.mazeyo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private BottomNavigationView bnv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bnv= findViewById(R.id.BottomNavigationView);
 
         GoToHome();
+
+        bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                if(item.getItemId() == R.id.nav_home) {
+                    GoToHome();
+                }
+                if(item.getItemId() == R.id.nav_profile){
+                    GoToProfile();
+                }
+
+                return true;
+            }
+        });
+
+
 
     }
 
@@ -22,6 +47,17 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new HomeFragment());
         ft.commit();
+    }
+
+    private void GoToProfile() {
+
+        FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
+        ft.commit();
+    }
+
+    public BottomNavigationView getBottomNavigationView(){
+        return bnv;
     }
 
 }

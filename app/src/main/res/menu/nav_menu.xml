@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         tools:showIn = "navigation_view">
 
@@ -11,17 +10,17 @@
                 android:title="Home"/>
 
             <item
-                android:id="@+id/nav_settings"
+                android:id="@+id/nav_rank"
                 android:icon="@drawable/baseline_leaderboard_24"
                 android:title="Rankings"/>
 
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_shop"
                 android:icon="@drawable/baseline_store_24"
                 android:title="Shop"/>
 
             <item
-                android:id="@+id/nav_about"
+                android:id="@+id/nav_profile"
                 android:icon="@drawable/baseline_person_24"
                 android:title="Profile"/>
 
