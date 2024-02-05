@@ -12,15 +12,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvEasyhame"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="266dp"
-            android:layout_marginEnd="131dp"
-            android:layout_marginBottom="35dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginEnd="50dp"
             app:cardBackgroundColor="@color/Bright_Orange"
             app:cardCornerRadius="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/cvMediumhome"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -45,16 +43,16 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvMediumhome"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginStart="50dp"
-            android:layout_marginEnd="131dp"
-            android:layout_marginBottom="35dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="50dp"
             app:cardBackgroundColor="@color/Bright_Orange"
             app:cardCornerRadius="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/cardView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvEasyhame">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,16 +74,16 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginStart="50dp"
-            android:layout_marginEnd="131dp"
-            android:layout_marginBottom="200dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="50dp"
             app:cardBackgroundColor="@color/Bright_Orange"
             app:cardCornerRadius="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvMediumhome">
 
             <LinearLayout
                 android:layout_width="match_parent"

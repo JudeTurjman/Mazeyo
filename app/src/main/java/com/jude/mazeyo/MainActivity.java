@@ -6,12 +6,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
+    FireBaseServices fbs;
     private BottomNavigationView bnv;
 
     @Override
@@ -19,9 +21,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        fbs = FireBaseServices.getInstance();
         bnv= findViewById(R.id.BottomNavigationView);
 
-        GoToHome();
+        if(fbs.getAuth().getCurrentUser()!=null){
+
+            bnv.setVisibility(View.VISIBLE);
+            GoToHome();
+
+        }else{
+
+            bnv.setVisibility(View.GONE);
+            GoToSignup();
+
+        }
 
         bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -38,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void GoToHome() {
@@ -53,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
+        ft.commit();
+    }
+
+    private void GoToSignup() {
+
+        FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new SignUpFragment());
         ft.commit();
     }
 

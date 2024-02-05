@@ -22,7 +22,6 @@
             android:layout_height="65dp"
             android:layout_alignParentBottom="true"
             app:menu="@menu/nav_menu"
-            android:background="@color/Black_Bron"
-            />
+            android:background="@color/Black_Bron" />
 
 </RelativeLayout>
