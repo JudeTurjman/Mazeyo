@@ -91,7 +91,6 @@ public class SignUpFragment extends Fragment {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String email = etMail.getText().toString();
                 String pass = etPass.getText().toString();
                 String username = etUser.getText().toString();
