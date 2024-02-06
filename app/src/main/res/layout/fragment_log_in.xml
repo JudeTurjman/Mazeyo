@@ -4,38 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".SignUpFragment">
+    tools:context=".LogInFragment">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="sign up"
+            android:text="Log In"
             android:textColor="@color/black"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <EditText
-            android:id="@+id/etUsernameSinup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <EditText
-            android:id="@+id/etEmailSignup"
+            android:id="@+id/etEmailLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -44,10 +33,10 @@
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etUsernameSinup" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <EditText
-            android:id="@+id/etPasswordSignup"
+            android:id="@+id/etPasswordLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -56,51 +45,29 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmailSignup" />
+            app:layout_constraintTop_toBottomOf="@+id/etEmailLogin" />
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvSignup"
+            android:id="@+id/cvLogin"
             android:layout_width="250dp"
             android:layout_height="55dp"
             android:layout_marginTop="30dp"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPasswordSignup">
+            app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin">
 
             <Button
-                android:id="@+id/btnSignup"
+                android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/card_view_shadow"
-                android:text="Signup"
-                app:backgroundTint="@null" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvGotoLogin"
-            android:layout_width="250dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cvSignup">
-
-            <Button
-                android:id="@+id/btnGotoLogin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/card_view_shadow"
-                android:text="Go to Log in"
+                android:text="Log in"
                 app:backgroundTint="@null" />
 
         </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </RelativeLayout>

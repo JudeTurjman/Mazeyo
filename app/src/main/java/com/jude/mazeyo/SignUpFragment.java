@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ public class SignUpFragment extends Fragment {
 
     FireBaseServices fbs;
     EditText etMail, etPass, etUser;
-    Button btnSingup;
+    Button btnSignup, btnLogin;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,12 +82,13 @@ public class SignUpFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
-        etMail = getView().findViewById(R.id.etEmailSinup);
-        etPass = getView().findViewById(R.id.etPasswordSinup);
-        etUser = getView().findViewById(R.id.etUsenameSinup);
-        btnSingup = getView().findViewById(R.id.btnSignup);
+        etMail = getView().findViewById(R.id.etEmailSignup);
+        etPass = getView().findViewById(R.id.etPasswordSignup);
+        etUser = getView().findViewById(R.id.etUsernameSinup);
+        btnSignup = getView().findViewById(R.id.btnSignup);
+        btnLogin = getView().findViewById(R.id.btnGotoLogin);
 
-        btnSingup.setOnClickListener(new View.OnClickListener() {
+        btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -119,6 +121,13 @@ public class SignUpFragment extends Fragment {
             }
         });
 
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToLogin();
+            }
+        });
+
     }
 
     private void SignInNewUser(String email, String pass) {
@@ -146,15 +155,21 @@ public class SignUpFragment extends Fragment {
 
     private void SetHomeNav() {
 
-        // Getting the Navigation Bar From The Main Activity and Showing It!!!!!!!!!!!!!!!!!!!!
+        // Getting the Navigation Bar From The Main Activity and Showing It!
         BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
         bnv.setVisibility(View.VISIBLE);
 
-        // Go To Home Screen!!!!!!!!!!!!!!!!!!!!!!!!!
+        // Go To Home Screen!
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new HomeFragment());
         ft.commit();
 
     }
 
+    private void GoToLogin() {
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new LogInFragment());
+        ft.commit();
+    }
 }

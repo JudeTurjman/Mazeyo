@@ -35,11 +35,12 @@
                     android:textAlignment="center"/>
 
                 <EditText
+                    android:id="@+id/etUsernameProfile"
                     android:layout_width="99dp"
                     android:layout_height="match_parent"
                     android:hint="..."
-                    android:textSize="17dp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:textSize="17dp" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
