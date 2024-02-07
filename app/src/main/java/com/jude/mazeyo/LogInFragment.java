@@ -2,13 +2,21 @@ package com.jude.mazeyo;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.AuthResult;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,7 +27,7 @@ public class LogInFragment extends Fragment {
 
     FireBaseServices fbs;
     EditText etMail, etPass;
-    Button btnLogin;
+    Button btnLogin, btnSignup;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,7 +85,72 @@ public class LogInFragment extends Fragment {
         etMail = getView().findViewById(R.id.etEmailLogin);
         etPass = getView().findViewById(R.id.etPasswordLogin);
         btnLogin = getView().findViewById(R.id.btnLogin);
+        btnSignup = getView().findViewById(R.id.btnGotoSignup);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String email = etMail.getText().toString();
+                String pass = etPass.getText().toString();
+
+                if (email.trim().isEmpty() || pass.trim().isEmpty()){
+                    Toast.makeText(getActivity(), "Some Fields are Missing", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+
+                fbs.getAuth().signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()){
+
+                            Toast.makeText(getActivity(),"Logging in Successful!",Toast.LENGTH_SHORT).show();
+                            SetHomeNav();
+
+                        }
+                        else {
+
+                            Toast.makeText(getActivity(), "Logging in Failed!", Toast.LENGTH_SHORT).show();
+
+                        }
+
+
+                    }
+                });
+
+            }
+        });
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToSignup();
+            }
+        });
 
 
     }
+
+    private void SetHomeNav() {
+
+        // Getting the Navigation Bar From The Main Activity and Showing It!
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setVisibility(View.VISIBLE);
+
+        // Go To Home Screen!
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new HomeFragment());
+        ft.commit();
+
+    }
+
+    private void GoToSignup() {
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new SignUpFragment());
+        ft.commit();
+    }
+
 }

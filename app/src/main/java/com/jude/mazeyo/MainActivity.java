@@ -24,19 +24,18 @@ public class MainActivity extends AppCompatActivity {
         fbs = FireBaseServices.getInstance();
         bnv= findViewById(R.id.BottomNavigationView);
 
-        //        if(fbs.getAuth().getCurrentUser()!=null){
-        //
-        //            bnv.setVisibility(View.VISIBLE);
-        //            GoToHome();
-        //
-        //        }else{
-        //
-        //            bnv.setVisibility(View.GONE);
-        //            GoToSignup();
-        //
-        //        }
+        if(fbs.getAuth().getCurrentUser()!=null){
 
-        GoToSignup();
+            bnv.setVisibility(View.VISIBLE);
+            GoToHome();
+
+        }else{
+
+            bnv.setVisibility(View.GONE);
+            GoToSignup();
+
+        }
+
 
         bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
