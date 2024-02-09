@@ -9,12 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.common.collect.Sets;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+
+    FireBaseServices fbs;
+    EditText etUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,5 +68,18 @@ public class ProfileFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // I do not know what this shit do, but I hope it will set the User name...
+        // I knew that this is wrong and I need to use AddShowFragment, but I like to HOPE :)
+        fbs = FireBaseServices.getInstance();
+        String Username = fbs.getStorage().toString();
+        etUser.setText(Username);
+        etUser = getView().findViewById(R.id.etUsernameProfile);
+
+    }
 
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +29,7 @@ public class LogInFragment extends Fragment {
     FireBaseServices fbs;
     EditText etMail, etPass;
     Button btnLogin, btnSignup;
+    TextView tvForgot;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -86,6 +88,7 @@ public class LogInFragment extends Fragment {
         etPass = getView().findViewById(R.id.etPasswordLogin);
         btnLogin = getView().findViewById(R.id.btnLogin);
         btnSignup = getView().findViewById(R.id.btnGotoSignup);
+        tvForgot = getView().findViewById(R.id.tvGotoForgotpassword);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +133,11 @@ public class LogInFragment extends Fragment {
             }
         });
 
+        tvForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {GoToForgot();}
+        });
+
 
     }
 
@@ -150,6 +158,13 @@ public class LogInFragment extends Fragment {
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new SignUpFragment());
+        ft.commit();
+    }
+
+    private void GoToForgot() {
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new ForgotPasswordFragment());
         ft.commit();
     }
 

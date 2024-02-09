@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
 
             bnv.setVisibility(View.GONE);
-            GoToSignup();
+            GoToLogin();
 
         }
 
@@ -68,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    private void GoToSignup() {
+    private void GoToLogin() {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FrameLayoutMain, new SignUpFragment());
+        ft.replace(R.id.FrameLayoutMain, new LogInFragment());
         ft.commit();
     }
 
