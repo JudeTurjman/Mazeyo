@@ -123,6 +123,11 @@ public class ForgotPasswordFragment extends Fragment {
             }
         });
 
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {GoToLogin();}
+        });
+
 
     }
 

@@ -1,12 +1,16 @@
 package com.jude.mazeyo;
 
+import android.animation.LayoutTransition;
 import android.os.Bundle;
 
+import androidx.annotation.LayoutRes;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +18,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+
+    CardView cvMedium;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +67,25 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        cvMedium = getView().findViewById(R.id.cvMediumhome);
+
+        cvMedium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToMedium();
+            }
+        });
+
+    }
+
+    // this shit is to go to a new layout but I dont know how to do it ...
+    public void GoToMedium(){
+
     }
 }
