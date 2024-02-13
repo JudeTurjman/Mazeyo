@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,6 +89,10 @@ public class HomeFragment extends Fragment {
 
 
     public void GoToMedium(){
+
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setVisibility(View.GONE);
+
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new GameMediumFragment());
         ft.commit();

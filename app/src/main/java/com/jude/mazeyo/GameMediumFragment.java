@@ -2,11 +2,16 @@ package com.jude.mazeyo;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class GameMediumFragment extends Fragment {
+
+    CardView cvHome;
+    View vMedium;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +69,27 @@ public class GameMediumFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_game_medium, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        cvHome = getView().findViewById(R.id.cvGotoHomeMedium);
+        vMedium = getView().findViewById(R.id.vGameMedium);
+        cvHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {GoToHome();}
+        });
+    }
+
+    public void GoToHome(){
+
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setVisibility(View.VISIBLE);
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new HomeFragment());
+        ft.commit();
     }
 }
