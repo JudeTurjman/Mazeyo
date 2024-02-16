@@ -10,18 +10,69 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="81dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@mipmap/profile_launcher_foreground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvMCoinHome"
+            android:layout_width="258dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvMCoinCountHome"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:text="000:"
+                    android:textSize="40dp"
+                    android:textStyle="italic"
+                    android:textAlignment="textEnd"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintTop_toTopOf="10dp" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/m_coin_removebg"
+                    app:layout_constraintStart_toEndOf="@+id/tvMCoinCountHome"
+                    tools:layout_editor_absoluteX="242dp"
+                    tools:layout_editor_absoluteY="16dp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cvEasyhome"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="150dp"
             android:layout_marginEnd="50dp"
             app:cardBackgroundColor="@color/Bright_Orange"
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/cvMCoinHome">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,7 +153,6 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

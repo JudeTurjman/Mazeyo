@@ -134,7 +134,7 @@ public class GameViewMedium extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.GREEN);
+        canvas.drawColor(Color.WHITE);
 
         int width = getWidth();
         int height = getHeight();

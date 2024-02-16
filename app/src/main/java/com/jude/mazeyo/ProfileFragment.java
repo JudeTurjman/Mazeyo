@@ -69,17 +69,5 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // I do not know what this shit do, but I hope it will set the User name...
-        // I knew that this is wrong and I need to use AddShowFragment, but I like to HOPE :)
-        fbs = FireBaseServices.getInstance();
-        String Username = fbs.getStorage().toString();
-        etUser.setText(Username);
-        etUser = getView().findViewById(R.id.etUsernameProfile);
-
-    }
 
 }
