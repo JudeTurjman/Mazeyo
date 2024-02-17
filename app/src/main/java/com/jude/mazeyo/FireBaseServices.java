@@ -12,6 +12,15 @@ public class FireBaseServices {
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
     private FirebaseStorage storage;
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public FirebaseFirestore getFirestore() {
         return firestore;

@@ -2,7 +2,9 @@ package com.jude.mazeyo;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +12,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.common.collect.Sets;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +26,7 @@ public class ProfileFragment extends Fragment {
 
     FireBaseServices fbs;
     TextView tvUsername;
+    CardView cvLogout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,7 +80,37 @@ public class ProfileFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
+        tvUsername = getView().findViewById(R.id.tvUsernameProfile);
+        cvLogout = getView().findViewById(R.id.cvLogoutProfile);
 
+        if(fbs.getUser()==null){
 
+            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                    User user = documentSnapshot.toObject(User.class);
+                    fbs.setUser(user);
+                    tvUsername.setText(user.getUsername());
+
+                }
+            });
+        }
+
+        cvLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {GoToLogin();}
+        });
+
+    }
+
+    private void GoToLogin(){
+
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setVisibility(View.GONE);
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new LogInFragment());
+        ft.commit();
     }
 }

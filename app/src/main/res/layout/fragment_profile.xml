@@ -39,6 +39,7 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cvUsernameProfile"
             android:layout_width="199dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/cardView2"
@@ -70,6 +71,37 @@
                     android:textSize="17dp" />
 
             </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvLogoutProfile"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="250dp"
+            android:layout_marginEnd="50dp"
+            app:cardBackgroundColor="@color/Bright_Orange"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cvUsernameProfile">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/card_view_shadow">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Log Out"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

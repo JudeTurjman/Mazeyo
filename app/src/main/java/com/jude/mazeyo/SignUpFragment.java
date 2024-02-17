@@ -108,7 +108,7 @@ public class SignUpFragment extends Fragment {
                         if(task.isSuccessful()){
 
                             Toast.makeText(getActivity(), "Signup Successful!", Toast.LENGTH_SHORT).show();
-                            CreateUser(username);
+                            CreateUser(username , email);
                             SignInNewUser(email, pass);
 
                         }
@@ -133,10 +133,10 @@ public class SignUpFragment extends Fragment {
     }
 
     // this thing for creating a new user
-    private void CreateUser(String Uname){
+    private void CreateUser(String Uname ,String mail){
         User user = new User(Uname);
 
-        fbs.getFirestore().collection("Users").document().set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+        fbs.getFirestore().collection("Users").document(mail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
 
