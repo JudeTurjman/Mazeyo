@@ -11,19 +11,45 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="199dp"
-            android:layout_height="40dp"
+            android:layout_height="199dp"
             android:layout_marginStart="106dp"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="106dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:outlineSpotShadowColor="@color/white"
+            android:outlineAmbientShadowColor="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="199dp"
+                    android:layout_height="199dp"
+                    android:src="@mipmap/profile_launcher_foreground"
+                    tools:layout_editor_absoluteX="126dp"
+                    tools:layout_editor_absoluteY="169dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="199dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cardView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:outlineSpotShadowColor="@color/white"
+            android:outlineAmbientShadowColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <TextView
                     android:id="@+id/textView1"
@@ -34,111 +60,16 @@
                     android:textSize="17dp"
                     android:textAlignment="center"/>
 
-                <EditText
-                    android:id="@+id/etUsernameProfile"
+                <TextView
+                    android:id="@+id/tvUsernameProfile"
                     android:layout_width="99dp"
                     android:layout_height="match_parent"
                     android:hint="..."
+                    android:text=""
                     android:textAlignment="center"
                     android:textSize="17dp" />
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="199dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="106dp"
-            android:layout_marginTop="290dp"
-            android:layout_marginEnd="106dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="First Name:"
-                    android:textSize="17dp"
-                    android:textAlignment="center"/>
-
-                <EditText
-                    android:layout_width="99dp"
-                    android:layout_height="match_parent"
-                    android:hint="..."
-                    android:textSize="17dp"
-                    android:textAlignment="center"/>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="199dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="106dp"
-            android:layout_marginTop="330dp"
-            android:layout_marginEnd="106dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Last Name:"
-                    android:textSize="17dp"
-                    android:textAlignment="center"/>
-
-                <EditText
-                    android:layout_width="99dp"
-                    android:layout_height="match_parent"
-                    android:hint="..."
-                    android:textSize="17dp"
-                    android:textAlignment="center"/>
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
-            android:layout_width="199dp"
-            android:layout_height="199dp"
-            android:layout_marginStart="106dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="106dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="199dp"
-                    android:layout_height="match_parent"
-                    android:src="@mipmap/profile_launcher_foreground"
-                    tools:layout_editor_absoluteX="126dp"
-                    tools:layout_editor_absoluteY="169dp" />
-
-            </LinearLayout>
-
-
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

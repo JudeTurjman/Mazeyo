@@ -11,9 +11,9 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="0dp"
-            android:layout_height="81dp"
+            android:id="@+id/ivProfileHome"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:src="@mipmap/profile_launcher_foreground"
@@ -22,15 +22,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvMCoinHome"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="115dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="78dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="15dp"
             android:outlineAmbientShadowColor="@color/white"
             android:outlineSpotShadowColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -41,16 +39,16 @@
                     android:id="@+id/tvMCoinCountHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="15dp"
                     android:text="000:"
                     android:textAlignment="textEnd"
-                    android:textSize="40dp"
+                    android:textSize="20dp"
                     android:textStyle="italic" />
 
                 <ImageView
                     android:id="@+id/ivMCoinHome"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
                     android:src="@drawable/m_coin_removebg"
                     tools:layout_editor_absoluteX="242dp"
                     tools:layout_editor_absoluteY="16dp" />

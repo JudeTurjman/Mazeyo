@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -23,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class HomeFragment extends Fragment {
 
     CardView cvMedium;
+    ImageView ivProfile;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -77,12 +79,17 @@ public class HomeFragment extends Fragment {
         super.onStart();
 
         cvMedium = getView().findViewById(R.id.cvMediumhome);
+        ivProfile = getView().findViewById(R.id.ivProfileHome);
 
         cvMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GoToMedium();
             }
+        });
+        ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {GoToProfile();}
         });
 
     }
@@ -95,6 +102,12 @@ public class HomeFragment extends Fragment {
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new GameMediumFragment());
+        ft.commit();
+    }
+
+    public void GoToProfile(){
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
         ft.commit();
     }
 }

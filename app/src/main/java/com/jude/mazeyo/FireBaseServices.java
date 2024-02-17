@@ -10,15 +10,15 @@ public class FireBaseServices {
 
     private  static FireBaseServices instance;
     private FirebaseAuth auth;
-    private FirebaseFirestore fire;
+    private FirebaseFirestore firestore;
     private FirebaseStorage storage;
+
+    public FirebaseFirestore getFirestore() {
+        return firestore;
+    }
 
     public FirebaseAuth getAuth() {
         return auth;
-    }
-
-    public FirebaseFirestore getFire() {
-        return fire;
     }
 
     public FirebaseStorage getStorage() {
@@ -28,7 +28,7 @@ public class FireBaseServices {
     public  FireBaseServices()
     {
         auth=FirebaseAuth.getInstance();
-        fire=FirebaseFirestore.getInstance();
+        firestore=FirebaseFirestore.getInstance();
         storage=FirebaseStorage.getInstance();
     }
 

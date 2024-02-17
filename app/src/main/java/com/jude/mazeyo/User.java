@@ -2,35 +2,32 @@ package com.jude.mazeyo;
 
 public class User {
 
-    private String firstname;
-    private String lastname;
+
     private String username;
+    private String comment;
     private String photo;
+    private int easy;
+    private int medium;
+    private int hard;
+    private int coin;
+
+    public User(String username) {
+        this.username = username;
+        comment = "hi, I am a Mazeyo Player";
+        easy = 0;
+        medium = 0;
+        hard = 0;
+        coin = 0;
+    }
 
     public User() {
-    }
-
-    public User(String firstname, String lastname, String username, String photo) {
-        this.firstname = firstname;
-        this.lastname = lastname;
         this.username = username;
+        this.comment = comment;
         this.photo = photo;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.easy = easy;
+        this.medium = medium;
+        this.hard = hard;
+        this.coin = coin;
     }
 
     public String getUsername() {
@@ -41,13 +38,64 @@ public class User {
         this.username = username;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public int getEasy() {
+        return easy;
+    }
+
+    public void setEasy(int easy) {
+        this.easy = easy;
+    }
+
+    public int getMedium() {
+        return medium;
+    }
+
+    public void setMedium(int medium) {
+        this.medium = medium;
+    }
+
+    public int getHard() {
+        return hard;
+    }
+
+    public void setHard(int hard) {
+        this.hard = hard;
+    }
+
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", username='" + username + '\'' +
+                "username='" + username + '\'' +
+                ", comment='" + comment + '\'' +
                 ", photo='" + photo + '\'' +
+                ", easy=" + easy +
+                ", medium=" + medium +
+                ", hard=" + hard +
+                ", coin=" + coin +
                 '}';
     }
 }

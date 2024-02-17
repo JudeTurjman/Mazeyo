@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.common.collect.Sets;
 
@@ -19,7 +20,7 @@ import com.google.common.collect.Sets;
 public class ProfileFragment extends Fragment {
 
     FireBaseServices fbs;
-    EditText etUser;
+    TextView tvUsername;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,6 +69,12 @@ public class ProfileFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        fbs = FireBaseServices.getInstance();
 
 
+    }
 }
