@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="@null">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/card_view_shadow">
+
+        <TextView
+            android:id="@+id/tvtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="You Won!"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutSellerInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvtxt">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExitWinner"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/white"
+                android:hapticFeedbackEnabled="true"
+                android:text="Exit"
+                android:textColor="@color/black"
+                app:shapeAppearance="@style/RoundShape.App.50percent"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp" />
+
+            <Button
+                android:id="@+id/btnContinueWinner"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:backgroundTint="@color/Black_Bron"
+                android:hapticFeedbackEnabled="true"
+                android:text="Continue"
+                android:textColor="@color/white"
+                app:shapeAppearance="@style/RoundShape.App.50percent" />
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

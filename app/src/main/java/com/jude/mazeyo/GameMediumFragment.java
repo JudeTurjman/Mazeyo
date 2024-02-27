@@ -23,7 +23,6 @@ public class GameMediumFragment extends Fragment {
     CardView cvHome;
     View vMedium;
 
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -77,6 +76,7 @@ public class GameMediumFragment extends Fragment {
 
         cvHome = getView().findViewById(R.id.cvGotoHomeMedium);
         vMedium = getView().findViewById(R.id.vGameMedium);
+
         cvHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {GoToHome();}

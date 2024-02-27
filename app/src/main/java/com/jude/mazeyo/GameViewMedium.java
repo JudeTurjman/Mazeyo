@@ -2,6 +2,7 @@ package com.jude.mazeyo;
 
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,8 +10,19 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,6 +30,9 @@ import java.util.Stack;
 
 public class GameViewMedium extends View {
 
+    private FireBaseServices fbs;
+    Context contextView;
+    Dialog dialog;
     private enum Direction{
         UP, DOWN, LEFT, RIGHT
     }
@@ -34,6 +49,8 @@ public class GameViewMedium extends View {
     public GameViewMedium(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
+        fbs = FireBaseServices.getInstance();
+
         wallPaint = new Paint();
         wallPaint.setColor(Color.BLACK);
         wallPaint.setStrokeWidth(WALL_THICKNESS);
@@ -46,7 +63,15 @@ public class GameViewMedium extends View {
 
         random = new Random();
 
-        createMaze();
+        contextView = context;
+
+        dialog = new Dialog(contextView);
+        dialog.setContentView(R.layout.winner_dialog_popup);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+        dialog.setCancelable(false);
+
+         createMaze();
     }
 
     private Cell getNeighbour(Cell cell){
@@ -103,6 +128,7 @@ public class GameViewMedium extends View {
     }
 
     private void createMaze(){
+
         Stack<Cell> stack = new Stack<>();
         Cell current, next;
 
@@ -227,8 +253,92 @@ public class GameViewMedium extends View {
     }
 
     private void checkExit(){
+
         if (player == exit)
-            createMaze();
+        {
+            // add one Medium Game Played! and Increase Coins Count by 5 Mazeyo Coins.
+            // Todo: Make Popup Dialog with 2 Options (1- Exit , 2- Continue).
+
+            if(!dialog.isShowing()) dialog.show();
+
+            Button cont = dialog.findViewById(R.id.btnContinueWinner);
+            Button exit = dialog.findViewById(R.id.btnExitWinner);
+
+            User user = fbs.getUser();
+
+            cont.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(user!=null) {
+
+                        user.setCoin(user.getCoin()+5);
+                        user.setMedium(user.getMedium()+1);
+
+                        fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                                fbs.setUser(user);
+
+                                dialog.dismiss();
+                                createMaze();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                    }
+
+                }
+            });
+
+            exit.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(user!=null) {
+
+                        user.setCoin(user.getCoin()+5);
+                        user.setMedium(user.getMedium()+1);
+
+                        fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                                fbs.setUser(user);
+
+                                FragmentManager fm = ((MainActivity) contextView).getSupportFragmentManager();
+
+                                BottomNavigationView bnv = ((MainActivity) contextView).getBottomNavigationView();
+                                bnv.setVisibility(View.VISIBLE);
+
+                                FragmentTransaction ft= fm.beginTransaction();
+                                ft.replace(R.id.FrameLayoutMain, new HomeFragment());
+                                ft.commit();
+
+                                dialog.dismiss();
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                    }
+
+                }
+            });
+
+            Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -143,8 +143,11 @@ public class LogInFragment extends Fragment {
 
     private void SetHomeNav() {
 
+        fbs.setUser(null);
+
         // Getting the Navigation Bar From The Main Activity and Showing It!
         BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setSelectedItemId(R.id.nav_home);
         bnv.setVisibility(View.VISIBLE);
 
         // Go To Home Screen!

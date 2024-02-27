@@ -108,8 +108,7 @@ public class SignUpFragment extends Fragment {
                         if(task.isSuccessful()){
 
                             Toast.makeText(getActivity(), "Signup Successful!", Toast.LENGTH_SHORT).show();
-                            CreateUser(username , email);
-                            SignInNewUser(email, pass);
+                            CreateUser(username , email, pass);
 
                         }
                         else {
@@ -133,17 +132,19 @@ public class SignUpFragment extends Fragment {
     }
 
     // this thing for creating a new user
-    private void CreateUser(String Uname ,String mail){
+    private void CreateUser(String Uname ,String mail, String pass){
         User user = new User(Uname);
 
         fbs.getFirestore().collection("Users").document(mail).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-
+                SignInNewUser(mail, pass);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+
+                Toast.makeText(getActivity(), "Creating User Profile Failed!", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -163,7 +164,7 @@ public class SignUpFragment extends Fragment {
                 }
                 else{
 
-                    Toast.makeText(getActivity(), "Logging in Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Login Failed!", Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -174,8 +175,11 @@ public class SignUpFragment extends Fragment {
 
     private void SetHomeNav() {
 
+        fbs.setUser(null);
+
         // Getting the Navigation Bar From The Main Activity and Showing It!
         BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setSelectedItemId(R.id.nav_home);
         bnv.setVisibility(View.VISIBLE);
 
         // Go To Home Screen!

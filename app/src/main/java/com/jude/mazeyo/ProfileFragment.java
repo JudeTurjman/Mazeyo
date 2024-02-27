@@ -25,7 +25,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 public class ProfileFragment extends Fragment {
 
     FireBaseServices fbs;
-    TextView tvUsername;
+    TextView tvUsername, tvEasy, tvMedium, tvHard;
     CardView cvLogout;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -81,20 +81,19 @@ public class ProfileFragment extends Fragment {
 
         fbs = FireBaseServices.getInstance();
         tvUsername = getView().findViewById(R.id.tvUsernameProfile);
+        tvEasy = getView().findViewById(R.id.tvEasyProfile);
+        tvMedium = getView().findViewById(R.id.tvMediumProfile);
+        tvHard = getView().findViewById(R.id.tvHardProfile);
         cvLogout = getView().findViewById(R.id.cvLogoutProfile);
 
-        if(fbs.getUser()==null){
 
-            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
+        if(fbs.getUser()!=null) {
 
-                    User user = documentSnapshot.toObject(User.class);
-                    fbs.setUser(user);
-                    tvUsername.setText(user.getUsername());
+            tvUsername.setText(fbs.getUser().getUsername());
+            tvEasy.setText(Integer.toString(fbs.getUser().getEasy()));
+            tvMedium.setText(Integer.toString(fbs.getUser().getMedium()));
+            tvHard.setText(Integer.toString(fbs.getUser().getHard()));
 
-                }
-            });
         }
 
         cvLogout.setOnClickListener(new View.OnClickListener() {

@@ -12,8 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 
 /**
@@ -23,8 +26,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  */
 public class HomeFragment extends Fragment {
 
+    private FireBaseServices fbs;
     CardView cvMedium;
     ImageView ivProfile;
+    TextView tvMCoin;
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -78,8 +84,33 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        fbs = FireBaseServices.getInstance();
         cvMedium = getView().findViewById(R.id.cvMediumhome);
         ivProfile = getView().findViewById(R.id.ivProfileHome);
+        tvMCoin = getView().findViewById(R.id.tvMCoinCountHome);
+
+        if(fbs.getUser() == null){
+
+            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                    User user = documentSnapshot.toObject(User.class);
+                    fbs.setUser(user);
+
+                    tvMCoin.setText(fbs.getUser().getCoin()+":");
+
+
+                    // show Coins Amount and Comment and Game Count.
+
+                }
+            });
+
+        } else {
+
+            tvMCoin.setText(fbs.getUser().getCoin()+":");
+
+        }
 
         cvMedium.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,11 +120,13 @@ public class HomeFragment extends Fragment {
         });
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {GoToProfile();}
+            public void onClick(View v) {
+                GoToProfile();
+                ((MainActivity) getActivity()).getBottomNavigationView().setSelectedItemId(R.id.nav_profile);
+            }
         });
 
     }
-
 
     public void GoToMedium(){
 

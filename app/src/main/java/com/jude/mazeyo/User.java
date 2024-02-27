@@ -30,6 +30,16 @@ public class User {
         this.coin = coin;
     }
 
+    public User(String username, String comment, String photo, int easy, int medium, int hard, int coin) {
+        this.username = username;
+        this.comment = comment;
+        this.photo = photo;
+        this.easy = easy;
+        this.medium = medium;
+        this.hard = hard;
+        this.coin = coin;
+    }
+
     public String getUsername() {
         return username;
     }
