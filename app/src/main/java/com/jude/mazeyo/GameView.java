@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-public class GameViewMedium extends View {
+public class GameView extends View {
 
     private FireBaseServices fbs;
     Context contextView;
@@ -38,7 +38,7 @@ public class GameViewMedium extends View {
     }
     private Cell[] [] cells;
     private Cell player, exit;
-    private static final int Cols = 20 , Rows = 20 ;
+    private static int Cols , Rows ;
     private static final float WALL_THICKNESS = 4;
     private float cellsSize, hMargin, vMargin;
     private final Paint wallPaint;
@@ -46,7 +46,7 @@ public class GameViewMedium extends View {
     private final Paint exitPaint;
     private final Random random;
 
-    public GameViewMedium(Context context, @Nullable AttributeSet attrs) {
+    public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         fbs = FireBaseServices.getInstance();
@@ -62,6 +62,27 @@ public class GameViewMedium extends View {
         exitPaint.setColor(getResources().getColor(R.color.Tangerine)); // set Color by Hex (int) without the # Symbol.
 
         random = new Random();
+
+        // this if is to get the right difficulty...
+        if (fbs.getDifficulty() == "Easy"){
+            Cols = 10; Rows = 10;
+        } else {
+            if (fbs.getDifficulty() == "Medium") {
+                Cols = 20;
+                Rows = 20;
+            } else {
+                if (fbs.getDifficulty() == "Hard") {
+                    Cols = 30;
+                    Rows = 30;
+                } else {
+                    if (fbs.getDifficulty() == "DailyPlay") {
+                        int r = random.nextInt(20) + 20;
+                        Cols = r;
+                        Rows = r;
+                    } else {Cols = 2; Rows = 2;}
+                }
+            }
+        }
 
         contextView = context;
 
@@ -274,8 +295,27 @@ public class GameViewMedium extends View {
                     if (!bool[0]) {
                         if (user != null) {
 
-                            user.setCoin(user.getCoin() + 5);
-                            user.setMedium(user.getMedium() + 1);
+                            // this if to set the right amount of MCoins and difficulty to the user
+                            if (fbs.getDifficulty() == "Easy"){
+                                user.setCoin(user.getCoin() + 1);
+                                user.setEasy(user.getEasy() + 1);
+                                Toast.makeText(contextView, "You Got 1 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (fbs.getDifficulty() == "Medium") {
+                                    user.setCoin(user.getCoin() + 5);
+                                    user.setMedium(user.getMedium() + 1);
+                                    Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (fbs.getDifficulty() == "Hard") {
+                                        user.setCoin(user.getCoin() + 10);
+                                        user.setHard(user.getHard() + 1);
+                                        Toast.makeText(contextView, "You Got 10 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        user.setCoin(user.getCoin() + 20);
+                                        Toast.makeText(contextView, "You Got 20 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
 
                             fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -309,14 +349,35 @@ public class GameViewMedium extends View {
                     if (!bool[0]) {
                         if (user != null) {
 
-                            user.setCoin(user.getCoin() + 5);
-                            user.setMedium(user.getMedium() + 1);
+                            // this if to set the right amount of MCoins and difficulty to the user
+                            if (fbs.getDifficulty() == "Easy"){
+                                user.setCoin(user.getCoin() + 1);
+                                user.setEasy(user.getEasy() + 1);
+                                Toast.makeText(contextView, "You Got 1 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (fbs.getDifficulty() == "Medium") {
+                                    user.setCoin(user.getCoin() + 5);
+                                    user.setMedium(user.getMedium() + 1);
+                                    Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (fbs.getDifficulty() == "Hard") {
+                                        user.setCoin(user.getCoin() + 10);
+                                        user.setHard(user.getHard() + 1);
+                                        Toast.makeText(contextView, "You Got 10 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        user.setCoin(user.getCoin() + 20);
+                                        Toast.makeText(contextView, "You Got 20 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
 
                             fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
 
                                     fbs.setUser(user);
+
+                                    fbs.setDifficulty("NoGame");
 
                                     FragmentManager fm = ((MainActivity) contextView).getSupportFragmentManager();
 
@@ -344,8 +405,6 @@ public class GameViewMedium extends View {
                     }
                 }
             });
-
-            Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
 
         }
     }

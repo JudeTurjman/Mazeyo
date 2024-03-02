@@ -16,10 +16,10 @@ import com.jude.mazeyo.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link GameMediumFragment#newInstance} factory method to
+ * Use the {@link GamePlayFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class GameMediumFragment extends Fragment {
+public class GamePlayFragment extends Fragment {
 
     CardView cvHome;
 
@@ -32,7 +32,7 @@ public class GameMediumFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public GameMediumFragment() {
+    public GamePlayFragment() {
         // Required empty public constructor
     }
 
@@ -42,11 +42,11 @@ public class GameMediumFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment GameMediumFragment.
+     * @return A new instance of fragment GamePlayFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GameMediumFragment newInstance(String param1, String param2) {
-        GameMediumFragment fragment = new GameMediumFragment();
+    public static GamePlayFragment newInstance(String param1, String param2) {
+        GamePlayFragment fragment = new GamePlayFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,7 +67,7 @@ public class GameMediumFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_medium, container, false);
+        return inflater.inflate(R.layout.fragment_game_play, container, false);
     }
 
     @Override

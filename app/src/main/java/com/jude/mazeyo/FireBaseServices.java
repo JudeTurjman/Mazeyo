@@ -13,6 +13,15 @@ public class FireBaseServices {
     private FirebaseFirestore firestore;
     private FirebaseStorage storage;
     private User user;
+    private String difficulty;
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
 
     public User getUser() {
         return user;

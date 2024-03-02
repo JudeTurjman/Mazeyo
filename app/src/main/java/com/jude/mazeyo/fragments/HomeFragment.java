@@ -29,7 +29,7 @@ import com.jude.mazeyo.User;
 public class HomeFragment extends Fragment {
 
     private FireBaseServices fbs;
-    CardView cvMedium, cvDaily;
+    CardView cvEasy, cvMedium, cvHard, cvDaily;
     ImageView ivProfile;
     TextView tvMCoin;
 
@@ -87,10 +87,13 @@ public class HomeFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
+        cvEasy = getView().findViewById(R.id.cvEasyHome);
         cvMedium = getView().findViewById(R.id.cvMediumHome);
+        cvHard = getView().findViewById(R.id.cvHardHome);
         cvDaily = getView().findViewById(R.id.cvDailyHome);
         ivProfile = getView().findViewById(R.id.ivProfileHome);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountHome);
+        fbs.setDifficulty("NoGame");
 
         if(fbs.getUser() == null){
 
@@ -115,10 +118,22 @@ public class HomeFragment extends Fragment {
 
         }
 
+        cvEasy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToEasy();
+            }
+        });
         cvMedium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GoToMedium();
+            }
+        });
+        cvHard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToHard();
             }
         });
         ivProfile.setOnClickListener(new View.OnClickListener() {
@@ -140,29 +155,61 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public void GoToMedium(){
-
-        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
-        bnv.setVisibility(View.GONE);
-
-        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FrameLayoutMain, new GameMediumFragment());
-        ft.commit();
-    }
-
     public void GoToProfile(){
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
         ft.commit();
     }
 
+
+
+
+    public void GoToEasy(){
+
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setVisibility(View.GONE);
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new GamePlayFragment());
+        ft.commit();
+
+        // set the difficulty to Easy mode
+        fbs.setDifficulty("Easy");
+    }
+    public void GoToMedium(){
+
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setVisibility(View.GONE);
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new GamePlayFragment());
+        ft.commit();
+
+        // set the difficulty to Medium mode
+        fbs.setDifficulty("Medium");
+    }
+    public void GoToHard(){
+
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setVisibility(View.GONE);
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new GamePlayFragment());
+        ft.commit();
+
+        // set the difficulty to Hard mode
+        fbs.setDifficulty("Hard");
+    }
     public void GoTODailyPlay(){
 
         BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
         bnv.setVisibility(View.GONE);
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FrameLayoutMain, new GameMediumFragment());
+        ft.replace(R.id.FrameLayoutMain, new GamePlayFragment());
         ft.commit();
+
+        // set the difficulty to Daily mode
+        fbs.setDifficulty("DailyPlay");
     }
 }
