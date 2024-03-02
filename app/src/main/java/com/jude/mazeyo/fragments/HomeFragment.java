@@ -1,9 +1,7 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.fragments;
 
-import android.animation.LayoutTransition;
 import android.os.Bundle;
 
-import androidx.annotation.LayoutRes;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,6 +15,10 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.MainActivity;
+import com.jude.mazeyo.R;
+import com.jude.mazeyo.User;
 
 
 /**
@@ -27,7 +29,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 public class HomeFragment extends Fragment {
 
     private FireBaseServices fbs;
-    CardView cvMedium;
+    CardView cvMedium, cvDaily;
     ImageView ivProfile;
     TextView tvMCoin;
 
@@ -85,7 +87,8 @@ public class HomeFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
-        cvMedium = getView().findViewById(R.id.cvMediumhome);
+        cvMedium = getView().findViewById(R.id.cvMediumHome);
+        cvDaily = getView().findViewById(R.id.cvDailyHome);
         ivProfile = getView().findViewById(R.id.ivProfileHome);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountHome);
 
@@ -126,6 +129,15 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        cvDaily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoTODailyPlay();
+            }
+        });
+
+
     }
 
     public void GoToMedium(){
@@ -141,6 +153,16 @@ public class HomeFragment extends Fragment {
     public void GoToProfile(){
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
+        ft.commit();
+    }
+
+    public void GoTODailyPlay(){
+
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setVisibility(View.GONE);
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new GameMediumFragment());
         ft.commit();
     }
 }

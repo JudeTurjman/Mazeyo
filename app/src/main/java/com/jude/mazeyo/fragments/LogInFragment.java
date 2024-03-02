@@ -1,4 +1,4 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.fragments;
 
 import android.os.Bundle;
 
@@ -18,6 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
+import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.MainActivity;
+import com.jude.mazeyo.R;
 
 /**
  * A simple {@link Fragment} subclass.

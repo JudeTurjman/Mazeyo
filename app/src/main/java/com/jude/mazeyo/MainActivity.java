@@ -11,6 +11,9 @@ import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.jude.mazeyo.fragments.HomeFragment;
+import com.jude.mazeyo.fragments.LogInFragment;
+import com.jude.mazeyo.fragments.ProfileFragment;
 
 public class MainActivity extends AppCompatActivity {
 

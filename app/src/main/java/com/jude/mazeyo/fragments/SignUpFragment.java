@@ -1,10 +1,9 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.fragments;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
@@ -20,6 +19,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
+import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.MainActivity;
+import com.jude.mazeyo.R;
+import com.jude.mazeyo.User;
 
 /**
  * A simple {@link Fragment} subclass.

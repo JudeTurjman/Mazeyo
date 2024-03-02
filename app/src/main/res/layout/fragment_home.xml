@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    tools:context=".fragments.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,8 +26,9 @@
             android:layout_height="40dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="15dp"
-            android:outlineAmbientShadowColor="@color/white"
-            android:outlineSpotShadowColor="@color/white"
+            app:cardBackgroundColor="@color/Transparent"
+            android:outlineSpotShadowColor="@color/Transparent"
+            android:outlineAmbientShadowColor="@color/Transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -57,11 +58,11 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvEasyhome"
+            android:id="@+id/cvEasyHome"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="125dp"
             android:layout_marginEnd="50dp"
             app:cardBackgroundColor="@color/Bright_Orange"
             app:cardCornerRadius="12dp"
@@ -88,7 +89,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cvMediumhome"
+            android:id="@+id/cvMediumHome"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginStart="50dp"
@@ -98,7 +99,7 @@
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cvEasyhome">
+            app:layout_constraintTop_toBottomOf="@+id/cvEasyHome">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,7 +120,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+            android:id="@+id/cvHardHome"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginStart="50dp"
@@ -129,7 +130,7 @@
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cvMediumhome">
+            app:layout_constraintTop_toBottomOf="@+id/cvMediumHome">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -144,6 +145,56 @@
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvDailyHome"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="50dp"
+            app:cardBackgroundColor="@color/Bright_Orange"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvHardHome">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/card_view_shadow">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Daly Play"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="0"
+                    android:gravity="center"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/fire_daly_play"/>
+
 
             </LinearLayout>
 

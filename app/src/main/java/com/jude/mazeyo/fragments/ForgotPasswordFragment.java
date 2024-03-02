@@ -1,4 +1,4 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.fragments;
 
 import android.os.Bundle;
 
@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
-import org.checkerframework.common.subtyping.qual.Bottom;
+import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.R;
 
 /**
  * A simple {@link Fragment} subclass.

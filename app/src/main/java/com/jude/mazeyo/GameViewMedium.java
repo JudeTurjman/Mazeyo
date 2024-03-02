@@ -16,13 +16,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jude.mazeyo.fragments.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,7 +38,7 @@ public class GameViewMedium extends View {
     }
     private Cell[] [] cells;
     private Cell player, exit;
-    private static final int Cols = 10, Rows = 10;
+    private static final int Cols = 20 , Rows = 20 ;
     private static final float WALL_THICKNESS = 4;
     private float cellsSize, hMargin, vMargin;
     private final Paint wallPaint;
@@ -59,7 +59,7 @@ public class GameViewMedium extends View {
         playerPaint.setColor(Color.RED);
 
         exitPaint = new Paint();
-        exitPaint.setColor(Color.BLUE);
+        exitPaint.setColor(getResources().getColor(R.color.Tangerine)); // set Color by Hex (int) without the # Symbol.
 
         random = new Random();
 
@@ -263,6 +263,7 @@ public class GameViewMedium extends View {
 
             Button cont = dialog.findViewById(R.id.btnContinueWinner);
             Button exit = dialog.findViewById(R.id.btnExitWinner);
+            final boolean[] bool = {false};
 
             User user = fbs.getUser();
 
@@ -270,30 +271,34 @@ public class GameViewMedium extends View {
                 @Override
                 public void onClick(View v) {
 
-                    if(user!=null) {
+                    if (!bool[0]) {
+                        if (user != null) {
 
-                        user.setCoin(user.getCoin()+5);
-                        user.setMedium(user.getMedium()+1);
+                            user.setCoin(user.getCoin() + 5);
+                            user.setMedium(user.getMedium() + 1);
 
-                        fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
+                            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
 
-                                fbs.setUser(user);
+                                    fbs.setUser(user);
 
-                                dialog.dismiss();
-                                createMaze();
+                                    dialog.dismiss();
+                                    createMaze();
 
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                        }
+
+                        bool[0] = true;
 
                     }
-
                 }
             });
 
@@ -301,38 +306,42 @@ public class GameViewMedium extends View {
                 @Override
                 public void onClick(View v) {
 
-                    if(user!=null) {
+                    if (!bool[0]) {
+                        if (user != null) {
 
-                        user.setCoin(user.getCoin()+5);
-                        user.setMedium(user.getMedium()+1);
+                            user.setCoin(user.getCoin() + 5);
+                            user.setMedium(user.getMedium() + 1);
 
-                        fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
+                            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
 
-                                fbs.setUser(user);
+                                    fbs.setUser(user);
 
-                                FragmentManager fm = ((MainActivity) contextView).getSupportFragmentManager();
+                                    FragmentManager fm = ((MainActivity) contextView).getSupportFragmentManager();
 
-                                BottomNavigationView bnv = ((MainActivity) contextView).getBottomNavigationView();
-                                bnv.setVisibility(View.VISIBLE);
+                                    BottomNavigationView bnv = ((MainActivity) contextView).getBottomNavigationView();
+                                    bnv.setVisibility(View.VISIBLE);
 
-                                FragmentTransaction ft= fm.beginTransaction();
-                                ft.replace(R.id.FrameLayoutMain, new HomeFragment());
-                                ft.commit();
+                                    FragmentTransaction ft = fm.beginTransaction();
+                                    ft.replace(R.id.FrameLayoutMain, new HomeFragment());
+                                    ft.commit();
 
-                                dialog.dismiss();
+                                    dialog.dismiss();
 
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                        }
+
+                        bool[0] = true;
 
                     }
-
                 }
             });
 

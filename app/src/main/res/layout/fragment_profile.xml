@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment" >
+    tools:context=".fragments.ProfileFragment" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,16 +12,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
-            android:layout_width="199dp"
-            android:layout_height="199dp"
-            android:layout_marginStart="106dp"
+            android:layout_width="139dp"
+            android:layout_height="139dp"
             android:layout_marginTop="50dp"
-            android:layout_marginEnd="106dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:outlineSpotShadowColor="@color/white"
-            android:outlineAmbientShadowColor="@color/white">
+            app:cardBackgroundColor="@color/Transparent"
+            android:outlineSpotShadowColor="@color/Transparent"
+            android:outlineAmbientShadowColor="@color/Transparent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -29,46 +28,73 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="199dp"
-                    android:layout_height="199dp"
+                    android:layout_width="139dp"
+                    android:layout_height="139dp"
                     android:src="@mipmap/profile_launcher_foreground"
                     tools:layout_editor_absoluteX="126dp"
                     tools:layout_editor_absoluteY="169dp" />
+
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvUsernameProfile"
-            android:layout_width="199dp"
+            android:layout_width="139dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/cardView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:outlineSpotShadowColor="@color/white"
-            android:outlineAmbientShadowColor="@color/white">
+            app:cardBackgroundColor="@color/Transparent"
+            android:outlineSpotShadowColor="@color/Transparent"
+            android:outlineAmbientShadowColor="@color/Transparent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/tvUsernameProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="..."
+                    android:text=""
+                    android:textAlignment="center"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvCommentProfile"
+            android:layout_width="199dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cvUsernameProfile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:cardBackgroundColor="@color/Transparent"
+            android:outlineSpotShadowColor="@color/Transparent"
+            android:outlineAmbientShadowColor="@color/Transparent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="User Name:"
-                    android:textSize="17dp"
-                    android:textAlignment="center"/>
 
                 <TextView
-                    android:id="@+id/tvUsernameProfile"
-                    android:layout_width="99dp"
+                    android:id="@+id/tvCommentProfile"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="..."
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="17dp" />
+                    android:textSize="17dp"
+                    android:textStyle="italic"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -77,11 +103,13 @@
             android:id="@+id/cvEasyProfile"
             android:layout_width="199dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/cvUsernameProfile"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/cvCommentProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:outlineSpotShadowColor="@color/white"
-            android:outlineAmbientShadowColor="@color/white">
+            app:cardBackgroundColor="@color/Transparent"
+            android:outlineSpotShadowColor="@color/Transparent"
+            android:outlineAmbientShadowColor="@color/Transparent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,7 +122,8 @@
                     android:layout_weight="1"
                     android:text="Easy:"
                     android:textSize="17dp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/tvEasyProfile"
@@ -103,7 +132,8 @@
                     android:hint="..."
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="17dp" />
+                    android:textSize="17dp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -115,8 +145,9 @@
             app:layout_constraintTop_toBottomOf="@id/cvEasyProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:outlineSpotShadowColor="@color/white"
-            android:outlineAmbientShadowColor="@color/white">
+            app:cardBackgroundColor="@color/Transparent"
+            android:outlineSpotShadowColor="@color/Transparent"
+            android:outlineAmbientShadowColor="@color/Transparent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -129,7 +160,8 @@
                     android:layout_weight="1"
                     android:text="Medium:"
                     android:textSize="17dp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/tvMediumProfile"
@@ -138,7 +170,8 @@
                     android:hint="..."
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="17dp" />
+                    android:textSize="17dp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -150,8 +183,9 @@
             app:layout_constraintTop_toBottomOf="@id/cvMediumProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:outlineSpotShadowColor="@color/white"
-            android:outlineAmbientShadowColor="@color/white">
+            app:cardBackgroundColor="@color/Transparent"
+            android:outlineSpotShadowColor="@color/Transparent"
+            android:outlineAmbientShadowColor="@color/Transparent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -164,7 +198,8 @@
                     android:layout_weight="1"
                     android:text="Hard:"
                     android:textSize="17dp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/tvHardProfile"
@@ -173,18 +208,17 @@
                     android:hint="..."
                     android:text=""
                     android:textAlignment="center"
-                    android:textSize="17dp" />
+                    android:textSize="17dp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvLogoutProfile"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="65dp"
-            android:layout_marginStart="50dp"
             android:layout_marginTop="200dp"
-            android:layout_marginEnd="50dp"
             app:cardBackgroundColor="@color/Bright_Orange"
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"

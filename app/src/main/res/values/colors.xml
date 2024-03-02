@@ -12,4 +12,5 @@
     <color name="Sienna">#A0522D</color>
     <color name="Amber">#FFBF00</color>
     <color name="Tangerine">#F08000	</color>
+    <color name="Transparent">#00000000</color>
 </resources>

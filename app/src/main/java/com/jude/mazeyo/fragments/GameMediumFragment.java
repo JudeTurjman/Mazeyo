@@ -1,4 +1,4 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.fragments;
 
 import android.os.Bundle;
 
@@ -9,24 +9,19 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.common.collect.Sets;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.jude.mazeyo.MainActivity;
+import com.jude.mazeyo.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
+ * Use the {@link GameMediumFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment {
+public class GameMediumFragment extends Fragment {
 
-    FireBaseServices fbs;
-    TextView tvUsername, tvEasy, tvMedium, tvHard;
-    CardView cvLogout;
+    CardView cvHome;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,7 +32,7 @@ public class ProfileFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ProfileFragment() {
+    public GameMediumFragment() {
         // Required empty public constructor
     }
 
@@ -47,11 +42,11 @@ public class ProfileFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
+     * @return A new instance of fragment GameMediumFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
+    public static GameMediumFragment newInstance(String param1, String param2) {
+        GameMediumFragment fragment = new GameMediumFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,44 +67,28 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return inflater.inflate(R.layout.fragment_game_medium, container, false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
-        fbs = FireBaseServices.getInstance();
-        tvUsername = getView().findViewById(R.id.tvUsernameProfile);
-        tvEasy = getView().findViewById(R.id.tvEasyProfile);
-        tvMedium = getView().findViewById(R.id.tvMediumProfile);
-        tvHard = getView().findViewById(R.id.tvHardProfile);
-        cvLogout = getView().findViewById(R.id.cvLogoutProfile);
+        cvHome = getView().findViewById(R.id.cvGotoHomeMedium);
 
-
-        if(fbs.getUser()!=null) {
-
-            tvUsername.setText(fbs.getUser().getUsername());
-            tvEasy.setText(Integer.toString(fbs.getUser().getEasy()));
-            tvMedium.setText(Integer.toString(fbs.getUser().getMedium()));
-            tvHard.setText(Integer.toString(fbs.getUser().getHard()));
-
-        }
-
-        cvLogout.setOnClickListener(new View.OnClickListener() {
+        cvHome.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {GoToLogin();}
+            public void onClick(View v) {GoToHome();}
         });
-
     }
 
-    private void GoToLogin(){
+    public void GoToHome(){
 
         BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
-        bnv.setVisibility(View.GONE);
+        bnv.setVisibility(View.VISIBLE);
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FrameLayoutMain, new LogInFragment());
+        ft.replace(R.id.FrameLayoutMain, new HomeFragment());
         ft.commit();
     }
 }
