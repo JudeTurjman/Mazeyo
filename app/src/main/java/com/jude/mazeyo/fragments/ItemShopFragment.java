@@ -3,12 +3,24 @@ package com.jude.mazeyo.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.Item;
 import com.jude.mazeyo.R;
+import com.jude.mazeyo.ShopAdapter;
+import com.jude.mazeyo.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +28,11 @@ import com.jude.mazeyo.R;
  * create an instance of this fragment.
  */
 public class ItemShopFragment extends Fragment {
+
+    private FireBaseServices fbs;
+    TextView tvMCoin;
+    RecyclerView rvSkin;
+    ArrayList<Item> iSkins;
 
 
 
@@ -64,5 +81,53 @@ public class ItemShopFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_item_shop, container, false);
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        fbs = FireBaseServices.getInstance();
+        tvMCoin = getView().findViewById(R.id.tvMCoinCountShop);
+        rvSkin = getView().findViewById(R.id.rvSkinShop);
+        iSkins = new ArrayList<Item>();
+
+
+        if(fbs.getUser() == null){
+
+            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                    User user = documentSnapshot.toObject(User.class);
+                    fbs.setUser(user);
+
+                    tvMCoin.setText(fbs.getUser().getCoin()+":");
+
+                    // show Coins Amount and Comment and Game Count.
+                }
+            });
+
+        } else {
+
+            tvMCoin.setText(fbs.getUser().getCoin()+":");
+        }
+
+
+        // this is the item skin in the shop
+        iSkins.add(new Item("Amber",900,R.color.Amber));
+        iSkins.add(new Item("black",100,R.color.black));
+        iSkins.add(new Item("Black Bron",500,R.color.Black_Bron));
+        iSkins.add(new Item("Bronze",1000,R.color.Bronze));
+        iSkins.add(new Item("Mango",450,R.color.Mango));
+        iSkins.add(new Item("Red Orange",750,R.color.Red_Orange));
+        iSkins.add(new Item("white Orange",1500,R.color.white_Orange));
+
+
+        rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, true));
+        rvSkin.setAdapter(new ShopAdapter(getActivity(),iSkins));
+
+
     }
 }

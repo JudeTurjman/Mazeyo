@@ -1,5 +1,6 @@
 package com.jude.mazeyo.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -148,7 +150,10 @@ public class HomeFragment extends Fragment {
         cvDaily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GoTODailyPlay();
+                if(!fbs.getUser().getDidDaily())
+                    GoTODailyPlay();
+                else
+                    Toast.makeText(getActivity(), "You Played today, you can't play again now", Toast.LENGTH_SHORT).show();
             }
         });
 

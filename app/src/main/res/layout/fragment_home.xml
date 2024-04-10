@@ -62,8 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="125dp"
             android:layout_marginEnd="50dp"
+            android:layout_marginTop="125dp"
             app:cardBackgroundColor="@color/Bright_Orange"
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -172,7 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Daly Play"
+                    android:text="Daily Play"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
