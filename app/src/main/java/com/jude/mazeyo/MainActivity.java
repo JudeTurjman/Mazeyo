@@ -6,14 +6,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.jude.mazeyo.fragments.HomeFragment;
+import com.jude.mazeyo.fragments.ItemShopFragment;
 import com.jude.mazeyo.fragments.LogInFragment;
 import com.jude.mazeyo.fragments.ProfileFragment;
+
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         fbs = FireBaseServices.getInstance();
         bnv= findViewById(R.id.BottomNavigationView);
+
 
         if(fbs.getAuth().getCurrentUser()!=null){
 
@@ -54,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 if(item.getItemId() == R.id.nav_profile){
                     GoToProfile();
                 }
+                if(item.getItemId() == R.id.nav_shop){
+                    GoToShop();
+                }
 
                 return true;
             }
@@ -61,10 +69,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //todo: this for reset the daily play
+
     private void GoToHome() {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new HomeFragment());
+        ft.commit();
+    }
+
+    private void GoToShop() {
+
+        FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new ItemShopFragment());
         ft.commit();
     }
 

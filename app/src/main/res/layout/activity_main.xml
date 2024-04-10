@@ -27,6 +27,6 @@
             app:labelVisibilityMode="labeled"
             app:itemIconTint="@drawable/nav_icon_state"
             app:itemTextColor="@drawable/nav_icon_state"
-            android:background="@color/Black_Bron" />
+            android:background="@color/Bright_Gray_Bron" />
 
 </RelativeLayout>

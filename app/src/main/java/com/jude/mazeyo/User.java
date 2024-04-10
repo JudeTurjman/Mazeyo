@@ -10,6 +10,8 @@ public class User {
     private int medium;
     private int hard;
     private int coin;
+    private int dailyCount;
+    private boolean didDaily;
 
     public User(String username) {
         this.username = username;
@@ -18,9 +20,11 @@ public class User {
         medium = 0;
         hard = 0;
         coin = 0;
+        dailyCount = 0;
+        didDaily = false;
     }
 
-    public User() {
+    public User(String username, String comment, String photo, int easy, int medium, int hard, int coin, int dailyCount, boolean didDaily) {
         this.username = username;
         this.comment = comment;
         this.photo = photo;
@@ -28,16 +32,24 @@ public class User {
         this.medium = medium;
         this.hard = hard;
         this.coin = coin;
+        this.dailyCount = dailyCount;
+        this.didDaily = didDaily;
     }
 
-    public User(String username, String comment, String photo, int easy, int medium, int hard, int coin) {
-        this.username = username;
-        this.comment = comment;
-        this.photo = photo;
-        this.easy = easy;
-        this.medium = medium;
-        this.hard = hard;
-        this.coin = coin;
+    public boolean getDidDaily() {
+        return didDaily;
+    }
+
+    public void setDidDaily(boolean didDaily) {
+        this.didDaily = didDaily;
+    }
+
+    public int getDailyCount() {
+        return dailyCount;
+    }
+
+    public void setDailyCount(int dalyCount) {
+        this.dailyCount = dalyCount;
     }
 
     public String getUsername() {
