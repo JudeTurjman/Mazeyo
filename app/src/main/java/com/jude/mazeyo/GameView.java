@@ -88,7 +88,8 @@ public class GameView extends View {
         contextView = context;
 
         dialog = new Dialog(contextView);
-        dialog.setContentView(R.layout.winner_dialog_popup);
+        if(fbs.getDifficulty().equals("DailyPlay")) dialog.setContentView(R.layout.daily_winner_dialog_popup);
+        else dialog.setContentView(R.layout.winner_dialog_popup);
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
         dialog.setCancelable(false);
@@ -279,52 +280,66 @@ public class GameView extends View {
         if (player == exit)
         {
             // add one Game Played to the current Difficulty! and Increase Coins Count.
+            User user = fbs.getUser();
 
             if(!dialog.isShowing()) dialog.show();
 
-            Button cont = dialog.findViewById(R.id.btnContinueWinner);
-            Button exit = dialog.findViewById(R.id.btnExitWinner);
-            final boolean[] bool = {false};
-
-            User user = fbs.getUser();
-
             if (fbs.getDifficulty().equals("DailyPlay")){
-                user.setCoin(user.getCoin() + 20 + user.getDailyCount() * 5);
-                user.setDailyCount(user.getDailyCount() + 1);
-                user.setDidDaily(true);
-                user.setDatePlay(Calendar.getInstance().getTime());
-                Toast.makeText(contextView, "You Got 20 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
 
-                // go to the home
-                fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                Button exit = dialog.findViewById(R.id.btnExitDailyWinner);
+
+                exit.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void onSuccess(Void unused) {
+                    public void onClick(View v) {
+                        if (user != null){
 
-                        fbs.setUser(user);
+                            int money = 20 + user.getDailyCount() * 5;
+                            user.setCoin(user.getCoin() + money);
+                            user.setDailyCount(user.getDailyCount() + 1);
+                            user.setDidDaily(true);
+                            user.setDatePlay(Calendar.getInstance().getTime());
+                            Toast.makeText(contextView, "You Got " + money + " Mazeyo Coins!", Toast.LENGTH_SHORT).show();
 
-                        fbs.setDifficulty("NoGame");
+                            // go to the home
+                            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
 
-                        FragmentManager fm = ((MainActivity) contextView).getSupportFragmentManager();
+                                    fbs.setUser(user);
 
-                        BottomNavigationView bnv = ((MainActivity) contextView).getBottomNavigationView();
-                        bnv.setVisibility(View.VISIBLE);
+                                    fbs.setDifficulty("NoGame");
 
-                        FragmentTransaction ft = fm.beginTransaction();
-                        ft.replace(R.id.FrameLayoutMain, new HomeFragment());
-                        ft.commit();
+                                    FragmentManager fm = ((MainActivity) contextView).getSupportFragmentManager();
 
-                        dialog.dismiss();
+                                    BottomNavigationView bnv = ((MainActivity) contextView).getBottomNavigationView();
+                                    bnv.setVisibility(View.VISIBLE);
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
+                                    FragmentTransaction ft = fm.beginTransaction();
+                                    ft.replace(R.id.FrameLayoutMain, new HomeFragment());
+                                    ft.commit();
+
+                                    dialog.dismiss();
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                        }
                     }
                 });
 
+
+
             }
             else {
+
+                Button cont = dialog.findViewById(R.id.btnContinueWinner);
+                Button exit = dialog.findViewById(R.id.btnExitWinner);
+                final boolean[] bool = {false};
 
                 createMaze();
 
@@ -346,17 +361,9 @@ public class GameView extends View {
                                         user.setMedium(user.getMedium() + 1);
                                         Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        if (fbs.getDifficulty().equals("Hard")) {
-                                            user.setCoin(user.getCoin() + 10);
-                                            user.setHard(user.getHard() + 1);
-                                            Toast.makeText(contextView, "You Got 10 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            user.setCoin(user.getCoin() + 20 + user.getDailyCount() * 5);
-                                            user.setDailyCount(user.getDailyCount() + 1);
-                                            user.setDidDaily(true);
-                                            user.setDatePlay(Calendar.getInstance().getTime());
-                                            Toast.makeText(contextView, "You Got 20 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
-                                        }
+                                        user.setCoin(user.getCoin() + 10);
+                                        user.setHard(user.getHard() + 1);
+                                        Toast.makeText(contextView, "You Got 10 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -402,17 +409,9 @@ public class GameView extends View {
                                         user.setMedium(user.getMedium() + 1);
                                         Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        if (fbs.getDifficulty().equals("Hard")) {
-                                            user.setCoin(user.getCoin() + 10);
-                                            user.setHard(user.getHard() + 1);
-                                            Toast.makeText(contextView, "You Got 10 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            user.setCoin(user.getCoin() + 20 + user.getDailyCount() * 5);
-                                            user.setDailyCount(user.getDailyCount() + 1);
-                                            user.setDidDaily(true);
-                                            user.setDatePlay(Calendar.getInstance().getTime());
-                                            Toast.makeText(contextView, "You Got 20 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
-                                        }
+                                        user.setCoin(user.getCoin() + 10);
+                                        user.setHard(user.getHard() + 1);
+                                        Toast.makeText(contextView, "You Got 10 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 

@@ -16,6 +16,7 @@ import com.jude.mazeyo.fragments.HomeFragment;
 import com.jude.mazeyo.fragments.ItemShopFragment;
 import com.jude.mazeyo.fragments.LogInFragment;
 import com.jude.mazeyo.fragments.ProfileFragment;
+import com.jude.mazeyo.fragments.RankAllFragment;
 
 import java.sql.Time;
 import java.util.Date;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         fbs = FireBaseServices.getInstance();
         bnv= findViewById(R.id.BottomNavigationView);
+
+
 
         if(fbs.getAuth().getCurrentUser()!=null){
 
@@ -63,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(item.getItemId() == R.id.nav_shop){
                     GoToShop();
+                }
+                if(item.getItemId() == R.id.nav_rank){
+                    GoToRankAll();
                 }
 
                 return true;
@@ -96,6 +102,13 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new LogInFragment());
+        ft.commit();
+    }
+
+    private void GoToRankAll() {
+
+        FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new RankAllFragment());
         ft.commit();
     }
 

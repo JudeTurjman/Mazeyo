@@ -1,5 +1,6 @@
 package com.jude.mazeyo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ public class User {
     private int dailyCount;
     private boolean didDaily;
     private Date datePlay;
+    private ArrayList<String> ownedItems;
 
     public User() {
     }
@@ -30,19 +32,16 @@ public class User {
         dailyCount = 0;
         didDaily = false;
         datePlay = Calendar.getInstance().getTime();
-
+        ownedItems = new ArrayList<String>();
+        ownedItems.add("Red");
     }
-    public User(String username, String comment, String photo, int easy, int medium, int hard, int coin, int dailyCount, boolean didDaily, Date datePlay) {
-        this.username = username;
-        this.comment = comment;
-        this.photo = photo;
-        this.easy = easy;
-        this.medium = medium;
-        this.hard = hard;
-        this.coin = coin;
-        this.dailyCount = dailyCount;
-        this.didDaily = didDaily;
-        this.datePlay = datePlay;
+
+    public ArrayList<String> getOwnedItems() {
+        return ownedItems;
+    }
+
+    public void setOwnedItems(ArrayList<String> ownedItems) {
+        this.ownedItems = ownedItems;
     }
 
     public Date getDatePlay() {

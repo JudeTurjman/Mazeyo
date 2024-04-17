@@ -1,10 +1,13 @@
 package com.jude.mazeyo.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +18,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.Item;
 import com.jude.mazeyo.MainActivity;
 import com.jude.mazeyo.R;
+import com.jude.mazeyo.ShopAdapter;
 import com.jude.mazeyo.User;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,9 +33,11 @@ import com.jude.mazeyo.User;
  */
 public class ProfileFragment extends Fragment {
 
-    FireBaseServices fbs;
+    private FireBaseServices fbs;
     TextView tvUsername, tvEasy, tvMedium, tvHard, tvComment;
     CardView cvLogout;
+    RecyclerView rvSkin;
+    ArrayList<Item> iSkin;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -88,6 +97,8 @@ public class ProfileFragment extends Fragment {
         tvHard = getView().findViewById(R.id.tvHardProfile);
         tvComment  = getView().findViewById(R.id.tvCommentProfile);
         cvLogout = getView().findViewById(R.id.cvLogoutProfile);
+        rvSkin = getView().findViewById(R.id.rvSkinProfile);
+        iSkin = new ArrayList<Item>();
 
 
         if(fbs.getUser()!=null) {
@@ -98,6 +109,11 @@ public class ProfileFragment extends Fragment {
             tvMedium.setText(Integer.toString(fbs.getUser().getMedium()));
             tvHard.setText(Integer.toString(fbs.getUser().getHard()));
 
+            //iSkin.add(new Item("Black",100, Color.RED));
+            //
+            //
+            //            rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
+            //            rvSkin.setAdapter(new ShopAdapter(getActivity(),iSkin));
         }
 
         cvLogout.setOnClickListener(new View.OnClickListener() {

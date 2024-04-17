@@ -119,12 +119,14 @@ public class HomeFragment extends Fragment {
                     long date2 = newDate.getTime();
 
                     if (date1 < date2){
-                        if (user.getDidDaily()){
+                        date1 += (24 * 60 * 60 * 1000);
+                        if (user.getDidDaily() && date1 >= date2){
                             user.setDidDaily(false);
                             user.setDatePlay(Calendar.getInstance().getTime());
                         }
                         else {
                             user.setDailyCount(0);
+                            user.setDidDaily(false);
                         }
                     }
 
@@ -148,15 +150,16 @@ public class HomeFragment extends Fragment {
             long date2 = newDate.getTime();
 
             if (date1 < date2){
-                if (fbs.getUser().getDidDaily()){
+                date1 += (24 * 60 * 60 * 1000);
+                if (fbs.getUser().getDidDaily() && date1 >= date2){
                     fbs.getUser().setDidDaily(false);
                     fbs.getUser().setDatePlay(Calendar.getInstance().getTime());
                 }
                 else {
                     fbs.getUser().setDailyCount(0);
+                    fbs.getUser().setDidDaily(false);
                 }
             }
-
             tvDailyCount.setText(Integer.toString(fbs.getUser().getDailyCount()));
 
         }

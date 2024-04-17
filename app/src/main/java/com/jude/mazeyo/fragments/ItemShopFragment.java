@@ -116,16 +116,18 @@ public class ItemShopFragment extends Fragment {
 
 
         // this is the item skin in the shop
-        iSkins.add(new Item("Amber",900,R.color.Amber));
-        iSkins.add(new Item("black",100,R.color.black));
-        iSkins.add(new Item("Black Bron",500,R.color.Black_Bron));
-        iSkins.add(new Item("Bronze",1000,R.color.Bronze));
+        iSkins.add(new Item("Black",100,R.color.black));
+        iSkins.add(new Item("Light Orange",250,R.color.white_Orange));
         iSkins.add(new Item("Mango",450,R.color.Mango));
-        iSkins.add(new Item("Red Orange",750,R.color.Red_Orange));
-        iSkins.add(new Item("white Orange",1500,R.color.white_Orange));
+        iSkins.add(new Item("Black Bron",500,R.color.Black_Bron));
+        iSkins.add(new Item("Bronze",750,R.color.Bronze));
+        iSkins.add(new Item("Red Orange",850,R.color.Red_Orange));
+        iSkins.add(new Item("Amber",1000,R.color.Amber));
+        iSkins.add(new Item("Turquoise Blue", 2500, R.color.Turquoise_Blue));
 
 
-        rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, true));
+
+        rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
         rvSkin.setAdapter(new ShopAdapter(getActivity(),iSkins));
 
 

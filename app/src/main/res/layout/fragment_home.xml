@@ -188,7 +188,7 @@
                     android:id="@+id/tvDailyCountHome"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="0"
+                    android:text=""
                     android:gravity="center"/>
 
                 <ImageView
