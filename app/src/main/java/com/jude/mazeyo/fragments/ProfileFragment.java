@@ -11,10 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.jude.mazeyo.FireBaseServices;
 import com.jude.mazeyo.MainActivity;
 import com.jude.mazeyo.R;
+import com.jude.mazeyo.User;
 
 /**
  * A simple {@link Fragment} subclass.

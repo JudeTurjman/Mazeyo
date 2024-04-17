@@ -1,5 +1,8 @@
 package com.jude.mazeyo;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class User {
 
 
@@ -12,6 +15,10 @@ public class User {
     private int coin;
     private int dailyCount;
     private boolean didDaily;
+    private Date datePlay;
+
+    public User() {
+    }
 
     public User(String username) {
         this.username = username;
@@ -22,9 +29,10 @@ public class User {
         coin = 0;
         dailyCount = 0;
         didDaily = false;
-    }
+        datePlay = Calendar.getInstance().getTime();
 
-    public User(String username, String comment, String photo, int easy, int medium, int hard, int coin, int dailyCount, boolean didDaily) {
+    }
+    public User(String username, String comment, String photo, int easy, int medium, int hard, int coin, int dailyCount, boolean didDaily, Date datePlay) {
         this.username = username;
         this.comment = comment;
         this.photo = photo;
@@ -34,6 +42,15 @@ public class User {
         this.coin = coin;
         this.dailyCount = dailyCount;
         this.didDaily = didDaily;
+        this.datePlay = datePlay;
+    }
+
+    public Date getDatePlay() {
+        return datePlay;
+    }
+
+    public void setDatePlay(Date datePlay) {
+        this.datePlay = datePlay;
     }
 
     public boolean getDidDaily() {

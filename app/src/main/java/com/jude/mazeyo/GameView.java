@@ -25,6 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jude.mazeyo.fragments.HomeFragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 import java.util.Stack;
 
@@ -277,8 +278,7 @@ public class GameView extends View {
 
         if (player == exit)
         {
-            // add one Medium Game Played! and Increase Coins Count by 5 Mazeyo Coins.
-            // Todo: Make Popup Dialog with 2 Options (1- Exit , 2- Continue).
+            // add one Game Played to the current Difficulty! and Increase Coins Count.
 
             if(!dialog.isShowing()) dialog.show();
 
@@ -292,6 +292,7 @@ public class GameView extends View {
                 user.setCoin(user.getCoin() + 20 + user.getDailyCount() * 5);
                 user.setDailyCount(user.getDailyCount() + 1);
                 user.setDidDaily(true);
+                user.setDatePlay(Calendar.getInstance().getTime());
                 Toast.makeText(contextView, "You Got 20 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
 
                 // go to the home
@@ -353,6 +354,7 @@ public class GameView extends View {
                                             user.setCoin(user.getCoin() + 20 + user.getDailyCount() * 5);
                                             user.setDailyCount(user.getDailyCount() + 1);
                                             user.setDidDaily(true);
+                                            user.setDatePlay(Calendar.getInstance().getTime());
                                             Toast.makeText(contextView, "You Got 20 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -408,6 +410,7 @@ public class GameView extends View {
                                             user.setCoin(user.getCoin() + 20 + user.getDailyCount() * 5);
                                             user.setDailyCount(user.getDailyCount() + 1);
                                             user.setDidDaily(true);
+                                            user.setDatePlay(Calendar.getInstance().getTime());
                                             Toast.makeText(contextView, "You Got 20 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                         }
                                     }

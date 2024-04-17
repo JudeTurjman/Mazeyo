@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,9 @@ import com.jude.mazeyo.MainActivity;
 import com.jude.mazeyo.R;
 import com.jude.mazeyo.User;
 
+import java.util.Calendar;
+import java.util.Date;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +37,7 @@ public class HomeFragment extends Fragment {
     private FireBaseServices fbs;
     CardView cvEasy, cvMedium, cvHard, cvDaily;
     ImageView ivProfile;
-    TextView tvMCoin;
+    TextView tvMCoin, tvDailyCount;
 
 
 
@@ -95,28 +99,65 @@ public class HomeFragment extends Fragment {
         cvDaily = getView().findViewById(R.id.cvDailyHome);
         ivProfile = getView().findViewById(R.id.ivProfileHome);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountHome);
+        tvDailyCount = getView().findViewById(R.id.tvDailyCountHome);
         fbs.setDifficulty("NoGame");
 
         if(fbs.getUser() == null){
-
             fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                 public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                     User user = documentSnapshot.toObject(User.class);
                     fbs.setUser(user);
 
-                    tvMCoin.setText(fbs.getUser().getCoin()+":");
+                    tvMCoin.setText(Integer.toString(user.getCoin())+":");
+
+                    // reset the user (if have played the daily play or Not) after that reset the user dailyCount...
+
+                    long date1 = user.getDatePlay().getTime() + (24 * 60 * 60 * 1000);
+                    Date newDate = Calendar.getInstance().getTime();
+                    long date2 = newDate.getTime();
+
+                    if (date1 < date2){
+                        if (user.getDidDaily()){
+                            user.setDidDaily(false);
+                            user.setDatePlay(Calendar.getInstance().getTime());
+                        }
+                        else {
+                            user.setDailyCount(0);
+                        }
+                    }
+
+                    tvDailyCount.setText(Integer.toString(user.getDailyCount()));
 
 
                     // show Coins Amount and Comment and Game Count.
+                    // and show daily played in a row count.
 
                 }
             });
 
         } else {
 
-            tvMCoin.setText(fbs.getUser().getCoin()+":");
+            tvMCoin.setText(Integer.toString(fbs.getUser().getCoin())+":");
+
+            // reset the user (if have played the daily play or Not) after that reset the user dailyCount...
+
+            long date1 = fbs.getUser().getDatePlay().getTime() + (24 * 60 * 60 * 1000);
+            Date newDate = Calendar.getInstance().getTime();
+            long date2 = newDate.getTime();
+
+            if (date1 < date2){
+                if (fbs.getUser().getDidDaily()){
+                    fbs.getUser().setDidDaily(false);
+                    fbs.getUser().setDatePlay(Calendar.getInstance().getTime());
+                }
+                else {
+                    fbs.getUser().setDailyCount(0);
+                }
+            }
+
+            tvDailyCount.setText(Integer.toString(fbs.getUser().getDailyCount()));
 
         }
 

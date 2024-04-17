@@ -17,6 +17,7 @@ import com.jude.mazeyo.fragments.ItemShopFragment;
 import com.jude.mazeyo.fragments.LogInFragment;
 import com.jude.mazeyo.fragments.ProfileFragment;
 
+import java.sql.Time;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         fbs = FireBaseServices.getInstance();
         bnv= findViewById(R.id.BottomNavigationView);
 
-
         if(fbs.getAuth().getCurrentUser()!=null){
 
             bnv.setVisibility(View.VISIBLE);
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
             GoToLogin();
 
         }
+
+
 
 
         bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -68,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    //todo: this for reset the daily play
 
     private void GoToHome() {
 
