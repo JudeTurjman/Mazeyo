@@ -57,7 +57,31 @@ public class GameView extends View {
         wallPaint.setStrokeWidth(WALL_THICKNESS);
 
         playerPaint = new Paint();
-        playerPaint.setColor(Color.RED);
+        // set the inUse now color
+        for (int i=0;i<fbs.getUser().getOwnedSkins().size();i++){
+            if (fbs.getUser().getInUse().equals(fbs.getUser().getOwnedSkins().get(i))) {
+                if (fbs.getUser().getOwnedSkins().get(i).equals("Red"))
+                    playerPaint.setColor(Color.RED);
+                if (fbs.getUser().getOwnedSkins().get(i).equals("Black"))
+                    playerPaint.setColor(getResources().getColor(R.color.black));
+                if (fbs.getUser().getOwnedSkins().get(i).equals("Light Orange"))
+                    playerPaint.setColor(getResources().getColor(R.color.white_Orange));
+                if (fbs.getUser().getOwnedSkins().get(i).equals("Mango"))
+                    playerPaint.setColor(getResources().getColor(R.color.Mango));
+                if (fbs.getUser().getOwnedSkins().get(i).equals("Black Bron"))
+                    playerPaint.setColor(getResources().getColor(R.color.Black_Bron));
+                if (fbs.getUser().getOwnedSkins().get(i).equals("Bronze"))
+                    playerPaint.setColor(getResources().getColor(R.color.Bronze));
+                if (fbs.getUser().getOwnedSkins().get(i).equals("Red Orange"))
+                    playerPaint.setColor(getResources().getColor(R.color.Red_Orange));
+                if (fbs.getUser().getOwnedSkins().get(i).equals("Turquoise Blue"))
+                    playerPaint.setColor(getResources().getColor(R.color.Turquoise_Blue));
+                if (fbs.getUser().getOwnedSkins().get(i).equals("Amber"))
+                    playerPaint.setColor(getResources().getColor(R.color.Amber));
+                if (fbs.getUser().getOwnedSkins().get(i).equals("CarSLn Blue"))
+                    playerPaint.setColor(getResources().getColor(R.color.Blue700));
+            }
+        }
 
         exitPaint = new Paint();
         exitPaint.setColor(getResources().getColor(R.color.Tangerine)); // set Color by Hex (int) without the # Symbol.

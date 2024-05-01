@@ -1,5 +1,6 @@
 package com.jude.mazeyo.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,16 +11,20 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jude.mazeyo.FireBaseServices;
-import com.jude.mazeyo.Item;
+import com.jude.mazeyo.ItemOwned;
 import com.jude.mazeyo.MainActivity;
 import com.jude.mazeyo.R;
+import com.jude.mazeyo.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,8 +36,8 @@ public class ProfileFragment extends Fragment {
     private FireBaseServices fbs;
     TextView tvUsername, tvEasy, tvMedium, tvHard, tvComment;
     CardView cvLogout;
-    RecyclerView rvSkin;
-    ArrayList<Item> iSkin;
+    RecyclerView rvOwnedSkin;
+    ArrayList<ItemOwned> iOwnedSkins;
     ImageView ivSetting, ivImage;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -94,29 +99,49 @@ public class ProfileFragment extends Fragment {
         tvHard = getView().findViewById(R.id.tvHardProfile);
         tvComment  = getView().findViewById(R.id.tvCommentProfile);
         cvLogout = getView().findViewById(R.id.cvLogoutProfile);
-        rvSkin = getView().findViewById(R.id.rvSkinProfile);
-        iSkin = new ArrayList<Item>();
+        rvOwnedSkin = getView().findViewById(R.id.rvSkinProfile);
+        iOwnedSkins = new ArrayList<ItemOwned>();
 
 
         if(fbs.getUser()!=null) {
+            User user = fbs.getUser();
 
-            tvUsername.setText(fbs.getUser().getUsername());
-            tvComment.setText(fbs.getUser().getComment());
-            tvEasy.setText(Integer.toString(fbs.getUser().getEasy()));
-            tvMedium.setText(Integer.toString(fbs.getUser().getMedium()));
-            tvHard.setText(Integer.toString(fbs.getUser().getHard()));
-            if (fbs.getUser().getPhoto() != null && !fbs.getUser().getPhoto().isEmpty())
+            tvUsername.setText(user.getUsername());
+            tvComment.setText(user.getComment());
+            tvEasy.setText(Integer.toString(user.getEasy()));
+            tvMedium.setText(Integer.toString(user.getMedium()));
+            tvHard.setText(Integer.toString(user.getHard()));
+            if (user.getPhoto() != null && !user.getPhoto().isEmpty())
             {
 
-                Picasso.get().load(fbs.getUser().getPhoto()).into(ivImage);
+                Picasso.get().load(user.getPhoto()).into(ivImage);
 
             }
 
-            //iSkin.add(new Item("Red",100, Color.RED));
-            //
-            //
-            //            rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
-            //            rvSkin.setAdapter(new ShopAdapter(getActivity(),iSkin));
+            for (int i = 0; i < user.getOwnedSkins().size(); i++){
+                if(user.getOwnedSkins().get(i).equals("Red")) iOwnedSkins.add(new ItemOwned("Red",false, Color.RED));
+
+                if(user.getOwnedSkins().get(i).equals("Black")) iOwnedSkins.add(new ItemOwned("Black", false, R.color.black));
+
+                if(user.getOwnedSkins().get(i).equals("Light Orange"))iOwnedSkins.add(new ItemOwned("Light Orange",false,R.color.white_Orange));
+
+                if(user.getOwnedSkins().get(i).equals("Mango"))iOwnedSkins.add(new ItemOwned("Mango",false,R.color.Mango));
+
+                if(user.getOwnedSkins().get(i).equals("Black Bron"))iOwnedSkins.add(new ItemOwned("Black Bron",false,R.color.Black_Bron));
+
+                if(user.getOwnedSkins().get(i).equals("Bronze"))iOwnedSkins.add(new ItemOwned("Bronze",false,R.color.Bronze));
+
+                if(user.getOwnedSkins().get(i).equals("Red Orange"))iOwnedSkins.add(new ItemOwned("Red Orange",false,R.color.Red_Orange));
+
+                if(user.getOwnedSkins().get(i).equals("Turquoise Blue"))iOwnedSkins.add(new ItemOwned("Turquoise Blue", false, R.color.Turquoise_Blue));
+
+                if(user.getOwnedSkins().get(i).equals("Amber"))iOwnedSkins.add(new ItemOwned("Amber",false,R.color.Amber));
+
+                if(user.getOwnedSkins().get(i).equals("CarSLn Blue"))iOwnedSkins.add(new ItemOwned("CarSLn Blue", false, R.color.Blue700));
+            }
+
+            rvOwnedSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
+            //rvOwnedSkin.setAdapter(new OwnedAdapter(getActivity(),iOwnedSkins));
         }
 
         cvLogout.setOnClickListener(new View.OnClickListener() {
