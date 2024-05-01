@@ -14,6 +14,15 @@ public class FireBaseServices {
     private FirebaseStorage storage;
     private User user;
     private String difficulty;
+    private Uri selectedImageURL;
+
+    public Uri getSelectedImageURL() {
+        return selectedImageURL;
+    }
+
+    public void setSelectedImageURL(Uri selectedImageURL) {
+        this.selectedImageURL = selectedImageURL;
+    }
 
     public String getDifficulty() {
         return difficulty;

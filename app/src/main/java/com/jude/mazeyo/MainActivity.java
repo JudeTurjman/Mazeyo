@@ -1,14 +1,13 @@
 package com.jude.mazeyo;
 
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -17,9 +16,6 @@ import com.jude.mazeyo.fragments.ItemShopFragment;
 import com.jude.mazeyo.fragments.LogInFragment;
 import com.jude.mazeyo.fragments.ProfileFragment;
 import com.jude.mazeyo.fragments.RankAllFragment;
-
-import java.sql.Time;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         bnv= findViewById(R.id.BottomNavigationView);
 
 
-
         if(fbs.getAuth().getCurrentUser()!=null){
 
             bnv.setVisibility(View.VISIBLE);
@@ -50,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
             GoToLogin();
 
         }
-
-
 
 
         bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

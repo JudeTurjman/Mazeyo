@@ -30,7 +30,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:background="?attr/homeAsUpIndicator"
-                    android:backgroundTint="#000000" />
+                    android:backgroundTint="@color/white_Orange" />
 
 
             </LinearLayout>

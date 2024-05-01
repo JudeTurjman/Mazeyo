@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileFragment" >
 
+    <ImageView
+        android:id="@+id/ivGoToSettingProfile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:src="@drawable/baseline_settings_24" />
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,7 +38,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/ivImageProfile"
                     android:layout_width="139dp"
                     android:layout_height="139dp"
                     android:src="@mipmap/profile_launcher_foreground"

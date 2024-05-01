@@ -2,13 +2,32 @@ package com.jude.mazeyo.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.api.Usage;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.jude.mazeyo.FireBaseServices;
 import com.jude.mazeyo.R;
+import com.jude.mazeyo.RankAdapter;
+import com.jude.mazeyo.User;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +35,12 @@ import com.jude.mazeyo.R;
  * create an instance of this fragment.
  */
 public class RankAllFragment extends Fragment {
+
+    private FireBaseServices fbs;
+    TextView tvSeeEasy, tvSeeMedium, tvSeeHard, tvSeeDaily;
+    RecyclerView rvEasy, rvMedium, rvHard, rvDaily;
+    ArrayList<User> listEasy, listMedium, listHard, listDaily, topListEasy, topListMedium, topListHard, topListDaily;
+    RankAdapter adapterEasy, adapterMedium, adapterHard, adapterDaily;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,4 +88,121 @@ public class RankAllFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_rank_all, container, false);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        fbs = FireBaseServices.getInstance();
+        tvSeeEasy = getView().findViewById(R.id.tvSeeAllEasyRankAll);
+        tvSeeMedium = getView().findViewById(R.id.tvSeeAllMediumRankAll);
+        tvSeeHard = getView().findViewById(R.id.tvSeeAllHardRankAll);
+        tvSeeDaily = getView().findViewById(R.id.tvSeeAllDailyRankAll);
+        rvEasy = getView().findViewById(R.id.rvEasyRankAll);
+        rvMedium = getView().findViewById(R.id.rvMediumRankAll);
+        rvHard = getView().findViewById(R.id.rvHardRankAll);
+        rvDaily = getView().findViewById(R.id.rvDailyRankAll);
+        listEasy = new ArrayList<User>();
+        listMedium = new ArrayList<User>();
+        listHard = new ArrayList<User>();
+        listDaily = new ArrayList<User>();
+        topListEasy = new ArrayList<User>();
+        topListMedium = new ArrayList<User>();
+        topListHard = new ArrayList<User>();
+        topListDaily = new ArrayList<User>();
+        rvEasy.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvMedium.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvHard.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvDaily.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapterEasy = new RankAdapter(getActivity(),listEasy);
+        adapterMedium = new RankAdapter(getActivity(),listMedium);
+        adapterHard = new RankAdapter(getActivity(),listHard);
+        adapterDaily = new RankAdapter(getActivity(),listDaily);
+
+        FirebaseFirestore db = fbs.getFirestore();
+
+        db.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                for (DocumentSnapshot dataSnapshot: queryDocumentSnapshots.getDocuments()){
+
+                    User user = dataSnapshot.toObject(User.class);
+
+                    listEasy.add(user);
+                    listMedium.add(user);
+                    listHard.add(user);
+                    listDaily.add(user);
+
+                }
+
+                Collections.sort(listEasy, new Comparator<User>() {
+                    @Override
+                    public int compare(User user1, User user2) {
+                        // Compare based on the EasyCounter
+                        return Integer.compare(user2.getEasy(), user1.getEasy());
+                    }
+                });
+                for (int i = 0; i < 3 ; i++){
+                    topListEasy.add(listEasy.get(i));
+                }
+                Collections.sort(listMedium, new Comparator<User>() {
+                    @Override
+                    public int compare(User user1, User user2) {
+                        // Compare based on the EasyCounter
+                        return Integer.compare(user2.getMedium(), user1.getMedium());
+                    }
+                });
+                for (int i = 0; i < 3 ; i++){
+                    topListMedium.add(listMedium.get(i));
+                }
+                Collections.sort(listHard, new Comparator<User>() {
+                    @Override
+                    public int compare(User user1, User user2) {
+                        // Compare based on the EasyCounter
+                        return Integer.compare(user2.getHard(), user1.getHard());
+                    }
+                });
+                for (int i = 0; i < 3 ; i++){
+                    topListHard.add(listHard.get(i));
+                }
+                Collections.sort(listDaily, new Comparator<User>() {
+                    @Override
+                    public int compare(User user1, User user2) {
+                        // Compare based on the EasyCounter
+                        return Integer.compare(user2.getDailyCount(), user1.getDailyCount());
+                    }
+                });
+                for (int i = 0; i < 3 ; i++){
+                    topListDaily.add(listDaily.get(i));
+                }
+
+
+                SettingFrame();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getActivity(),"Couldn't load the Ranking", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private void SettingFrame(){
+
+        rvEasy.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvMedium.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvHard.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvDaily.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapterEasy = new RankAdapter(getActivity(),topListEasy);
+        adapterMedium = new RankAdapter(getActivity(),topListMedium);
+        adapterHard = new RankAdapter(getActivity(),topListHard);
+        adapterDaily = new RankAdapter(getActivity(),topListDaily);
+        rvEasy.setAdapter(adapterEasy);
+        rvMedium.setAdapter(adapterMedium);
+        rvHard.setAdapter(adapterHard);
+        rvDaily.setAdapter(adapterDaily);
+    }
+
 }

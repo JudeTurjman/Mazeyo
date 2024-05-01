@@ -55,7 +55,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolderShop
             tvPrice = itemView.findViewById(R.id.tvPriceItem);
             ivColor = itemView.findViewById(R.id.ivColorItem);
 
-
         }
 
         void SetDetails (Item item){
@@ -65,5 +64,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolderShop
             ivColor.setImageResource(item.getImage());
 
         }
+
     }
 }

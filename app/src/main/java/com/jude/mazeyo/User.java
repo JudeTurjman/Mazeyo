@@ -17,7 +17,8 @@ public class User {
     private int dailyCount;
     private boolean didDaily;
     private Date datePlay;
-    private ArrayList<String> ownedItems;
+    private ArrayList<String> ownedSkins;
+    private String inUse;
 
     public User() {
     }
@@ -32,16 +33,26 @@ public class User {
         dailyCount = 0;
         didDaily = false;
         datePlay = Calendar.getInstance().getTime();
-        ownedItems = new ArrayList<String>();
-        ownedItems.add("Red");
+        photo = null;
+        ownedSkins = new ArrayList<String>();
+        ownedSkins.add("Red");
+        inUse = "Red";
     }
 
-    public ArrayList<String> getOwnedItems() {
-        return ownedItems;
+    public ArrayList<String> getOwnedSkins() {
+        return ownedSkins;
     }
 
-    public void setOwnedItems(ArrayList<String> ownedItems) {
-        this.ownedItems = ownedItems;
+    public void setOwnedSkins(ArrayList<String> ownedSkins) {
+        this.ownedSkins = ownedSkins;
+    }
+
+    public String getInUse() {
+        return inUse;
+    }
+
+    public void setInUse(String inUse) {
+        this.inUse = inUse;
     }
 
     public Date getDatePlay() {
@@ -134,6 +145,10 @@ public class User {
                 ", medium=" + medium +
                 ", hard=" + hard +
                 ", coin=" + coin +
+                ", dailyCount=" + dailyCount +
+                ", didDaily=" + didDaily +
+                ", datePlay=" + datePlay +
+                ", ownedSkins=" + ownedSkins +
                 '}';
     }
 }

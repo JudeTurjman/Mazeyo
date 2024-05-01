@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.EditProfileFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_view_shadow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/ivGoBackEditProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/homeAsUpIndicator"
+                android:backgroundTint="@color/white_Orange" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lImage"
+            android:layout_width="139dp"
+            android:layout_height="139dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivImageEditProfile"
+                android:layout_width="139dp"
+                android:layout_height="139dp"
+                android:src="@mipmap/profile_launcher_foreground"
+                tools:layout_editor_absoluteX="126dp"
+                tools:layout_editor_absoluteY="169dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lYouNeed10000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lImage">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/Red_Orange"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:text="Pay 10,000 Mazeyo Coins to edit user name"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lEditUsername"
+            android:layout_width="139dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lYouNeed10000">
+
+            <EditText
+                android:id="@+id/etEditUserNameEditProfile"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lEditNote"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lEditUsername">
+
+            <EditText
+                android:id="@+id/etEditNoteEditProfile"
+                android:layout_width="match_parent"
+                android:textColor="@color/black"
+                android:textSize="17dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lEditProfile"
+            android:layout_width="250dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lEditNote"
+            android:background="@drawable/card_view_shadow">
+
+            <TextView
+                android:id="@+id/tvEditTheProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Edit"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</RelativeLayout>

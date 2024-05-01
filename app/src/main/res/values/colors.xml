@@ -16,4 +16,5 @@
     <color name="Transparent">#00000000</color>
     <color name="Bright_Gray_Bron">#A37E66</color>
     <color name="Turquoise_Blue">#40E0D0</color>
+    <color name="Blue700"> #03bafc </color>
 </resources>

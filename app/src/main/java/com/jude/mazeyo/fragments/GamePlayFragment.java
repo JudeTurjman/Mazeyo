@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jude.mazeyo.FireBaseServices;
 import com.jude.mazeyo.MainActivity;
 import com.jude.mazeyo.R;
 
@@ -21,6 +22,7 @@ import com.jude.mazeyo.R;
  */
 public class GamePlayFragment extends Fragment {
 
+    FireBaseServices fbs;
     CardView cvHome;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -74,12 +76,18 @@ public class GamePlayFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        fbs =   FireBaseServices.getInstance();
         cvHome = getView().findViewById(R.id.cvGotoHomeMedium);
 
-        cvHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {GoToHome();}
-        });
+        if (fbs.getDifficulty().equals("DailyPlay")){
+
+            cvHome.setVisibility(View.GONE);
+        }else {
+            cvHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {GoToHome();}
+            });
+        }
     }
 
     public void GoToHome(){

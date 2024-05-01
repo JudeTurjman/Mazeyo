@@ -1,28 +1,23 @@
 package com.jude.mazeyo.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.jude.mazeyo.FireBaseServices;
 import com.jude.mazeyo.Item;
 import com.jude.mazeyo.MainActivity;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.ShopAdapter;
-import com.jude.mazeyo.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -38,6 +33,7 @@ public class ProfileFragment extends Fragment {
     CardView cvLogout;
     RecyclerView rvSkin;
     ArrayList<Item> iSkin;
+    ImageView ivSetting, ivImage;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,7 +43,6 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -91,7 +86,9 @@ public class ProfileFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
+        ivImage = getView().findViewById(R.id.ivImageProfile);
         tvUsername = getView().findViewById(R.id.tvUsernameProfile);
+        ivSetting = getView().findViewById(R.id.ivGoToSettingProfile);
         tvEasy = getView().findViewById(R.id.tvEasyProfile);
         tvMedium = getView().findViewById(R.id.tvMediumProfile);
         tvHard = getView().findViewById(R.id.tvHardProfile);
@@ -108,8 +105,14 @@ public class ProfileFragment extends Fragment {
             tvEasy.setText(Integer.toString(fbs.getUser().getEasy()));
             tvMedium.setText(Integer.toString(fbs.getUser().getMedium()));
             tvHard.setText(Integer.toString(fbs.getUser().getHard()));
+            if (fbs.getUser().getPhoto() != null && !fbs.getUser().getPhoto().isEmpty())
+            {
 
-            //iSkin.add(new Item("Black",100, Color.RED));
+                Picasso.get().load(fbs.getUser().getPhoto()).into(ivImage);
+
+            }
+
+            //iSkin.add(new Item("Red",100, Color.RED));
             //
             //
             //            rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
@@ -120,6 +123,24 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {GoToLogin();}
         });
+
+        ivSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GOToEditProfile();
+            }
+        });
+
+    }
+
+    private void GOToEditProfile() {
+
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setVisibility(View.GONE);
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new EditProfileFragment());
+        ft.commit();
 
     }
 
