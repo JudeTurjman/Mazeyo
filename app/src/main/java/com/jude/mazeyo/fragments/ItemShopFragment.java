@@ -1,14 +1,10 @@
 package com.jude.mazeyo.fragments;
 
-import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,8 +31,7 @@ public class ItemShopFragment extends Fragment {
     TextView tvMCoin, tvItemPrice, tvColorName;
     RecyclerView rvSkin;
     ArrayList<Item> iSkins;
-    Dialog dialog;
-    Context contextView;
+    boolean Black = false, LightOrange = false,Mango = false,Bronze = false, RedOrange = false,TurquoiseBlue = false,BlackBron = false,Amber = false,CarSLnBlue = false;
 
 
 
@@ -98,13 +93,7 @@ public class ItemShopFragment extends Fragment {
         iSkins = new ArrayList<Item>();
         tvItemPrice = getView().findViewById(R.id.tvPriceItem);
         tvColorName = getView().findViewById(R.id.tvNameItem);
-        contextView = getActivity();
 
-        dialog = new Dialog(contextView);
-        dialog.setContentView(R.layout.buy_dialog_popup);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
-        dialog.setCancelable(false);
 
 
         if(fbs.getUser() == null){
@@ -128,86 +117,76 @@ public class ItemShopFragment extends Fragment {
         }
 
         User user = fbs.getUser();
-        boolean Black = false,LightOrange = false,Mango = false,Bronze = false,
-                RedOrange = false,TurquoiseBlue = false,BlackBron = false,Amber = false
-                ,CarSLnBlue = false;
+
         // this is the item skin in the shop
-        for (int i = 0; i < user.getOwnedSkins().size(); i++){
-            if (!user.getOwnedSkins().get(i).equals("Black") && !Black){
-                iSkins.add(new Item("Black",100,R.color.black));
+        for (int i = 0; i < user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("Black")) {
                 Black = true;
             }
-            if (!user.getOwnedSkins().get(i).equals("Light Orange") && !LightOrange){
-                iSkins.add(new Item("Light Orange",250,R.color.white_Orange));
+        }
+        if(!Black)iSkins.add(new Item("Black", 100, R.color.black));
+
+        for (int i = 0; i < user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("Light Orange")) {
                 LightOrange = true;
             }
-            if (!user.getOwnedSkins().get(i).equals("Mango") && !Mango){
-                iSkins.add(new Item("Mango",500,R.color.Mango));
+        }
+        if(!LightOrange)iSkins.add(new Item("Light Orange",250,R.color.white_Orange));
+
+        for (int i = 0; i < user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("Mango")) {
                 Mango = true;
             }
-            if (!user.getOwnedSkins().get(i).equals("Black Bron") && !BlackBron){
-                iSkins.add(new Item("Black Bron",1000,R.color.Black_Bron));
+        }
+        if(!Mango)iSkins.add(new Item("Mango",500,R.color.Mango));
+
+        for (int i = 0; i < user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("Black Bron")) {
                 BlackBron = true;
             }
-            if (!user.getOwnedSkins().get(i).equals("Bronze") && !Bronze){
-                iSkins.add(new Item("Bronze",5000,R.color.Bronze));
+        }
+        if(!BlackBron)iSkins.add(new Item("Black Bron",1000,R.color.Black_Bron));
+
+        for (int i = 0; i < user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("Bronze")) {
                 Bronze = true;
             }
-            if (!user.getOwnedSkins().get(i).equals("Red Orange") && !RedOrange){
-                iSkins.add(new Item("Red Orange",12000,R.color.Red_Orange));
+        }
+        if(!Bronze)iSkins.add(new Item("Bronze",5000,R.color.Bronze));
+
+        for (int i = 0; i < user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("Red Orange")) {
                 RedOrange = true;
             }
-            if (!user.getOwnedSkins().get(i).equals("Turquoise Blue") && !TurquoiseBlue){
-                iSkins.add(new Item("Turquoise Blue", 25000, R.color.Turquoise_Blue));
+        }
+        if(!RedOrange)iSkins.add(new Item("Red Orange",12000,R.color.Red_Orange));
+
+        for (int i = 0; i < user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("Turquoise Blue")) {
                 TurquoiseBlue = true;
             }
-            if (!user.getOwnedSkins().get(i).equals("Amber") && !Amber){
-                iSkins.add(new Item("Amber",62000,R.color.Amber));
+        }
+        if(!TurquoiseBlue)iSkins.add(new Item("Turquoise Blue", 25000, R.color.Turquoise_Blue));
+
+        for (int i = 0; i < user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("Amber")) {
                 Amber = true;
             }
-            if (!user.getOwnedSkins().get(i).equals("CarSLn Blue") && !CarSLnBlue){
-                iSkins.add(new Item("CarSLn Blue",88000,R.drawable.blue700_carsln));
+        }
+        if(!Amber)iSkins.add(new Item("Amber",62000,R.color.Amber));
+
+        for (int i =0 ; i<user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("CarSLn Blue")) {
                 CarSLnBlue = true;
             }
         }
+        if(!CarSLnBlue)iSkins.add(new Item("CarSLn Blue", 88000, R.drawable.blue700_carsln));
+
 
 
         rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
         rvSkin.setAdapter(new ShopAdapter(getActivity(),iSkins));
 
-        tvItemPrice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fbs.getUser().getCoin() > Integer.parseInt(tvItemPrice.toString())){
-                    Toast.makeText(getActivity(), "You don't have enough Mazeyo Coin", Toast.LENGTH_SHORT).show();
-                }
-                else {
-
-                    if(!dialog.isShowing()) dialog.show();
-                    Button buy = dialog.findViewById(R.id.btnBuyItem);
-                    Button exit = dialog.findViewById(R.id.btnExitBuyItem);
-
-                    buy.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //User user = fbs.getUser();
-                            //user.setCoin(user.getCoin() - Integer.parseInt(tvItemPrice.toString()));
-                            //fbs.setUser(user);
-
-                            dialog.dismiss();
-                        }
-                    });
-                    exit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-
-
-                }
-            }
-        });
 
     }
 }
