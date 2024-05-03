@@ -1,5 +1,6 @@
 package com.jude.mazeyo;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,11 +32,11 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
     @Override
     public OwnedAdapter.ViewHolderOwned onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item,parent,false);
-        return new ViewHolderOwned(view);
+        return new OwnedAdapter.ViewHolderOwned(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OwnedAdapter.ViewHolderOwned holder, int position) {
+    public void onBindViewHolder(@NonNull OwnedAdapter.ViewHolderOwned holder, @SuppressLint("RecyclerView") int position) {
 
         ItemOwned itemOwned = lst.get(position);
         holder.SetDetails(itemOwned);
@@ -70,7 +71,7 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
         @Override
         public void onClick(View v) {
 
-            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).update("inUse",tvOwned.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).update("inUse",tvName.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     Toast.makeText(context, "You chang your Use Color", Toast.LENGTH_SHORT).show();
@@ -87,13 +88,18 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
 
         void SetDetails (ItemOwned itemOwned){
 
-            tvName.setText(itemOwned.getName());
+            String ColorName = itemOwned.getName();
+            tvName.setText(ColorName);
             ivColor.setImageResource(itemOwned.getImage());
-            if(fbs.getUser().getInUse().equals(tvName.getText().toString())){
+            if(fbs.getUser().getInUse().equals(ColorName)){
                 tvOwned.setText("Use Now");
                 llBtn.setBackgroundResource(R.drawable.card_view_out_lines);
             }
-            else tvOwned.setText("Owned");
+            else {
+                tvOwned.setText("Owned");
+                llBtn.setBackgroundResource(R.drawable.card_view_shadow);
+            }
+
 
         }
     }

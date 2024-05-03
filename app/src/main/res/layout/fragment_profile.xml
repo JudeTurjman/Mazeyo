@@ -16,7 +16,6 @@
         android:layout_marginEnd="0dp"
         android:src="@drawable/baseline_settings_24" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -225,6 +224,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvSkinProfile"
             android:layout_width="match_parent"
@@ -235,6 +235,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cvHardProfile" />
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvLogoutProfile"
@@ -266,4 +267,5 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </RelativeLayout>

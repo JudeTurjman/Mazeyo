@@ -19,6 +19,8 @@ public class User {
     private Date datePlay;
     private ArrayList<String> ownedSkins;
     private String inUse;
+    private ArrayList<String> ownedMaps;
+    private String inMap;
 
     public User() {
     }
@@ -29,7 +31,7 @@ public class User {
         easy = 0;
         medium = 0;
         hard = 0;
-        coin = 0;
+        coin = 150;
         dailyCount = 0;
         didDaily = false;
         datePlay = Calendar.getInstance().getTime();
@@ -37,6 +39,25 @@ public class User {
         ownedSkins = new ArrayList<String>();
         ownedSkins.add("Red");
         inUse = "Red";
+        ownedMaps = new ArrayList<String>();
+        ownedMaps.add("White");
+        inMap = null;
+    }
+
+    public ArrayList<String> getOwnedMaps() {
+        return ownedMaps;
+    }
+
+    public void setOwnedMaps(ArrayList<String> ownedMaps) {
+        this.ownedMaps = ownedMaps;
+    }
+
+    public String getInMap() {
+        return inMap;
+    }
+
+    public void setInMap(String inMap) {
+        this.inMap = inMap;
     }
 
     public ArrayList<String> getOwnedSkins() {
@@ -149,6 +170,9 @@ public class User {
                 ", didDaily=" + didDaily +
                 ", datePlay=" + datePlay +
                 ", ownedSkins=" + ownedSkins +
+                ", inUse='" + inUse + '\'' +
+                ", ownedMaps=" + ownedMaps +
+                ", inMap='" + inMap + '\'' +
                 '}';
     }
 }

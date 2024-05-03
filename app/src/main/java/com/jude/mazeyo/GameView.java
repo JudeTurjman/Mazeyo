@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,6 +47,7 @@ public class GameView extends View {
     private final Paint playerPaint;
     private final Paint exitPaint;
     private final Random random;
+    private Drawable backgroundMap;
 
     public GameView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -56,32 +58,31 @@ public class GameView extends View {
         wallPaint.setColor(Color.BLACK);
         wallPaint.setStrokeWidth(WALL_THICKNESS);
 
+        // set the inUseMap now background
+        backgroundMap = getResources().getDrawable(R.drawable.map_world_map);
+
         playerPaint = new Paint();
         // set the inUse now color
-        for (int i=0;i<fbs.getUser().getOwnedSkins().size();i++){
-            if (fbs.getUser().getInUse().equals(fbs.getUser().getOwnedSkins().get(i))) {
-                if (fbs.getUser().getOwnedSkins().get(i).equals("Red"))
-                    playerPaint.setColor(Color.RED);
-                if (fbs.getUser().getOwnedSkins().get(i).equals("Black"))
-                    playerPaint.setColor(getResources().getColor(R.color.black));
-                if (fbs.getUser().getOwnedSkins().get(i).equals("Light Orange"))
-                    playerPaint.setColor(getResources().getColor(R.color.white_Orange));
-                if (fbs.getUser().getOwnedSkins().get(i).equals("Mango"))
-                    playerPaint.setColor(getResources().getColor(R.color.Mango));
-                if (fbs.getUser().getOwnedSkins().get(i).equals("Black Bron"))
-                    playerPaint.setColor(getResources().getColor(R.color.Black_Bron));
-                if (fbs.getUser().getOwnedSkins().get(i).equals("Bronze"))
-                    playerPaint.setColor(getResources().getColor(R.color.Bronze));
-                if (fbs.getUser().getOwnedSkins().get(i).equals("Red Orange"))
-                    playerPaint.setColor(getResources().getColor(R.color.Red_Orange));
-                if (fbs.getUser().getOwnedSkins().get(i).equals("Turquoise Blue"))
-                    playerPaint.setColor(getResources().getColor(R.color.Turquoise_Blue));
-                if (fbs.getUser().getOwnedSkins().get(i).equals("Amber"))
-                    playerPaint.setColor(getResources().getColor(R.color.Amber));
-                if (fbs.getUser().getOwnedSkins().get(i).equals("CarSLn Blue"))
-                    playerPaint.setColor(getResources().getColor(R.color.Blue700));
-            }
-        }
+        if (fbs.getUser().getInUse().equals("Red"))
+            playerPaint.setColor(Color.RED);
+        if (fbs.getUser().getInUse().equals("Black"))
+            playerPaint.setColor(getResources().getColor(R.color.black));
+        if (fbs.getUser().getInUse().equals("Light Orange"))
+            playerPaint.setColor(getResources().getColor(R.color.white_Orange));
+        if (fbs.getUser().getInUse().equals("Mango"))
+            playerPaint.setColor(getResources().getColor(R.color.Mango));
+        if (fbs.getUser().getInUse().equals("Black Bron"))
+            playerPaint.setColor(getResources().getColor(R.color.Black_Bron));
+        if (fbs.getUser().getInUse().equals("Bronze"))
+            playerPaint.setColor(getResources().getColor(R.color.Bronze));
+        if (fbs.getUser().getInUse().equals("Red Orange"))
+            playerPaint.setColor(getResources().getColor(R.color.Red_Orange));
+        if (fbs.getUser().getInUse().equals("Turquoise Blue"))
+            playerPaint.setColor(getResources().getColor(R.color.Turquoise_Blue));
+        if (fbs.getUser().getInUse().equals("Amber"))
+            playerPaint.setColor(getResources().getColor(R.color.Amber));
+        if (fbs.getUser().getInUse().equals("CarSLn Blue"))
+            playerPaint.setColor(getResources().getColor(R.color.Blue700));
 
         exitPaint = new Paint();
         exitPaint.setColor(getResources().getColor(R.color.Tangerine)); // set Color by Hex (int) without the # Symbol.
@@ -207,7 +208,13 @@ public class GameView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.WHITE);
+        if (backgroundMap == null)
+            canvas.drawColor(Color.WHITE);
+        else {
+            backgroundMap.setBounds(0, 0, getWidth(), getHeight());
+            backgroundMap.draw(canvas);
+        }
+
 
         int width = getWidth();
         int height = getHeight();

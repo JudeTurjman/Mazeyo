@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.jude.mazeyo.FireBaseServices;
 import com.jude.mazeyo.Item;
+import com.jude.mazeyo.MapShopAdapter;
 import com.jude.mazeyo.R;
 import com.jude.mazeyo.ShopAdapter;
 import com.jude.mazeyo.User;
@@ -29,9 +30,10 @@ public class ItemShopFragment extends Fragment {
 
     private FireBaseServices fbs;
     TextView tvMCoin, tvItemPrice, tvColorName;
-    RecyclerView rvSkin;
-    ArrayList<Item> iSkins;
+    RecyclerView rvSkin, rvMap;
+    ArrayList<Item> iSkins, iMaps;
     boolean Black = false, LightOrange = false,Mango = false,Bronze = false, RedOrange = false,TurquoiseBlue = false,BlackBron = false,Amber = false,CarSLnBlue = false;
+    boolean Nature = false,Water = false,Beach = false,Ice = false,Greek = false,Egyptian = false,World = false,Church = false,Aqsa = false;
 
 
 
@@ -90,7 +92,9 @@ public class ItemShopFragment extends Fragment {
         fbs = FireBaseServices.getInstance();
         tvMCoin = getView().findViewById(R.id.tvMCoinCountShop);
         rvSkin = getView().findViewById(R.id.rvSkinShop);
+        rvMap = getView().findViewById(R.id.rvMapShop);
         iSkins = new ArrayList<Item>();
+        iMaps = new ArrayList<Item>();
         tvItemPrice = getView().findViewById(R.id.tvPriceItem);
         tvColorName = getView().findViewById(R.id.tvNameItem);
 
@@ -182,11 +186,76 @@ public class ItemShopFragment extends Fragment {
         }
         if(!CarSLnBlue)iSkins.add(new Item("CarSLn Blue", 88000, R.drawable.blue700_carsln));
 
-
-
         rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
         rvSkin.setAdapter(new ShopAdapter(getActivity(),iSkins));
 
 
+        // this is the item Map in the shop
+        for (int i = 0; i < user.getOwnedMaps().size(); i++) {
+            if (user.getOwnedMaps().get(i).equals("Nature")) {
+                Nature = true;
+            }
+        }
+        if(!Nature)iMaps.add(new Item("Nature", 100, R.drawable.map_nature));
+
+        for (int i = 0; i < user.getOwnedMaps().size(); i++) {
+            if (user.getOwnedMaps().get(i).equals("Water")) {
+                Water = true;
+            }
+        }
+        if(!Water)iMaps.add(new Item("Water",200,R.drawable.map_water));
+
+        for (int i = 0; i < user.getOwnedMaps().size(); i++) {
+            if (user.getOwnedMaps().get(i).equals("Beach")) {
+                Beach = true;
+            }
+        }
+        if(!Beach)iMaps.add(new Item("Beach",550,R.drawable.map_beach));
+
+        for (int i = 0; i < user.getOwnedMaps().size(); i++) {
+            if (user.getOwnedMaps().get(i).equals("Ice")) {
+                Ice = true;
+            }
+        }
+        if(!Ice)iMaps.add(new Item("Ice",1200,R.drawable.map_ice));
+
+        for (int i = 0; i < user.getOwnedMaps().size(); i++) {
+            if (user.getOwnedMaps().get(i).equals("Greek Column")) {
+                Greek = true;
+            }
+        }
+        if(!Greek)iMaps.add(new Item("Greek Column",7500,R.drawable.map_ancient_greek_column));
+
+        for (int i = 0; i < user.getOwnedMaps().size(); i++) {
+            if (user.getOwnedMaps().get(i).equals("Egyptian Pyramid")) {
+                Egyptian = true;
+            }
+        }
+        if(!Egyptian)iMaps.add(new Item("Egyptian Pyramid",17500,R.drawable.map_egyptian_pyramid));
+
+        for (int i = 0; i < user.getOwnedMaps().size(); i++) {
+            if (user.getOwnedMaps().get(i).equals("World Map")) {
+                World = true;
+            }
+        }
+        if(!World)iMaps.add(new Item("World Map", 42000, R.drawable.map_world_map));
+
+        for (int i = 0; i < user.getOwnedMaps().size(); i++) {
+            if (user.getOwnedMaps().get(i).equals("Church")) {
+                Church = true;
+            }
+        }
+        if(!Church)iMaps.add(new Item("Church",75000,R.drawable.map_church_of_the_annunciation));
+
+        for (int i =0 ; i<user.getOwnedMaps().size(); i++) {
+            if (user.getOwnedMaps().get(i).equals("Al Aqsa Mosque")) {
+                Aqsa = true;
+            }
+        }
+        if(!Aqsa)iMaps.add(new Item("Al Aqsa Mosque", 100000, R.drawable.map_al_aqsa_mosque));
+
+
+        rvMap.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
+        rvMap.setAdapter(new MapShopAdapter(getActivity(),iMaps));
     }
 }

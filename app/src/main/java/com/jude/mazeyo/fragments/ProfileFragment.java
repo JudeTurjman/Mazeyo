@@ -1,6 +1,5 @@
 package com.jude.mazeyo.fragments;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jude.mazeyo.FireBaseServices;
 import com.jude.mazeyo.ItemOwned;
 import com.jude.mazeyo.MainActivity;
+import com.jude.mazeyo.OwnedAdapter;
 import com.jude.mazeyo.R;
 import com.jude.mazeyo.User;
 import com.squareup.picasso.Picasso;
@@ -119,7 +119,7 @@ public class ProfileFragment extends Fragment {
             }
 
             for (int i = 0; i < user.getOwnedSkins().size(); i++){
-                if(user.getOwnedSkins().get(i).equals("Red")) iOwnedSkins.add(new ItemOwned("Red",false, Color.RED));
+                if(user.getOwnedSkins().get(i).equals("Red")) iOwnedSkins.add(new ItemOwned("Red",false, R.color.Red));
 
                 if(user.getOwnedSkins().get(i).equals("Black")) iOwnedSkins.add(new ItemOwned("Black", false, R.color.black));
 
@@ -140,8 +140,11 @@ public class ProfileFragment extends Fragment {
                 if(user.getOwnedSkins().get(i).equals("CarSLn Blue"))iOwnedSkins.add(new ItemOwned("CarSLn Blue", false, R.color.Blue700));
             }
 
-            rvOwnedSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
-            //rvOwnedSkin.setAdapter(new OwnedAdapter(getActivity(),iOwnedSkins));
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+            linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+            rvOwnedSkin.setLayoutManager(linearLayoutManager);
+            OwnedAdapter adapter = new OwnedAdapter(getActivity(),iOwnedSkins);
+            rvOwnedSkin.setAdapter(adapter);
         }
 
         cvLogout.setOnClickListener(new View.OnClickListener() {
