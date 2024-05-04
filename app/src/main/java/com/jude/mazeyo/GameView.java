@@ -59,7 +59,24 @@ public class GameView extends View {
         wallPaint.setStrokeWidth(WALL_THICKNESS);
 
         // set the inUseMap now background
-        backgroundMap = getResources().getDrawable(R.drawable.map_world_map);
+        if (fbs.getUser().getInMap().equals("Nature"))
+            backgroundMap = getResources().getDrawable(R.drawable.map_nature);
+        if (fbs.getUser().getInMap().equals("Water"))
+            backgroundMap = getResources().getDrawable(R.drawable.map_water);
+        if (fbs.getUser().getInMap().equals("Beach"))
+            backgroundMap = getResources().getDrawable(R.drawable.map_beach);
+        if (fbs.getUser().getInMap().equals("Ice"))
+            backgroundMap = getResources().getDrawable(R.drawable.map_ice);
+        if (fbs.getUser().getInMap().equals("Greek Column"))
+            backgroundMap = getResources().getDrawable(R.drawable.map_ancient_greek_column);
+        if (fbs.getUser().getInMap().equals("Egyptian Pyramid"))
+            backgroundMap = getResources().getDrawable(R.drawable.map_egyptian_pyramid);
+        if (fbs.getUser().getInMap().equals("World Map"))
+            backgroundMap = getResources().getDrawable(R.drawable.map_world_map);
+        if (fbs.getUser().getInMap().equals("Church"))
+            backgroundMap = getResources().getDrawable(R.drawable.map_church_of_the_annunciation);
+        if (fbs.getUser().getInMap().equals("Al Aqsa Mosque"))
+            backgroundMap = getResources().getDrawable(R.drawable.map_al_aqsa_mosque);
 
         playerPaint = new Paint();
         // set the inUse now color
@@ -208,7 +225,7 @@ public class GameView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (backgroundMap == null)
+        if (backgroundMap == null || backgroundMap.toString().equals("White"))
             canvas.drawColor(Color.WHITE);
         else {
             backgroundMap.setBounds(0, 0, getWidth(), getHeight());

@@ -18,6 +18,7 @@ import com.jude.mazeyo.FireBaseServices;
 import com.jude.mazeyo.ItemOwned;
 import com.jude.mazeyo.MainActivity;
 import com.jude.mazeyo.OwnedAdapter;
+import com.jude.mazeyo.OwnedMapAdapter;
 import com.jude.mazeyo.R;
 import com.jude.mazeyo.User;
 import com.squareup.picasso.Picasso;
@@ -38,6 +39,8 @@ public class ProfileFragment extends Fragment {
     CardView cvLogout;
     RecyclerView rvOwnedSkin;
     ArrayList<ItemOwned> iOwnedSkins;
+    RecyclerView rvOwnedMap;
+    ArrayList<ItemOwned> iOwnedMaps;
     ImageView ivSetting, ivImage;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -101,6 +104,8 @@ public class ProfileFragment extends Fragment {
         cvLogout = getView().findViewById(R.id.cvLogoutProfile);
         rvOwnedSkin = getView().findViewById(R.id.rvSkinProfile);
         iOwnedSkins = new ArrayList<ItemOwned>();
+        rvOwnedMap = getView().findViewById(R.id.rvMapProfile);
+        iOwnedMaps = new ArrayList<ItemOwned>();
 
 
         if(fbs.getUser()!=null) {
@@ -145,6 +150,30 @@ public class ProfileFragment extends Fragment {
             rvOwnedSkin.setLayoutManager(linearLayoutManager);
             OwnedAdapter adapter = new OwnedAdapter(getActivity(),iOwnedSkins);
             rvOwnedSkin.setAdapter(adapter);
+
+            // the map you have
+            for (int i = 0; i < user.getOwnedMaps().size(); i++){
+                if(user.getOwnedMaps().get(i).equals("Nature")) iOwnedMaps.add(new ItemOwned("Nature",false, R.drawable.map_nature));
+
+                if(user.getOwnedMaps().get(i).equals("Water")) iOwnedMaps.add(new ItemOwned("Water", false, R.drawable.map_water));
+
+                if(user.getOwnedMaps().get(i).equals("Beach"))iOwnedMaps.add(new ItemOwned("Beach",false,R.drawable.map_beach));
+
+                if(user.getOwnedMaps().get(i).equals("Ice"))iOwnedMaps.add(new ItemOwned("Ice",false,R.drawable.map_ice));
+
+                if(user.getOwnedMaps().get(i).equals("Greek Column"))iOwnedMaps.add(new ItemOwned("Greek Column",false,R.drawable.map_ancient_greek_column));
+
+                if(user.getOwnedMaps().get(i).equals("Egyptian Pyramid"))iOwnedMaps.add(new ItemOwned("Egyptian Pyramid",false,R.drawable.map_egyptian_pyramid));
+
+                if(user.getOwnedMaps().get(i).equals("World Map"))iOwnedMaps.add(new ItemOwned("World Map",false,R.drawable.map_world_map));
+
+                if(user.getOwnedMaps().get(i).equals("Church"))iOwnedMaps.add(new ItemOwned("Church", false, R.drawable.map_church_of_the_annunciation));
+
+                if(user.getOwnedMaps().get(i).equals("Al Aqsa Mosque"))iOwnedMaps.add(new ItemOwned("Al Aqsa Mosque",false,R.drawable.map_al_aqsa_mosque));
+            }
+
+            rvOwnedMap.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
+            rvOwnedMap.setAdapter(new OwnedMapAdapter(getActivity(),iOwnedMaps));
         }
 
         cvLogout.setOnClickListener(new View.OnClickListener() {
