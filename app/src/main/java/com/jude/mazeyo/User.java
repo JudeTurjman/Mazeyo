@@ -41,7 +41,7 @@ public class User {
         inUse = "Red";
         ownedMaps = new ArrayList<String>();
         ownedMaps.add("White");
-        inMap = null;
+        inMap = "White";
     }
 
     public ArrayList<String> getOwnedMaps() {

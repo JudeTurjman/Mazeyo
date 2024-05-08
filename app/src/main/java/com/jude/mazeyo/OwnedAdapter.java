@@ -22,8 +22,10 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
 
     private Context context;
     private ArrayList<ItemOwned> lst;
+    private FireBaseServices fbs;
 
     public OwnedAdapter(Context context, ArrayList<ItemOwned> lst) {
+        fbs = FireBaseServices.getInstance();
         this.context = context;
         this.lst = lst;
     }
@@ -41,6 +43,35 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
         ItemOwned itemOwned = lst.get(position);
         holder.SetDetails(itemOwned);
 
+        holder.llBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User user = fbs.getUser();
+                String PreOwned = user.getInUse();
+                user.setInUse(holder.tvName.getText().toString());
+                fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).update("inUse",holder.tvName.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(context, "You chang your Use Color", Toast.LENGTH_SHORT).show();
+                        holder.tvOwned.setText("Use Now");
+                        holder.llBtn.setBackgroundResource(R.drawable.card_view_out_lines);
+                        for(int i = 0 ; i < lst.size(); i++){
+                            if (lst.get(i).getName().equals(PreOwned)) {
+                                ItemOwned itemOwned = lst.get(i);
+                                holder.ChangeDetails(itemOwned);
+                            }
+                        }
+                        fbs.setUser(user);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Try to chang your Use Color agan!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
     }
 
     @Override
@@ -48,12 +79,11 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
         return lst.size();
     }
 
-    public class ViewHolderOwned extends RecyclerView.ViewHolder implements View.OnClickListener  {
+    public class ViewHolderOwned extends RecyclerView.ViewHolder{
 
         private TextView tvName, tvOwned;
         private ImageView ivColor;
         private LinearLayout llBtn;
-        private FireBaseServices fbs;
 
         public ViewHolderOwned(@NonNull View itemView) {
             super(itemView);
@@ -63,28 +93,7 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
             ivColor = itemView.findViewById(R.id.ivColorItem);
             llBtn = itemView.findViewById(R.id.llBtnItem);
 
-            fbs = FireBaseServices.getInstance();
-
-            tvOwned.setOnClickListener(this);
         }
-
-        @Override
-        public void onClick(View v) {
-
-            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).update("inUse",tvName.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    Toast.makeText(context, "You chang your Use Color", Toast.LENGTH_SHORT).show();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(context, "Try to chang your Use Color agan!", Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        }
-
 
         void SetDetails (ItemOwned itemOwned){
 
@@ -99,6 +108,13 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
                 tvOwned.setText("Owned");
                 llBtn.setBackgroundResource(R.drawable.card_view_shadow);
             }
+
+        }
+
+        void ChangeDetails(ItemOwned itemOwned) {
+
+            tvOwned.setText("Owned");
+            llBtn.setBackgroundResource(R.drawable.card_view_shadow);
 
         }
     }
