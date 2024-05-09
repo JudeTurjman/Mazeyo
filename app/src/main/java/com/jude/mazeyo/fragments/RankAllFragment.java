@@ -114,10 +114,10 @@ public class RankAllFragment extends Fragment {
         rvMedium.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvHard.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvDaily.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapterEasy = new RankAdapter(getActivity(),listEasy);
-        adapterMedium = new RankAdapter(getActivity(),listMedium);
-        adapterHard = new RankAdapter(getActivity(),listHard);
-        adapterDaily = new RankAdapter(getActivity(),listDaily);
+        adapterEasy = new RankAdapter(getActivity(),listEasy,"Easy");
+        adapterMedium = new RankAdapter(getActivity(),listMedium,"Medium" );
+        adapterHard = new RankAdapter(getActivity(),listHard,"Hard" );
+        adapterDaily = new RankAdapter(getActivity(),listDaily,"Daily" );
 
         FirebaseFirestore db = fbs.getFirestore();
 
@@ -195,10 +195,10 @@ public class RankAllFragment extends Fragment {
         rvMedium.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvHard.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvDaily.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapterEasy = new RankAdapter(getActivity(),topListEasy);
-        adapterMedium = new RankAdapter(getActivity(),topListMedium);
-        adapterHard = new RankAdapter(getActivity(),topListHard);
-        adapterDaily = new RankAdapter(getActivity(),topListDaily);
+        adapterEasy = new RankAdapter(getActivity(),topListEasy,"Easy");
+        adapterMedium = new RankAdapter(getActivity(),topListMedium,"Medium" );
+        adapterHard = new RankAdapter(getActivity(),topListHard,"Hard" );
+        adapterDaily = new RankAdapter(getActivity(),topListDaily,"Daily" );
         rvEasy.setAdapter(adapterEasy);
         rvMedium.setAdapter(adapterMedium);
         rvHard.setAdapter(adapterHard);

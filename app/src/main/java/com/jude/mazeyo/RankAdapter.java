@@ -18,11 +18,13 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
 
    private Context context;
    private ArrayList<User> list;
-   private FireBaseServices fbs;
+   private final FireBaseServices fbs = FireBaseServices.getInstance();
+   private String factor;
 
-    public RankAdapter(Context context, ArrayList<User> list) {
+    public RankAdapter(Context context, ArrayList<User> list, String factor) {
         this.context = context;
         this.list = list;
+        this.factor = factor;
     }
 
     public RankAdapter() {
@@ -38,7 +40,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
     @Override
     public void onBindViewHolder(@NonNull RankAdapter.ViewRanking holder, int position) {
         User user = list.get(position);
-        holder.SetDetails(user);
+        holder.SetDetails(user,position);
     }
 
     @Override
@@ -54,7 +56,6 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
         public ViewRanking(@NonNull View itemView) {
             super(itemView);
 
-            fbs = FireBaseServices.getInstance();
             tvCount = itemView.findViewById(R.id.tvCountUser);
             tvRank = itemView.findViewById(R.id.tvRankUser);
             tvUsername = itemView.findViewById(R.id.tvUserNameUser);
@@ -62,11 +63,11 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
 
         }
 
-        void SetDetails (User user){
+        void SetDetails (User user, int position){
 
             tvUsername.setText(user.getUsername());
-            tvCount.setText("???");
-            tvRank.setText("#???");
+
+            tvRank.setText("#" + String.valueOf(position+1));
 
             if (fbs.getUser().getPhoto() != null && !fbs.getUser().getPhoto().isEmpty())
             {
@@ -75,7 +76,14 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
 
             }
 
-        }
+            // game is game
+            if (factor.equals("Easy")) tvCount.setText(String.valueOf(user.getEasy()));
+            else if (factor.equals("Medium")) tvCount.setText(String.valueOf(user.getMedium()));
+            else if (factor.equals("Hard")) tvCount.setText(String.valueOf(user.getHard()));
+            else if (factor.equals("Daily")) tvCount.setText(String.valueOf(user.getDailyCount()));
 
+
+
+        }
     }
 }

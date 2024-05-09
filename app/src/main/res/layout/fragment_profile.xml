@@ -259,8 +259,10 @@
                 android:layout_width="250dp"
                 android:layout_height="65dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginBottom="15dp"
                 app:cardBackgroundColor="@color/Bright_Orange"
                 app:cardCornerRadius="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rvMapProfile">

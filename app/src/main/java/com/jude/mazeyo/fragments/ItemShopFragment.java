@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +34,7 @@ public class ItemShopFragment extends Fragment {
     TextView tvMCoin, tvItemPrice, tvColorName;
     RecyclerView rvSkin, rvMap;
     ArrayList<Item> iSkins, iMaps;
+    ImageView ivProfile;
     boolean Black = false, LightOrange = false,Mango = false,Bronze = false, RedOrange = false,TurquoiseBlue = false,BlackBron = false,Amber = false,CarSLnBlue = false;
     boolean Nature = false,Water = false,Beach = false,Ice = false,Greek = false,Egyptian = false,World = false,Church = false,Aqsa = false;
 
@@ -90,6 +93,7 @@ public class ItemShopFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
+        ivProfile = getView().findViewById(R.id.ivProfileShop);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountShop);
         rvSkin = getView().findViewById(R.id.rvSkinShop);
         rvMap = getView().findViewById(R.id.rvMapShop);
@@ -97,6 +101,13 @@ public class ItemShopFragment extends Fragment {
         iMaps = new ArrayList<Item>();
         tvItemPrice = getView().findViewById(R.id.tvPriceItem);
         tvColorName = getView().findViewById(R.id.tvNameItem);
+
+        ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoToProfile();
+            }
+        });
 
 
 
@@ -257,5 +268,15 @@ public class ItemShopFragment extends Fragment {
 
         rvMap.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
         rvMap.setAdapter(new MapShopAdapter(getActivity(),iMaps));
+
     }
+
+    private void GoToProfile() {
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
+        ft.commit();
+    }
+
+
 }
