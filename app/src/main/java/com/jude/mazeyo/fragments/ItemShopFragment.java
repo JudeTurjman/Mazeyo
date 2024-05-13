@@ -16,9 +16,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.jude.mazeyo.FireBaseServices;
 import com.jude.mazeyo.Item;
-import com.jude.mazeyo.MapShopAdapter;
+import com.jude.mazeyo.Adapters.MapShopAdapter;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.ShopAdapter;
+import com.jude.mazeyo.Adapters.ShopAdapter;
 import com.jude.mazeyo.User;
 
 import java.util.ArrayList;

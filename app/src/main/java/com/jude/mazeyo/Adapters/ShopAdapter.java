@@ -1,4 +1,4 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.Adapters;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -14,6 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.Item;
+import com.jude.mazeyo.R;
+import com.jude.mazeyo.User;
 
 import java.util.ArrayList;
 

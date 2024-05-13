@@ -16,6 +16,17 @@ public class FireBaseServices {
     private String difficulty;
     private Uri selectedImageURL;
 
+    // -------------------------------
+    private static String seeRank;
+
+    public static String getSeeRank() {
+        return seeRank;
+    }
+
+    public static void setSeeRank(String seeRank) {
+        FireBaseServices.seeRank = seeRank;
+    }
+
     public Uri getSelectedImageURL() {
         return selectedImageURL;
     }

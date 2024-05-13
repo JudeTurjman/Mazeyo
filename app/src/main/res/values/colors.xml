@@ -6,6 +6,7 @@
     <color name="Black_Bron">#99492606</color>
     <color name="Bright_Orange">#FFAC1C</color>
     <color name="Bronze">#CD7F32</color>
+    <color name="Light_Bronze">#C87345</color>
     <color name="Golden_Yellow">#FFC000</color>
     <color name="Mango">#F4BB44</color>
     <color name="Orange">#FFA500</color>
@@ -18,4 +19,6 @@
     <color name="Turquoise_Blue">#40E0D0</color>
     <color name="Blue700"> #03bafc </color>
     <color name="Red"> #FFFF0000 </color>
+    <color name="Light_Silver"> #D3D3D3 </color>
+    <color name="Silver"> #C2BEBE </color>
 </resources>

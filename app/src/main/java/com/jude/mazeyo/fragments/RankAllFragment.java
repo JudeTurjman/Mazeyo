@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,17 +16,15 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.api.Usage;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jude.mazeyo.FireBaseServices;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.RankAdapter;
+import com.jude.mazeyo.Adapters.RankAdapter;
 import com.jude.mazeyo.User;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -94,6 +93,7 @@ public class RankAllFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
+        fbs.setSeeRank("No Ranking");
         tvSeeEasy = getView().findViewById(R.id.tvSeeAllEasyRankAll);
         tvSeeMedium = getView().findViewById(R.id.tvSeeAllMediumRankAll);
         tvSeeHard = getView().findViewById(R.id.tvSeeAllHardRankAll);
@@ -136,7 +136,7 @@ public class RankAllFragment extends Fragment {
 
                 }
 
-                Collections.sort(listEasy, new Comparator<User>() {
+                listEasy.sort(new Comparator<User>() {
                     @Override
                     public int compare(User user1, User user2) {
                         // Compare based on the EasyCounter
@@ -146,7 +146,7 @@ public class RankAllFragment extends Fragment {
                 for (int i = 0; i < 3 ; i++){
                     topListEasy.add(listEasy.get(i));
                 }
-                Collections.sort(listMedium, new Comparator<User>() {
+                listMedium.sort(new Comparator<User>() {
                     @Override
                     public int compare(User user1, User user2) {
                         // Compare based on the EasyCounter
@@ -156,7 +156,7 @@ public class RankAllFragment extends Fragment {
                 for (int i = 0; i < 3 ; i++){
                     topListMedium.add(listMedium.get(i));
                 }
-                Collections.sort(listHard, new Comparator<User>() {
+                listHard.sort(new Comparator<User>() {
                     @Override
                     public int compare(User user1, User user2) {
                         // Compare based on the EasyCounter
@@ -166,7 +166,7 @@ public class RankAllFragment extends Fragment {
                 for (int i = 0; i < 3 ; i++){
                     topListHard.add(listHard.get(i));
                 }
-                Collections.sort(listDaily, new Comparator<User>() {
+                listDaily.sort(new Comparator<User>() {
                     @Override
                     public int compare(User user1, User user2) {
                         // Compare based on the EasyCounter
@@ -187,6 +187,43 @@ public class RankAllFragment extends Fragment {
             }
         });
 
+        tvSeeEasy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbs.setSeeRank("Easy");
+                GoToRankSpecific();
+            }
+        });
+        tvSeeMedium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbs.setSeeRank("Medium");
+                GoToRankSpecific();
+            }
+        });
+        tvSeeHard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbs.setSeeRank("Hard");
+                GoToRankSpecific();
+            }
+        });
+        tvSeeDaily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbs.setSeeRank("Daily");
+                GoToRankSpecific();
+            }
+        });
+
+
+    }
+
+    private void GoToRankSpecific() {
+
+        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.FrameLayoutMain, new RankSpecificFragment());
+        ft.commit();
     }
 
     private void SettingFrame(){

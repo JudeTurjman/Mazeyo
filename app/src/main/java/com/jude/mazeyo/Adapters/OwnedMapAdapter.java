@@ -1,6 +1,5 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,16 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.ItemOwned;
+import com.jude.mazeyo.R;
+import com.jude.mazeyo.User;
 
 import java.util.ArrayList;
 
-public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOwned> {
+public class OwnedMapAdapter extends RecyclerView.Adapter<OwnedMapAdapter.ViewHolderOwned> {
 
     private Context context;
     private ArrayList<ItemOwned> lst;
     private FireBaseServices fbs;
 
-    public OwnedAdapter(Context context, ArrayList<ItemOwned> lst) {
+    public OwnedMapAdapter(Context context, ArrayList<ItemOwned> lst) {
         fbs = FireBaseServices.getInstance();
         this.context = context;
         this.lst = lst;
@@ -32,13 +35,13 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
 
     @NonNull
     @Override
-    public OwnedAdapter.ViewHolderOwned onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OwnedMapAdapter.ViewHolderOwned onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item,parent,false);
-        return new OwnedAdapter.ViewHolderOwned(view);
+        return new ViewHolderOwned(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OwnedAdapter.ViewHolderOwned holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull OwnedMapAdapter.ViewHolderOwned holder, int position) {
 
         ItemOwned itemOwned = lst.get(position);
         holder.SetDetails(itemOwned);
@@ -47,9 +50,9 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
             @Override
             public void onClick(View v) {
                 User user = fbs.getUser();
-                String PreOwned = user.getInUse();
-                user.setInUse(holder.tvName.getText().toString());
-                fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).update("inUse",holder.tvName.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                String PreOwned = user.getInMap();
+                user.setInMap(holder.tvName.getText().toString());
+                fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(context, "You chang your Use Color", Toast.LENGTH_SHORT).show();
@@ -79,7 +82,7 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
         return lst.size();
     }
 
-    public class ViewHolderOwned extends RecyclerView.ViewHolder{
+    public class ViewHolderOwned extends RecyclerView.ViewHolder {
 
         private TextView tvName, tvOwned;
         private ImageView ivColor;
@@ -95,16 +98,15 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
 
         }
 
-        void SetDetails (ItemOwned itemOwned){
+        void SetDetails(ItemOwned itemOwned) {
 
             String ColorName = itemOwned.getName();
             tvName.setText(ColorName);
             ivColor.setImageResource(itemOwned.getImage());
-            if(fbs.getUser().getInUse().equals(ColorName)){
+            if (fbs.getUser().getInMap().equals(ColorName)) {
                 tvOwned.setText("Use Now");
                 llBtn.setBackgroundResource(R.drawable.card_view_out_lines);
-            }
-            else {
+            } else {
                 tvOwned.setText("Owned");
                 llBtn.setBackgroundResource(R.drawable.card_view_shadow);
             }
