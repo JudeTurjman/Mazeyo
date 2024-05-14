@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="@null">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_Orange">
+
+
+        <LinearLayout
+            android:id="@+id/llImageUserPopUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:id="@+id/ivImageUserPopUp"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@mipmap/profile_launcher_foreground" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llUsernameUserPopUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llImageUserPopUp">
+
+            <TextView
+                android:id="@+id/tvUsernameUserPopUp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="..."
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llCommentUserPopUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llUsernameUserPopUp">
+
+
+            <TextView
+                android:id="@+id/tvCommentUserPopUp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:hint="..."
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="17dp"
+                android:textStyle="italic"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEasyUserPopUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llCommentUserPopUp"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Easy:"
+                android:textSize="17dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvEasyUserPopUp"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:hint="..."
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="17dp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llMediumUserPopUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llEasyUserPopUp">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Medium:"
+                android:textSize="17dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvMediumUserPopUp"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:hint="..."
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="17dp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llHardUserPopUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llMediumUserPopUp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Hard:"
+                android:textSize="17dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tvHardUserPopUp"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:hint="..."
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="17dp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutSellerInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llHardUserPopUp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExitUserPopUp"
+                android:layout_width="180dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/Mango"
+                android:hapticFeedbackEnabled="true"
+                android:text="Go Back"
+                android:textColor="@color/white_Orange"
+                app:shapeAppearance="@style/RoundShape.App.50percent"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

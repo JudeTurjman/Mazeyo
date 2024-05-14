@@ -1,9 +1,11 @@
 package com.jude.mazeyo.Adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
    private ArrayList<User> list;
    private final FireBaseServices fbs = FireBaseServices.getInstance();
    private String factor;
+    Dialog dialog;
 
     public RankAdapter(Context context, ArrayList<User> list, String factor) {
         this.context = context;
@@ -45,6 +48,45 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
     public void onBindViewHolder(@NonNull RankAdapter.ViewRanking holder, int position) {
         User user = list.get(position);
         holder.SetDetails(user,position);
+
+        dialog = new Dialog(context);
+        dialog.setContentView(R.layout.user_popup);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+        dialog.setCancelable(false);
+
+        holder.cvSeeTheUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!dialog.isShowing()) dialog.show();
+                ImageView ivProfilePhoto = dialog.findViewById(R.id.ivImageUserPopUp);
+                TextView tvUserName = dialog.findViewById(R.id.tvUsernameUserPopUp);
+                TextView tvComment = dialog.findViewById(R.id.tvCommentUserPopUp);
+                TextView tvEasy = dialog.findViewById(R.id.tvEasyUserPopUp);
+                TextView tvMedium = dialog.findViewById(R.id.tvMediumUserPopUp);
+                TextView tvHard = dialog.findViewById(R.id.tvHardUserPopUp);
+                Button exit = dialog.findViewById(R.id.btnExitUserPopUp);
+
+                if (user.getPhoto() != null && !user.getPhoto().isEmpty())
+                {
+                    Picasso.get().load(fbs.getUser().getPhoto()).into(ivProfilePhoto);
+                }
+
+                tvUserName.setText(user.getUsername());
+                tvComment.setText(user.getComment());
+                tvEasy.setText(String.valueOf(user.getEasy()));
+                tvMedium.setText(String.valueOf(user.getMedium()));
+                tvHard.setText(String.valueOf(user.getHard()));
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+        });
     }
 
     @Override
@@ -56,7 +98,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
 
         private TextView tvRank, tvUsername, tvCount;
         private ImageView ivProfile;
-        private CardView cvRank;
+        private CardView cvRank, cvSeeTheUser;
 
         public ViewRanking(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +108,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
             tvUsername = itemView.findViewById(R.id.tvUserNameUser);
             ivProfile = itemView.findViewById(R.id.ivRankUser);
             cvRank = itemView.findViewById(R.id.cvRankUser);
+            cvSeeTheUser = itemView.findViewById(R.id.cvSeeTheUser);
 
         }
 
