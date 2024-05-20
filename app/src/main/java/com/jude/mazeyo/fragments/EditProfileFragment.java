@@ -17,11 +17,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.jude.mazeyo.FireBaseServices;
-import com.jude.mazeyo.MainActivity;
+import com.jude.mazeyo.objects.FireBaseServices;
+import com.jude.mazeyo.activities.MainActivity;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.User;
-import com.jude.mazeyo.Utils;
+import com.jude.mazeyo.objects.User;
+import com.jude.mazeyo.objects.Utils;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -37,7 +37,7 @@ public class EditProfileFragment extends Fragment {
     ImageView ivGoBack, ivEditImage;
     TextView tvEdit;
     EditText etUname, etNote;
-
+    //Utils utils
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

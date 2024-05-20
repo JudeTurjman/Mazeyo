@@ -19,10 +19,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
-import com.jude.mazeyo.FireBaseServices;
-import com.jude.mazeyo.MainActivity;
+import com.jude.mazeyo.objects.FireBaseServices;
+import com.jude.mazeyo.activities.MainActivity;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.User;
+import com.jude.mazeyo.objects.User;
 
 /**
  * A simple {@link Fragment} subclass.

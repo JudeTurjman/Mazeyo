@@ -1,4 +1,4 @@
-package com.jude.mazeyo.Adapters;
+package com.jude.mazeyo.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -13,9 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.objects.FireBaseServices;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.User;
+import com.jude.mazeyo.objects.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
    private final FireBaseServices fbs = FireBaseServices.getInstance();
    private String factor;
     Dialog dialog;
+
 
     public RankAdapter(Context context, ArrayList<User> list, String factor) {
         this.context = context;
@@ -59,7 +60,9 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
             @Override
             public void onClick(View v) {
 
+
                 if(!dialog.isShowing()) dialog.show();
+                ImageView ivSLNLogoPopUP = dialog.findViewById(R.id.ivCarSLNLogoUserPopUp);
                 ImageView ivProfilePhoto = dialog.findViewById(R.id.ivImageUserPopUp);
                 TextView tvUserName = dialog.findViewById(R.id.tvUsernameUserPopUp);
                 TextView tvComment = dialog.findViewById(R.id.tvCommentUserPopUp);
@@ -78,6 +81,16 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
                 tvEasy.setText(String.valueOf(user.getEasy()));
                 tvMedium.setText(String.valueOf(user.getMedium()));
                 tvHard.setText(String.valueOf(user.getHard()));
+
+                // put the CarSLN logo in the profile photo "SLN"
+                boolean haveSLN = false;
+                for (int i = 0; i < user.getOwnedSkins().size(); i++){
+                    if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
+                        ivSLNLogoPopUP.setVisibility(View.VISIBLE);
+                        haveSLN = true;
+                    }
+                }
+                if (!haveSLN)ivSLNLogoPopUP.setVisibility(View.GONE);
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -97,7 +110,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
     public class ViewRanking extends RecyclerView.ViewHolder{
 
         private TextView tvRank, tvUsername, tvCount;
-        private ImageView ivProfile;
+        private ImageView ivProfile, ivSLNLogo;
         private CardView cvRank, cvSeeTheUser;
 
         public ViewRanking(@NonNull View itemView) {
@@ -106,6 +119,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
             tvCount = itemView.findViewById(R.id.tvCountUser);
             tvRank = itemView.findViewById(R.id.tvRankUser);
             tvUsername = itemView.findViewById(R.id.tvUserNameUser);
+            ivSLNLogo = itemView.findViewById(R.id.ivCarSLNLogoUser);
             ivProfile = itemView.findViewById(R.id.ivRankUser);
             cvRank = itemView.findViewById(R.id.cvRankUser);
             cvSeeTheUser = itemView.findViewById(R.id.cvSeeTheUser);
@@ -137,6 +151,12 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
             else if (factor.equals("Hard")) tvCount.setText(String.valueOf(user.getHard()));
             else if (factor.equals("Daily")) tvCount.setText(String.valueOf(user.getDailyCount()));
 
+            // put the CarSLN logo in the profile photo "SLN"
+            for (int i = 0; i < user.getOwnedSkins().size(); i++){
+                if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
+                    ivSLNLogo.setVisibility(View.VISIBLE);
+                }
+            }
 
 
         }

@@ -18,8 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
-import com.jude.mazeyo.FireBaseServices;
-import com.jude.mazeyo.MainActivity;
+import com.jude.mazeyo.objects.FireBaseServices;
+import com.jude.mazeyo.activities.MainActivity;
 import com.jude.mazeyo.R;
 
 /**

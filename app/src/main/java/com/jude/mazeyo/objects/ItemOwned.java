@@ -1,14 +1,14 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.objects;
 
-public class Item {
+public class ItemOwned {
 
     private String name;
-    private int price;
+    private boolean inUseNow;
     private int image;
 
-    public Item(String name, int price, int image) {
+    public ItemOwned(String name, boolean inUseNow, int image) {
         this.name = name;
-        this.price = price;
+        this.inUseNow = inUseNow;
         this.image = image;
     }
 
@@ -20,12 +20,12 @@ public class Item {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+    public boolean isInUseNow() {
+        return inUseNow;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setInUseNow(boolean inUseNow) {
+        this.inUseNow = inUseNow;
     }
 
     public int getImage() {

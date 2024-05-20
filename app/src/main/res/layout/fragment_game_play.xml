@@ -38,7 +38,7 @@
 
         <view
             android:id="@+id/view"
-            class="com.jude.mazeyo.GameView"
+            class="com.jude.mazeyo.objects.GameView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

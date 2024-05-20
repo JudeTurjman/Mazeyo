@@ -1,4 +1,4 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.activities;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -11,11 +11,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.jude.mazeyo.R;
 import com.jude.mazeyo.fragments.HomeFragment;
 import com.jude.mazeyo.fragments.ItemShopFragment;
 import com.jude.mazeyo.fragments.LogInFragment;
 import com.jude.mazeyo.fragments.ProfileFragment;
 import com.jude.mazeyo.fragments.RankAllFragment;
+import com.jude.mazeyo.objects.FireBaseServices;
 
 public class MainActivity extends AppCompatActivity {
 

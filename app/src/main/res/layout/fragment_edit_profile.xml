@@ -29,81 +29,54 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/lImage"
+
+        <ImageView
+            android:id="@+id/ivImageEditProfile"
             android:layout_width="139dp"
             android:layout_height="139dp"
+            android:src="@mipmap/profile_launcher_foreground"
             android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"/>
 
-            <ImageView
-                android:id="@+id/ivImageEditProfile"
-                android:layout_width="139dp"
-                android:layout_height="139dp"
-                android:src="@mipmap/profile_launcher_foreground"
-                tools:layout_editor_absoluteX="126dp"
-                tools:layout_editor_absoluteY="169dp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lYouNeed10000"
+        <TextView
+            android:id="@+id/tvYouNeed10000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/Red_Orange"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:text="Pay 10,000 Mazeyo Coins to edit user name"
             android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lImage">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/Red_Orange"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:text="Pay 10,000 Mazeyo Coins to edit user name"/>
+            app:layout_constraintTop_toBottomOf="@+id/ivImageEditProfile"/>
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lEditUsername"
+        <EditText
+            android:id="@+id/etEditUserNameEditProfile"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="17dp"
             android:layout_width="139dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lYouNeed10000">
+            app:layout_constraintTop_toBottomOf="@+id/tvYouNeed10000"/>
 
-            <EditText
-                android:id="@+id/etEditUserNameEditProfile"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lEditNote"
+        <EditText
+            android:id="@+id/etEditNoteEditProfile"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lEditUsername">
-
-            <EditText
-                android:id="@+id/etEditNoteEditProfile"
-                android:layout_width="match_parent"
-                android:textColor="@color/black"
-                android:textSize="17dp"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/etEditUserNameEditProfile"
+            android:textColor="@color/black"
+            android:textSize="17dp" />
 
         <LinearLayout
             android:id="@+id/lEditProfile"
@@ -112,7 +85,7 @@
             android:layout_marginTop="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lEditNote"
+            app:layout_constraintTop_toBottomOf="@+id/etEditNoteEditProfile"
             android:background="@drawable/card_view_shadow">
 
             <TextView
@@ -128,6 +101,5 @@
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </RelativeLayout>

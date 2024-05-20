@@ -1,4 +1,4 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.objects;
 
 import android.net.Uri;
 

@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.jude.mazeyo.FireBaseServices;
-import com.jude.mazeyo.ItemOwned;
-import com.jude.mazeyo.MainActivity;
-import com.jude.mazeyo.Adapters.OwnedAdapter;
-import com.jude.mazeyo.Adapters.OwnedMapAdapter;
+import com.jude.mazeyo.objects.FireBaseServices;
+import com.jude.mazeyo.objects.ItemOwned;
+import com.jude.mazeyo.activities.MainActivity;
+import com.jude.mazeyo.adapters.OwnedAdapter;
+import com.jude.mazeyo.adapters.OwnedMapAdapter;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.User;
+import com.jude.mazeyo.objects.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment {
     ArrayList<ItemOwned> iOwnedSkins;
     RecyclerView rvOwnedMap;
     ArrayList<ItemOwned> iOwnedMaps;
-    ImageView ivSetting, ivImage;
+    ImageView ivSetting, ivImage, ivSLNLogo;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,6 +94,7 @@ public class ProfileFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
+        ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoProfile);
         ivImage = getView().findViewById(R.id.ivImageProfile);
         tvUsername = getView().findViewById(R.id.tvUsernameProfile);
         ivSetting = getView().findViewById(R.id.ivGoToSettingProfile);
@@ -142,7 +143,10 @@ public class ProfileFragment extends Fragment {
 
                 if(user.getOwnedSkins().get(i).equals("Amber"))iOwnedSkins.add(new ItemOwned("Amber",false,R.color.Amber));
 
-                if(user.getOwnedSkins().get(i).equals("CarSLn Blue"))iOwnedSkins.add(new ItemOwned("CarSLn Blue", false, R.color.Blue700));
+                if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
+                    iOwnedSkins.add(new ItemOwned("CarSLn Blue", false, R.color.Blue700));
+                    ivSLNLogo.setVisibility(View.VISIBLE);
+                }
             }
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

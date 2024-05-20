@@ -1,4 +1,4 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.objects;
 
 
 import android.annotation.SuppressLint;
@@ -23,6 +23,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.jude.mazeyo.activities.MainActivity;
+import com.jude.mazeyo.R;
 import com.jude.mazeyo.fragments.HomeFragment;
 
 import java.util.ArrayList;

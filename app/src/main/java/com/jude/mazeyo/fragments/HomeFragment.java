@@ -15,10 +15,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.jude.mazeyo.FireBaseServices;
-import com.jude.mazeyo.MainActivity;
+import com.jude.mazeyo.objects.FireBaseServices;
+import com.jude.mazeyo.activities.MainActivity;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.User;
+import com.jude.mazeyo.objects.User;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
 
     private FireBaseServices fbs;
     CardView cvEasy, cvMedium, cvHard, cvDaily;
-    ImageView ivProfile;
+    ImageView ivProfile, ivSLNLogo;
     TextView tvMCoin, tvDailyCount;
 
 
@@ -90,6 +90,7 @@ public class HomeFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
+        ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoHome);
         cvEasy = getView().findViewById(R.id.cvEasyHome);
         cvMedium = getView().findViewById(R.id.cvMediumHome);
         cvHard = getView().findViewById(R.id.cvHardHome);
@@ -133,6 +134,12 @@ public class HomeFragment extends Fragment {
                     // show Coins Amount and Comment and Game Count.
                     // and show daily played in a row count.
 
+                    // put the CarSLN logo in the profile photo "SLN"
+                    for (int i = 0; i < user.getOwnedSkins().size(); i++){
+                        if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
+                            ivSLNLogo.setVisibility(View.VISIBLE);
+                        }
+                    }
                 }
             });
 
@@ -158,6 +165,12 @@ public class HomeFragment extends Fragment {
                 }
             }
             tvDailyCount.setText(Integer.toString(fbs.getUser().getDailyCount()));
+
+            for (int i = 0; i < fbs.getUser().getOwnedSkins().size(); i++){
+                if(fbs.getUser().getOwnedSkins().get(i).equals("CarSLn Blue")){
+                    ivSLNLogo.setVisibility(View.VISIBLE);
+                }
+            }
 
         }
 

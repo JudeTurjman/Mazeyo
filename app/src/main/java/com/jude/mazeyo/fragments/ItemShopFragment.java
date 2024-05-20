@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.jude.mazeyo.FireBaseServices;
-import com.jude.mazeyo.Item;
-import com.jude.mazeyo.Adapters.MapShopAdapter;
+import com.jude.mazeyo.objects.FireBaseServices;
+import com.jude.mazeyo.objects.Item;
+import com.jude.mazeyo.adapters.MapShopAdapter;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.Adapters.ShopAdapter;
-import com.jude.mazeyo.User;
+import com.jude.mazeyo.adapters.ShopAdapter;
+import com.jude.mazeyo.objects.User;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class ItemShopFragment extends Fragment {
     TextView tvMCoin, tvItemPrice, tvColorName;
     RecyclerView rvSkin, rvMap;
     ArrayList<Item> iSkins, iMaps;
-    ImageView ivProfile;
+    ImageView ivProfile, ivSLNLogo;
     boolean Black = false, LightOrange = false,Mango = false,Bronze = false, RedOrange = false,TurquoiseBlue = false,BlackBron = false,Amber = false,CarSLnBlue = false;
     boolean Nature = false,Water = false,Beach = false,Ice = false,Greek = false,Egyptian = false,World = false,Church = false,Aqsa = false;
 
@@ -93,6 +93,7 @@ public class ItemShopFragment extends Fragment {
         super.onStart();
 
         fbs = FireBaseServices.getInstance();
+        ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoShop);
         ivProfile = getView().findViewById(R.id.ivProfileShop);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountShop);
         rvSkin = getView().findViewById(R.id.rvSkinShop);
@@ -196,6 +197,7 @@ public class ItemShopFragment extends Fragment {
             }
         }
         if(!CarSLnBlue)iSkins.add(new Item("CarSLn Blue", 88000, R.drawable.blue700_carsln));
+        else ivSLNLogo.setVisibility(View.VISIBLE);
 
         rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));
         rvSkin.setAdapter(new ShopAdapter(getActivity(),iSkins));

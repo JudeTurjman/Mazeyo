@@ -19,13 +19,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.objects.FireBaseServices;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.Adapters.RankAdapter;
-import com.jude.mazeyo.User;
+import com.jude.mazeyo.adapters.RankAdapter;
+import com.jude.mazeyo.objects.User;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -115,9 +114,9 @@ public class RankAllFragment extends Fragment {
         rvHard.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvDaily.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapterEasy = new RankAdapter(getActivity(),listEasy,"Easy");
-        adapterMedium = new RankAdapter(getActivity(),listMedium,"Medium" );
-        adapterHard = new RankAdapter(getActivity(),listHard,"Hard" );
-        adapterDaily = new RankAdapter(getActivity(),listDaily,"Daily" );
+        adapterMedium = new RankAdapter(getActivity(),listMedium,"Medium");
+        adapterHard = new RankAdapter(getActivity(),listHard,"Hard");
+        adapterDaily = new RankAdapter(getActivity(),listDaily,"Daily");
 
         FirebaseFirestore db = fbs.getFirestore();
 
@@ -233,9 +232,9 @@ public class RankAllFragment extends Fragment {
         rvHard.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvDaily.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapterEasy = new RankAdapter(getActivity(),topListEasy,"Easy");
-        adapterMedium = new RankAdapter(getActivity(),topListMedium,"Medium" );
-        adapterHard = new RankAdapter(getActivity(),topListHard,"Hard" );
-        adapterDaily = new RankAdapter(getActivity(),topListDaily,"Daily" );
+        adapterMedium = new RankAdapter(getActivity(),topListMedium,"Medium");
+        adapterHard = new RankAdapter(getActivity(),topListHard,"Hard");
+        adapterDaily = new RankAdapter(getActivity(),topListDaily,"Daily");
         rvEasy.setAdapter(adapterEasy);
         rvMedium.setAdapter(adapterMedium);
         rvHard.setAdapter(adapterHard);

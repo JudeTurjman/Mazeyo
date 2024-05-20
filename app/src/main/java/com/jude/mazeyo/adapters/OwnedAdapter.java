@@ -1,4 +1,4 @@
-package com.jude.mazeyo.Adapters;
+package com.jude.mazeyo.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.jude.mazeyo.FireBaseServices;
-import com.jude.mazeyo.ItemOwned;
+import com.jude.mazeyo.objects.FireBaseServices;
+import com.jude.mazeyo.objects.ItemOwned;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.User;
+import com.jude.mazeyo.objects.User;
 
 import java.util.ArrayList;
 

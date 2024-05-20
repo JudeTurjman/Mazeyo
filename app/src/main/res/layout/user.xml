@@ -42,6 +42,15 @@
             android:gravity="center"
             android:src="@mipmap/profile_launcher_foreground" />
 
+        <ImageView
+            android:id="@+id/ivCarSLNLogoUser"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="117dp"
+            android:layout_alignBottom="@id/ivRankUser"
+            android:src="@drawable/carsln_sln_logo"
+            android:visibility="gone"/>
+
         <TextView
             android:id="@+id/tvUserNameUser"
             android:layout_width="wrap_content"

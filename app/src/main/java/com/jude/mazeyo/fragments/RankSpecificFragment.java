@@ -20,10 +20,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.jude.mazeyo.FireBaseServices;
+import com.jude.mazeyo.objects.FireBaseServices;
 import com.jude.mazeyo.R;
-import com.jude.mazeyo.Adapters.RankAdapter;
-import com.jude.mazeyo.User;
+import com.jude.mazeyo.adapters.RankAdapter;
+import com.jude.mazeyo.objects.User;
 
 import java.util.ArrayList;
 import java.util.Comparator;

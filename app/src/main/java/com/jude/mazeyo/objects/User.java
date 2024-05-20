@@ -1,4 +1,4 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.objects;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package com.jude.mazeyo;
+package com.jude.mazeyo.objects;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -43,7 +43,7 @@ public class Utils {
             progressDialog.show();
 
 
-            imageStr = "images/" + UUID.randomUUID() + ".jpg"; //+ selectedImageUri.getLastPathSegment();
+            imageStr = "images/" + UUID.randomUUID() + ".jpg";
             StorageReference imageRef = fbs.getStorage().getReference().child("images/" + selectedImageUri.getLastPathSegment());
 
             UploadTask uploadTask = imageRef.putFile(selectedImageUri);
@@ -72,6 +72,7 @@ public class Utils {
                     Toast.makeText(context, "Failed to upload image", Toast.LENGTH_SHORT).show();
                 }
             });
+
         } else {
             Toast.makeText(context, "Please choose an image first", Toast.LENGTH_SHORT).show();
         }
