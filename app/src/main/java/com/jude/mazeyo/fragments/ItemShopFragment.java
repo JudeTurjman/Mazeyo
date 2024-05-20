@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.jude.mazeyo.objects.FireBaseServices;
@@ -22,6 +23,8 @@ import com.jude.mazeyo.adapters.ShopAdapter;
 import com.jude.mazeyo.objects.User;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,6 +98,7 @@ public class ItemShopFragment extends Fragment {
         fbs = FireBaseServices.getInstance();
         ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoShop);
         ivProfile = getView().findViewById(R.id.ivProfileShop);
+        Glide.with(this).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivProfile);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountShop);
         rvSkin = getView().findViewById(R.id.rvSkinShop);
         rvMap = getView().findViewById(R.id.rvMapShop);

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jude.mazeyo.objects.FireBaseServices;
@@ -22,7 +23,12 @@ import com.jude.mazeyo.activities.MainActivity;
 import com.jude.mazeyo.R;
 import com.jude.mazeyo.objects.User;
 import com.jude.mazeyo.objects.Utils;
-import com.squareup.picasso.Picasso;
+import com.yalantis.ucrop.UCrop;
+
+import java.io.File;
+import java.util.UUID;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,6 +104,7 @@ public class EditProfileFragment extends Fragment {
         tvEdit = getView().findViewById(R.id.tvEditTheProfile);
         ivGoBack = getView().findViewById(R.id.ivGoBackEditProfile);
         ivEditImage = getView().findViewById(R.id.ivImageEditProfile);
+        Glide.with(this).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivEditImage);
 
         if(fbs.getUser() != null){
 
@@ -106,11 +113,8 @@ public class EditProfileFragment extends Fragment {
             Uname = etUname.getText().toString();
         }
 
-        if (fbs.getUser().getPhoto() != null && !fbs.getUser().getPhoto().isEmpty())
-        {
-
-            Picasso.get().load(fbs.getUser().getPhoto()).into(ivEditImage);
-
+        if (fbs.getUser().getPhoto() != null) {
+            if(fbs.getUser().getPhoto().isEmpty()) Glide.with(getActivity()).load(fbs.getUser().getPhoto()).into(ivEditImage);
         }
 
         ivEditImage.setOnClickListener(new View.OnClickListener() {
@@ -192,12 +196,39 @@ public class EditProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == UCrop.REQUEST_CROP) {
+            Uri resultUri = null;
+
+            if(data!=null) resultUri = UCrop.getOutput(data);
+
+            if(resultUri!=null) {
+                ivEditImage.setImageURI(resultUri);
+                utils.uploadImage(getActivity(), resultUri);
+            }
+
+        } else if(resultCode == UCrop.RESULT_ERROR) {
+            // Close the UCrop.
+        }
         if (requestCode == 123 && resultCode == getActivity().RESULT_OK && data != null) {
+
             Uri selectedImageUri = data.getData();
-            ivEditImage.setImageURI(selectedImageUri);
-            utils.uploadImage(getActivity(), selectedImageUri);
+            startCropActivity(selectedImageUri);
 
         }
+    }
+
+    private void startCropActivity(Uri sourceUri) {
+
+        Uri destinationUri = Uri.fromFile(new File(getActivity().getCacheDir(), UUID.randomUUID().toString()));
+
+        UCrop.Options options = new UCrop.Options();
+
+        UCrop uCrop = UCrop.of(sourceUri, destinationUri)
+                .withAspectRatio(1,1)
+                .withMaxResultSize(2000, 2000);
+        uCrop.withOptions(options);
+        uCrop.start(getContext(), this, UCrop.REQUEST_CROP);
+
     }
 
     private void GOToProfile() {

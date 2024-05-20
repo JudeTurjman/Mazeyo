@@ -56,7 +56,7 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
                 fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(context, "You chang your Use Color", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "You change your Used Color", Toast.LENGTH_SHORT).show();
                         holder.tvOwned.setText("Use Now");
                         holder.llBtn.setBackgroundResource(R.drawable.card_view_out_lines);
                         for(int i = 0 ; i < lst.size(); i++){
@@ -66,6 +66,8 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
                             }
                         }
                         fbs.setUser(user);
+
+                        //notifyDataSetChanged();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

@@ -13,12 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.jude.mazeyo.objects.FireBaseServices;
 import com.jude.mazeyo.R;
 import com.jude.mazeyo.objects.User;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
 
@@ -64,6 +66,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
                 if(!dialog.isShowing()) dialog.show();
                 ImageView ivSLNLogoPopUP = dialog.findViewById(R.id.ivCarSLNLogoUserPopUp);
                 ImageView ivProfilePhoto = dialog.findViewById(R.id.ivImageUserPopUp);
+                Glide.with(context).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivProfilePhoto);
                 TextView tvUserName = dialog.findViewById(R.id.tvUsernameUserPopUp);
                 TextView tvComment = dialog.findViewById(R.id.tvCommentUserPopUp);
                 TextView tvEasy = dialog.findViewById(R.id.tvEasyUserPopUp);
@@ -71,9 +74,8 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
                 TextView tvHard = dialog.findViewById(R.id.tvHardUserPopUp);
                 Button exit = dialog.findViewById(R.id.btnExitUserPopUp);
 
-                if (user.getPhoto() != null && !user.getPhoto().isEmpty())
-                {
-                    Picasso.get().load(fbs.getUser().getPhoto()).into(ivProfilePhoto);
+                if (fbs.getUser().getPhoto() != null) {
+                    if(!fbs.getUser().getPhoto().isEmpty())Glide.with(context).load(fbs.getUser().getPhoto()).into(ivProfilePhoto);
                 }
 
                 tvUserName.setText(user.getUsername());
@@ -121,6 +123,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
             tvUsername = itemView.findViewById(R.id.tvUserNameUser);
             ivSLNLogo = itemView.findViewById(R.id.ivCarSLNLogoUser);
             ivProfile = itemView.findViewById(R.id.ivRankUser);
+            Glide.with(context).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivProfile);
             cvRank = itemView.findViewById(R.id.cvRankUser);
             cvSeeTheUser = itemView.findViewById(R.id.cvSeeTheUser);
 
@@ -138,11 +141,8 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
                 cvRank.setBackgroundResource(R.drawable.rank_third);
             }
 
-            if (fbs.getUser().getPhoto() != null && !fbs.getUser().getPhoto().isEmpty())
-            {
-
-                Picasso.get().load(fbs.getUser().getPhoto()).into(ivProfile);
-
+            if (fbs.getUser().getPhoto() != null) {
+                if(!fbs.getUser().getPhoto().isEmpty())Glide.with(context).load(fbs.getUser().getPhoto()).into(ivProfile);
             }
 
             // game is game

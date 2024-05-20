@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -22,6 +23,8 @@ import com.jude.mazeyo.objects.User;
 
 import java.util.Calendar;
 import java.util.Date;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 
 /**
@@ -96,6 +99,7 @@ public class HomeFragment extends Fragment {
         cvHard = getView().findViewById(R.id.cvHardHome);
         cvDaily = getView().findViewById(R.id.cvDailyHome);
         ivProfile = getView().findViewById(R.id.ivProfileHome);
+        Glide.with(this).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivProfile);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountHome);
         tvDailyCount = getView().findViewById(R.id.tvDailyCountHome);
         fbs.setDifficulty("NoGame");

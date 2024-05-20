@@ -35,7 +35,7 @@ public class User {
         dailyCount = 0;
         didDaily = false;
         datePlay = Calendar.getInstance().getTime();
-        photo = null;
+        photo = "";
         ownedSkins = new ArrayList<String>();
         ownedSkins.add("Red");
         inUse = "Red";

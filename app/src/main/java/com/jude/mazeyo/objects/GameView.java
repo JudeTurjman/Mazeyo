@@ -343,7 +343,7 @@ public class GameView extends View {
                     public void onClick(View v) {
                         if (user != null){
 
-                            int money = 20 + user.getDailyCount() * 5;
+                            int money = 50 + user.getDailyCount() * 15;
                             user.setCoin(user.getCoin() + money);
                             user.setDailyCount(user.getDailyCount() + 1);
                             user.setDidDaily(true);
@@ -402,18 +402,18 @@ public class GameView extends View {
 
                                 // this if to set the right amount of MCoins and difficulty to the user
                                 if (fbs.getDifficulty().equals("Easy")) {
-                                    user.setCoin(user.getCoin() + 1);
+                                    user.setCoin(user.getCoin() + 5);
                                     user.setEasy(user.getEasy() + 1);
-                                    Toast.makeText(contextView, "You Got 1 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     if (fbs.getDifficulty().equals("Medium")) {
-                                        user.setCoin(user.getCoin() + 5);
+                                        user.setCoin(user.getCoin() + 15);
                                         user.setMedium(user.getMedium() + 1);
-                                        Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(contextView, "You Got 15 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        user.setCoin(user.getCoin() + 10);
+                                        user.setCoin(user.getCoin() + 40);
                                         user.setHard(user.getHard() + 1);
-                                        Toast.makeText(contextView, "You Got 10 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(contextView, "You Got 40 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 
@@ -450,18 +450,18 @@ public class GameView extends View {
 
                                 // this if to set the right amount of MCoins and difficulty to the user
                                 if (fbs.getDifficulty().equals("Easy")) {
-                                    user.setCoin(user.getCoin() + 1);
+                                    user.setCoin(user.getCoin() + 5);
                                     user.setEasy(user.getEasy() + 1);
-                                    Toast.makeText(contextView, "You Got 1 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     if (fbs.getDifficulty().equals("Medium")) {
-                                        user.setCoin(user.getCoin() + 5);
+                                        user.setCoin(user.getCoin() + 15);
                                         user.setMedium(user.getMedium() + 1);
-                                        Toast.makeText(contextView, "You Got 5 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(contextView, "You Got 15 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        user.setCoin(user.getCoin() + 10);
+                                        user.setCoin(user.getCoin() + 40);
                                         user.setHard(user.getHard() + 1);
-                                        Toast.makeText(contextView, "You Got 10 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(contextView, "You Got 40 Mazeyo Coins!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
 

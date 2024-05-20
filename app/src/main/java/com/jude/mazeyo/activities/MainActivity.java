@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         // To Make the App not Flip.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        // To hide "Mazeyo" on the top.
+        getSupportActionBar().hide();
+
         fbs = FireBaseServices.getInstance();
         bnv= findViewById(R.id.BottomNavigationView);
 

@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
@@ -22,22 +23,21 @@ public class Utils {
     private FireBaseServices fbs;
     private String imageStr;
 
-    public Utils()
-    {
+    public Utils() {
         fbs = FireBaseServices.getInstance();
     }
 
-    public static Utils getInstance()
-    {
+    public static Utils getInstance() {
         if (instance == null)
             instance = new Utils();
 
         return instance;
     }
+
     public void uploadImage(Context context, Uri selectedImageUri) {
         if (selectedImageUri != null) {
 
-            ProgressDialog progressDialog= new ProgressDialog(context);
+            ProgressDialog progressDialog = new ProgressDialog(context);
             progressDialog.setMessage("Your Image Is Being Uploaded");
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.show();
@@ -54,6 +54,7 @@ public class Utils {
                         @Override
                         public void onSuccess(Uri uri) {
                             fbs.setSelectedImageURL(uri);
+                            UpdateProfilePicture(context);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -63,7 +64,6 @@ public class Utils {
                     });
 
                     progressDialog.dismiss();
-                    Toast.makeText(context, "Image uploaded successfully", Toast.LENGTH_SHORT).show();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -78,4 +78,23 @@ public class Utils {
         }
     }
 
+    public void UpdateProfilePicture(Context context) {
+
+        String photo;
+        if (fbs.getSelectedImageURL() == null) photo = "";
+        else photo = fbs.getSelectedImageURL().toString() + ".jpg";
+
+        fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).update("photo", photo).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(context, "Profile Image Updated!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Couldn't Update Profile Image!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 }

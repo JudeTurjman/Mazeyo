@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jude.mazeyo.objects.FireBaseServices;
 import com.jude.mazeyo.objects.ItemOwned;
@@ -21,10 +22,10 @@ import com.jude.mazeyo.adapters.OwnedAdapter;
 import com.jude.mazeyo.adapters.OwnedMapAdapter;
 import com.jude.mazeyo.R;
 import com.jude.mazeyo.objects.User;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 
 /**
@@ -96,6 +97,7 @@ public class ProfileFragment extends Fragment {
         fbs = FireBaseServices.getInstance();
         ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoProfile);
         ivImage = getView().findViewById(R.id.ivImageProfile);
+        Glide.with(this).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivImage);
         tvUsername = getView().findViewById(R.id.tvUsernameProfile);
         ivSetting = getView().findViewById(R.id.ivGoToSettingProfile);
         tvEasy = getView().findViewById(R.id.tvEasyProfile);
@@ -117,11 +119,8 @@ public class ProfileFragment extends Fragment {
             tvEasy.setText(Integer.toString(user.getEasy()));
             tvMedium.setText(Integer.toString(user.getMedium()));
             tvHard.setText(Integer.toString(user.getHard()));
-            if (user.getPhoto() != null && !user.getPhoto().isEmpty())
-            {
-
-                Picasso.get().load(user.getPhoto()).into(ivImage);
-
+            if (user.getPhoto() != null) {
+                if (!user.getPhoto().isEmpty()) Glide.with(getActivity()).load(user.getPhoto()).into(ivImage);
             }
 
             for (int i = 0; i < user.getOwnedSkins().size(); i++){
