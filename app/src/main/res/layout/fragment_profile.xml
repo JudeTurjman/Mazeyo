@@ -15,10 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivImageProfile"
                 android:layout_width="139dp"
                 android:layout_height="139dp"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/RoundShape.App.50percent"
                 android:layout_marginTop="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

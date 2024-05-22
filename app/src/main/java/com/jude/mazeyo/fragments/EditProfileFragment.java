@@ -104,18 +104,22 @@ public class EditProfileFragment extends Fragment {
         tvEdit = getView().findViewById(R.id.tvEditTheProfile);
         ivGoBack = getView().findViewById(R.id.ivGoBackEditProfile);
         ivEditImage = getView().findViewById(R.id.ivImageEditProfile);
-        Glide.with(this).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivEditImage);
 
         if(fbs.getUser() != null){
 
             etUname.setText(fbs.getUser().getUsername());
             etNote.setText(fbs.getUser().getComment());
             Uname = etUname.getText().toString();
+
+            if (fbs.getUser().getPhoto() == null || fbs.getUser().getPhoto().isEmpty()) {
+                Glide.with(getActivity()).load(R.mipmap.profile_launcher_foreground).into(ivEditImage);
+            }else{
+                Glide.with(getActivity()).load(fbs.getUser().getPhoto()).into(ivEditImage);
+            }
+
         }
 
-        if (fbs.getUser().getPhoto() != null) {
-            if(fbs.getUser().getPhoto().isEmpty()) Glide.with(getActivity()).load(fbs.getUser().getPhoto()).into(ivEditImage);
-        }
+
 
         ivEditImage.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -98,7 +98,6 @@ public class ItemShopFragment extends Fragment {
         fbs = FireBaseServices.getInstance();
         ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoShop);
         ivProfile = getView().findViewById(R.id.ivProfileShop);
-        Glide.with(this).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivProfile);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountShop);
         rvSkin = getView().findViewById(R.id.rvSkinShop);
         rvMap = getView().findViewById(R.id.rvMapShop);
@@ -126,6 +125,11 @@ public class ItemShopFragment extends Fragment {
                     fbs.setUser(user);
 
                     tvMCoin.setText(fbs.getUser().getCoin()+":");
+                    if (fbs.getUser().getPhoto() == null || fbs.getUser().getPhoto().isEmpty()) {
+                        Glide.with(getActivity()).load(R.mipmap.profile_launcher_foreground).into(ivProfile);
+                    }else{
+                        Glide.with(getActivity()).load(fbs.getUser().getPhoto()).into(ivProfile);
+                    }
 
                     // show Coins Amount and Comment and Game Count.
                 }
@@ -134,6 +138,11 @@ public class ItemShopFragment extends Fragment {
         } else {
 
             tvMCoin.setText(fbs.getUser().getCoin()+":");
+            if (fbs.getUser().getPhoto() == null || fbs.getUser().getPhoto().isEmpty()) {
+                Glide.with(getActivity()).load(R.mipmap.profile_launcher_foreground).into(ivProfile);
+            }else{
+                Glide.with(getActivity()).load(fbs.getUser().getPhoto()).into(ivProfile);
+            }
         }
 
         User user = fbs.getUser();

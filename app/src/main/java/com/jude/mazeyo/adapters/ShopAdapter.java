@@ -48,12 +48,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolderShop
         Item item = lst.get(position);
         holder.SetDetails(item);
 
-        dialog = new Dialog(context);
-        dialog.setContentView(R.layout.buy_dialog_popup);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
-        dialog.setCancelable(false);
-
         holder.tvPrice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +56,13 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolderShop
                 }
                 else {
 
-                    if(!dialog.isShowing()) dialog.show();
+                    dialog = new Dialog(context);
+                    dialog.setContentView(R.layout.buy_dialog_popup);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                    dialog.show();
+
+
                     Button buy = dialog.findViewById(R.id.btnBuyItem);
                     Button exit = dialog.findViewById(R.id.btnExitBuyItem);
 

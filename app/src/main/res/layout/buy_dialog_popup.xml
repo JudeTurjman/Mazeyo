@@ -47,7 +47,7 @@
                 android:layout_height="60dp"
                 android:backgroundTint="@color/white"
                 android:hapticFeedbackEnabled="true"
-                android:text="Exit"
+                android:text="No"
                 android:textColor="@color/black"
                 app:shapeAppearance="@style/RoundShape.App.50percent"
                 app:strokeColor="@color/black"

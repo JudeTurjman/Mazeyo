@@ -11,10 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivProfileShop"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/RoundShape.App.50percent"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:src="@mipmap/profile_launcher_foreground"

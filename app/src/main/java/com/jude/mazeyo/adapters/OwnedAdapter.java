@@ -57,17 +57,9 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(context, "You change your Used Color", Toast.LENGTH_SHORT).show();
-                        holder.tvOwned.setText("Use Now");
-                        holder.llBtn.setBackgroundResource(R.drawable.card_view_out_lines);
-                        for(int i = 0 ; i < lst.size(); i++){
-                            if (lst.get(i).getName().equals(PreOwned)) {
-                                ItemOwned itemOwned = lst.get(i);
-                                holder.ChangeDetails(itemOwned);
-                            }
-                        }
                         fbs.setUser(user);
 
-                        //notifyDataSetChanged();
+                        notifyDataSetChanged();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

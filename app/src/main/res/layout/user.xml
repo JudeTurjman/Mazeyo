@@ -34,10 +34,12 @@
                 android:textSize="25dp" />
         </androidx.cardview.widget.CardView>
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivRankUser"
             android:layout_marginStart="75dp"
             android:layout_width="60dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/RoundShape.App.50percent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:src="@mipmap/profile_launcher_foreground" />

@@ -88,6 +88,7 @@ public class Utils {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(context, "Profile Image Updated!", Toast.LENGTH_SHORT).show();
+                fbs.getUser().setPhoto(photo);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

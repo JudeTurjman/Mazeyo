@@ -65,12 +65,6 @@ public class MapShopAdapter extends RecyclerView.Adapter<MapShopAdapter.ViewHold
 
             fbs = FireBaseServices.getInstance();
 
-            dialog = new Dialog(context);
-            dialog.setContentView(R.layout.buy_dialog_popup);
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
-            dialog.setCancelable(false);
-
             tvPrice.setOnClickListener(this);
         }
 
@@ -80,7 +74,13 @@ public class MapShopAdapter extends RecyclerView.Adapter<MapShopAdapter.ViewHold
                 Toast.makeText(context, "You don't have enough Mazeyo Coin", Toast.LENGTH_SHORT).show();
             } else {
 
-                if (!dialog.isShowing()) dialog.show();
+                dialog = new Dialog(context);
+                dialog.setContentView(R.layout.buy_dialog_popup);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                dialog.show();
+
+
                 Button buy = dialog.findViewById(R.id.btnBuyItem);
                 Button exit = dialog.findViewById(R.id.btnExitBuyItem);
 

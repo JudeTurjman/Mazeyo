@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void GoToHome() {
+    public void GoToHome() {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new HomeFragment());
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ItemShopFragment());
+        ft.addToBackStack("HomeFragment");
         ft.commit();
     }
 
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
+        ft.addToBackStack("HomeFragment");
         ft.commit();
     }
 
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new LogInFragment());
+        ft.addToBackStack("HomeFragment");
         ft.commit();
     }
 
@@ -107,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new RankAllFragment());
+        ft.addToBackStack("HomeFragment");
         ft.commit();
     }
 

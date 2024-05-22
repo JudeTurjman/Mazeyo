@@ -97,7 +97,6 @@ public class ProfileFragment extends Fragment {
         fbs = FireBaseServices.getInstance();
         ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoProfile);
         ivImage = getView().findViewById(R.id.ivImageProfile);
-        Glide.with(this).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivImage);
         tvUsername = getView().findViewById(R.id.tvUsernameProfile);
         ivSetting = getView().findViewById(R.id.ivGoToSettingProfile);
         tvEasy = getView().findViewById(R.id.tvEasyProfile);
@@ -112,6 +111,7 @@ public class ProfileFragment extends Fragment {
 
 
         if(fbs.getUser()!=null) {
+
             User user = fbs.getUser();
 
             tvUsername.setText(user.getUsername());
@@ -119,9 +119,13 @@ public class ProfileFragment extends Fragment {
             tvEasy.setText(Integer.toString(user.getEasy()));
             tvMedium.setText(Integer.toString(user.getMedium()));
             tvHard.setText(Integer.toString(user.getHard()));
-            if (user.getPhoto() != null) {
-                if (!user.getPhoto().isEmpty()) Glide.with(getActivity()).load(user.getPhoto()).into(ivImage);
+
+            if (fbs.getUser().getPhoto() == null || fbs.getUser().getPhoto().isEmpty()) {
+                Glide.with(getActivity()).load(R.mipmap.profile_launcher_foreground).into(ivImage);
+            }else{
+                Glide.with(getActivity()).load(fbs.getUser().getPhoto()).into(ivImage);
             }
+
 
             for (int i = 0; i < user.getOwnedSkins().size(); i++){
                 if(user.getOwnedSkins().get(i).equals("Red")) iOwnedSkins.add(new ItemOwned("Red",false, R.color.Red));

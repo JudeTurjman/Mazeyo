@@ -1,5 +1,6 @@
 package com.jude.mazeyo.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -162,6 +163,7 @@ public class SignUpFragment extends Fragment {
                 if(task.isSuccessful()){
 
                     Toast.makeText(getActivity(), "Welcome!", Toast.LENGTH_SHORT).show();
+                    fbs.setUser(null);
                     SetHomeNav();
 
                 }
@@ -178,17 +180,9 @@ public class SignUpFragment extends Fragment {
 
     private void SetHomeNav() {
 
-        fbs.setUser(null);
-
-        // Getting the Navigation Bar From The Main Activity and Showing It!
-        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
-        bnv.setSelectedItemId(R.id.nav_home);
-        bnv.setVisibility(View.VISIBLE);
-
-        // Go To Home Screen!
-        FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.FrameLayoutMain, new HomeFragment());
-        ft.commit();
+        // Refresh MainActivty and Go to HomeFragment
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
 
     }
 

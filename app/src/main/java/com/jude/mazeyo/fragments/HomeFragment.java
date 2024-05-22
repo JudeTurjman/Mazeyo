@@ -39,8 +39,6 @@ public class HomeFragment extends Fragment {
     ImageView ivProfile, ivSLNLogo;
     TextView tvMCoin, tvDailyCount;
 
-
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -99,10 +97,10 @@ public class HomeFragment extends Fragment {
         cvHard = getView().findViewById(R.id.cvHardHome);
         cvDaily = getView().findViewById(R.id.cvDailyHome);
         ivProfile = getView().findViewById(R.id.ivProfileHome);
-        Glide.with(this).load(R.mipmap.profile_launcher_foreground).transform(new CropCircleTransformation()).into(ivProfile);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountHome);
         tvDailyCount = getView().findViewById(R.id.tvDailyCountHome);
         fbs.setDifficulty("NoGame");
+
 
         if(fbs.getUser() == null){
             fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -110,9 +108,15 @@ public class HomeFragment extends Fragment {
                  public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                     User user = documentSnapshot.toObject(User.class);
+                    user.setPhoto(documentSnapshot.getString("photo"));
                     fbs.setUser(user);
 
                     tvMCoin.setText(Integer.toString(user.getCoin())+":");
+                    if (user.getPhoto() == null || user.getPhoto().isEmpty()) {
+                        Glide.with(getActivity()).load(R.mipmap.profile_launcher_foreground).into(ivProfile);
+                    }else{
+                        Glide.with(getActivity()).load(user.getPhoto()).into(ivProfile);
+                    }
 
                     // reset the user (if have played the daily play or Not) after that reset the user dailyCount...
 
@@ -150,6 +154,11 @@ public class HomeFragment extends Fragment {
         } else {
 
             tvMCoin.setText(Integer.toString(fbs.getUser().getCoin())+":");
+            if (fbs.getUser().getPhoto() == null || fbs.getUser().getPhoto().isEmpty()) {
+                Glide.with(getActivity()).load(R.mipmap.profile_launcher_foreground).into(ivProfile);
+            }else{
+                Glide.with(getActivity()).load(fbs.getUser().getPhoto()).into(ivProfile);
+            }
 
             // reset the user (if have played the daily play or Not) after that reset the user dailyCount...
 
@@ -208,8 +217,7 @@ public class HomeFragment extends Fragment {
         cvDaily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!fbs.getUser().getDidDaily())
-                    GoTODailyPlay();
+                if(!fbs.getUser().getDidDaily()) GoTODailyPlay();
                 else
                     Toast.makeText(getActivity(), "You Played today, you can't play again now", Toast.LENGTH_SHORT).show();
             }
@@ -223,9 +231,6 @@ public class HomeFragment extends Fragment {
         ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
         ft.commit();
     }
-
-
-
 
     public void GoToEasy(){
 
@@ -275,4 +280,5 @@ public class HomeFragment extends Fragment {
         // set the difficulty to Daily mode
         fbs.setDifficulty("DailyPlay");
     }
+
 }

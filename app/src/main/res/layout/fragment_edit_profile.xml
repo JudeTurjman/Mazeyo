@@ -30,12 +30,14 @@
         </LinearLayout>
 
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivImageEditProfile"
             android:layout_width="139dp"
             android:layout_height="139dp"
             android:src="@mipmap/profile_launcher_foreground"
             android:layout_marginTop="50dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/RoundShape.App.50percent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -61,6 +63,7 @@
             android:textStyle="bold"
             android:textSize="17dp"
             android:layout_width="139dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +79,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etEditUserNameEditProfile"
             android:textColor="@color/black"
-            android:textSize="17dp" />
+            android:textSize="17dp"
+            android:gravity="center" />
 
         <LinearLayout
             android:id="@+id/lEditProfile"
