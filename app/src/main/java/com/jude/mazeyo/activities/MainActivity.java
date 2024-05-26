@@ -1,9 +1,13 @@
 package com.jude.mazeyo.activities;
 
+import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,10 +23,13 @@ import com.jude.mazeyo.fragments.ProfileFragment;
 import com.jude.mazeyo.fragments.RankAllFragment;
 import com.jude.mazeyo.objects.FireBaseServices;
 
+import java.util.Stack;
+
 public class MainActivity extends AppCompatActivity {
 
     FireBaseServices fbs;
     private BottomNavigationView bnv;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +45,19 @@ public class MainActivity extends AppCompatActivity {
         fbs = FireBaseServices.getInstance();
         bnv= findViewById(R.id.BottomNavigationView);
 
-
         if(fbs.getAuth().getCurrentUser()!=null){
 
             bnv.setVisibility(View.VISIBLE);
+            fbs.setCurrentPage("Home");
             GoToHome();
 
         }else{
 
             bnv.setVisibility(View.GONE);
+            fbs.setCurrentPage("Login");
             GoToLogin();
 
         }
-
 
         bnv.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -75,10 +82,88 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void GoToHome() {
+    // The Back Pressed thing _______________:)__________________
+    @Override
+    public void onBackPressed() {
 
+        String wherePage = fbs.getCurrentPage();
+        if(!wherePage.equals("")){
+
+            // todo: if the user in the home don't lite him go to the login...
+            if (wherePage.equals("Home") || wherePage.equals("Login")){
+                super.onBackPressed();
+
+            } else if (wherePage.equals("Shop") || wherePage.equals("Profile") || wherePage.equals("RankAll")) {
+                bnv.setSelectedItemId(R.id.nav_home);
+                GoToHome();
+
+            } else if (wherePage.equals("Game")) {
+                if (!fbs.getDifficulty().equals("DailyPlay")){
+                    dialog = new Dialog(this);
+                    dialog.setContentView(R.layout.exit_game_dialog_popup);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                    dialog.show();
+
+                    Button exit = dialog.findViewById(R.id.btnExitGame);
+
+                    exit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            bnv.setVisibility(View.VISIBLE);
+                            GoToHome();
+                        }
+                    });
+                }
+
+            } else if (wherePage.equals("RankSpecific")) {
+                bnv.setVisibility(View.VISIBLE);
+                bnv.setSelectedItemId(R.id.nav_rank);
+                GoToRankAll();
+
+            } else if (wherePage.equals("EditProfile")) {
+                EditText etUnameEdit, etNoteEdit;
+                etUnameEdit = findViewById(R.id.etEditUserNameEditProfile);
+                etNoteEdit = findViewById(R.id.etEditNoteEditProfile);
+
+                if(!fbs.getUser().getUsername().equals(etUnameEdit.getText().toString()) || !fbs.getUser().getComment().equals(etNoteEdit.getText().toString())){
+
+                    dialog = new Dialog(this);
+                    dialog.setContentView(R.layout.exit_edit_profile_dialog_popup);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                    dialog.show();
+
+                    Button exit = dialog.findViewById(R.id.btnExitEditProfile);
+
+                    exit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            GoToProfile();
+                        }
+                    });
+
+                }else {
+                    GoToProfile();
+                }
+                bnv.setVisibility(View.VISIBLE);
+                bnv.setSelectedItemId(R.id.nav_profile);
+                GoToProfile();
+
+            } else if (wherePage.equals("SignUp") || wherePage.equals("ForgotPass")) {
+                GoToLogin();
+
+            }
+        }
+
+    }
+
+    public void GoToHome() {
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new HomeFragment());
+        fbs.setCurrentPage("Home");
         ft.commit();
     }
 
@@ -86,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ItemShopFragment());
-        ft.addToBackStack("HomeFragment");
+        fbs.setCurrentPage("Shop");
         ft.commit();
     }
 
@@ -94,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
-        ft.addToBackStack("HomeFragment");
+        fbs.setCurrentPage("Profile");
         ft.commit();
     }
 
@@ -102,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new LogInFragment());
-        ft.addToBackStack("HomeFragment");
+        fbs.setCurrentPage("Login");
         ft.commit();
     }
 
@@ -110,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new RankAllFragment());
-        ft.addToBackStack("HomeFragment");
+        fbs.setCurrentPage("RankAll");
         ft.commit();
     }
 

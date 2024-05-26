@@ -198,20 +198,17 @@ public class ProfileFragment extends Fragment {
     }
 
     private void GOToEditProfile() {
-
-        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
-        bnv.setVisibility(View.GONE);
+        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.GONE);
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new EditProfileFragment());
+        fbs.setCurrentPage("EditProfile");
         ft.commit();
 
     }
 
     private void GoToLogin(){
-
-        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
-        bnv.setVisibility(View.GONE);
+        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.GONE);
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new LogInFragment());

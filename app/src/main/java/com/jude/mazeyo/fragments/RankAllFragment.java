@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.jude.mazeyo.activities.MainActivity;
 import com.jude.mazeyo.objects.FireBaseServices;
 import com.jude.mazeyo.R;
 import com.jude.mazeyo.adapters.RankAdapter;
@@ -219,9 +220,11 @@ public class RankAllFragment extends Fragment {
     }
 
     private void GoToRankSpecific() {
+        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.GONE);
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new RankSpecificFragment());
+        fbs.setCurrentPage("RankSpecific");
         ft.commit();
     }
 

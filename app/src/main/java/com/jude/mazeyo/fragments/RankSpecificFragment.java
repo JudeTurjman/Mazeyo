@@ -17,9 +17,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.jude.mazeyo.activities.MainActivity;
 import com.jude.mazeyo.objects.FireBaseServices;
 import com.jude.mazeyo.R;
 import com.jude.mazeyo.adapters.RankAdapter;
@@ -185,6 +187,9 @@ public class RankSpecificFragment extends Fragment {
     }
 
     private void GoToRankAll() {
+        BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
+        bnv.setSelectedItemId(R.id.nav_rank);
+        bnv.setVisibility(View.VISIBLE);
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new RankAllFragment());

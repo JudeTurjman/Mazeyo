@@ -158,6 +158,7 @@ public class LogInFragment extends Fragment {
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new SignUpFragment());
+        fbs.setCurrentPage("SignUp");
         ft.commit();
     }
 
@@ -165,6 +166,7 @@ public class LogInFragment extends Fragment {
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ForgotPasswordFragment());
+        fbs.setCurrentPage("ForgotPass");
         ft.commit();
     }
 

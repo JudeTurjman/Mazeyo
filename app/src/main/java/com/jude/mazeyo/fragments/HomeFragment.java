@@ -23,6 +23,7 @@ import com.jude.mazeyo.objects.User;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Stack;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -209,7 +210,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 GoToProfile();
-                ((MainActivity) getActivity()).getBottomNavigationView().setSelectedItemId(R.id.nav_profile);
             }
         });
 
@@ -227,8 +227,10 @@ public class HomeFragment extends Fragment {
     }
 
     public void GoToProfile(){
+        ((MainActivity) getActivity()).getBottomNavigationView().setSelectedItemId(R.id.nav_profile);
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
+        fbs.setCurrentPage("Profile");
         ft.commit();
     }
 
@@ -239,6 +241,7 @@ public class HomeFragment extends Fragment {
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new GamePlayFragment());
+        fbs.setCurrentPage("Game");
         ft.commit();
 
         // set the difficulty to Easy mode
@@ -251,6 +254,7 @@ public class HomeFragment extends Fragment {
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new GamePlayFragment());
+        fbs.setCurrentPage("Game");
         ft.commit();
 
         // set the difficulty to Medium mode
@@ -263,6 +267,7 @@ public class HomeFragment extends Fragment {
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new GamePlayFragment());
+        fbs.setCurrentPage("Game");
         ft.commit();
 
         // set the difficulty to Hard mode
@@ -275,6 +280,7 @@ public class HomeFragment extends Fragment {
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new GamePlayFragment());
+        fbs.setCurrentPage("Game");
         ft.commit();
 
         // set the difficulty to Daily mode

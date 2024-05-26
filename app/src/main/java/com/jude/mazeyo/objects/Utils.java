@@ -19,7 +19,6 @@ import java.util.UUID;
 public class Utils {
 
     private static Utils instance;
-
     private FireBaseServices fbs;
     private String imageStr;
 
@@ -54,7 +53,7 @@ public class Utils {
                         @Override
                         public void onSuccess(Uri uri) {
                             fbs.setSelectedImageURL(uri);
-                            UpdateProfilePicture(context);
+                            //UpdateProfilePicture(context);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -78,24 +77,24 @@ public class Utils {
         }
     }
 
-    public void UpdateProfilePicture(Context context) {
-
-        String photo;
-        if (fbs.getSelectedImageURL() == null) photo = "";
-        else photo = fbs.getSelectedImageURL().toString() + ".jpg";
-
-        fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).update("photo", photo).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(context, "Profile Image Updated!", Toast.LENGTH_SHORT).show();
-                fbs.getUser().setPhoto(photo);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(context, "Couldn't Update Profile Image!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
+    //public void UpdateProfilePicture(Context context) {
+    //
+    //        String photo;
+    //        if (fbs.getSelectedImageURL() == null) photo = "";
+    //        else photo = fbs.getSelectedImageURL().toString() + ".jpg";
+    //
+    //        fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).update("photo", photo).addOnSuccessListener(new OnSuccessListener<Void>() {
+    //            @Override
+    //            public void onSuccess(Void unused) {
+    //                Toast.makeText(context, "Profile Image Updated!", Toast.LENGTH_SHORT).show();
+    //                fbs.getUser().setPhoto(photo);
+    //            }
+    //        }).addOnFailureListener(new OnFailureListener() {
+    //            @Override
+    //            public void onFailure(@NonNull Exception e) {
+    //                Toast.makeText(context, "Couldn't Update Profile Image!", Toast.LENGTH_SHORT).show();
+    //            }
+    //        });
+    //
+    //    }
 }

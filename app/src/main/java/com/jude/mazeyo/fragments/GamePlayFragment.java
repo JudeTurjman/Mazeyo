@@ -1,5 +1,6 @@
 package com.jude.mazeyo.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -9,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jude.mazeyo.objects.FireBaseServices;
@@ -24,6 +26,7 @@ public class GamePlayFragment extends Fragment {
 
     FireBaseServices fbs;
     CardView cvHome;
+    Dialog dialog;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,7 +88,25 @@ public class GamePlayFragment extends Fragment {
         }else {
             cvHome.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {GoToHome();}
+                public void onClick(View v) {
+                    if (!fbs.getDifficulty().equals("DailyPlay")){
+                        dialog = new Dialog(getActivity());
+                        dialog.setContentView(R.layout.exit_game_dialog_popup);
+                        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                        dialog.show();
+
+                        Button exit = dialog.findViewById(R.id.btnExitGame);
+
+                        exit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                                GoToHome();
+                            }
+                        });
+                    }
+                }
             });
         }
     }

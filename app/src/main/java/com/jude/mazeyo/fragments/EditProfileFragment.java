@@ -1,5 +1,6 @@
 package com.jude.mazeyo.fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +26,8 @@ import com.jude.mazeyo.R;
 import com.jude.mazeyo.objects.User;
 import com.jude.mazeyo.objects.Utils;
 import com.yalantis.ucrop.UCrop;
+
+import org.checkerframework.common.subtyping.qual.Bottom;
 
 import java.io.File;
 import java.util.UUID;
@@ -43,7 +47,7 @@ public class EditProfileFragment extends Fragment {
     ImageView ivGoBack, ivEditImage;
     TextView tvEdit;
     EditText etUname, etNote;
-    //Utils utils
+    Dialog dialog;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -144,10 +148,10 @@ public class EditProfileFragment extends Fragment {
 
                 }
 
-                if (fbs.getSelectedImageURL() == null) photo = null;
-                else photo = fbs.getSelectedImageURL().toString()+".jpg";
-
-                user.setPhoto(photo);
+                if (fbs.getSelectedImageURL() != null) {
+                    photo = fbs.getSelectedImageURL().toString()+".jpg";
+                    user.setPhoto(photo);
+                }
 
                 if (!finalUname.equals(etUname.getText().toString())){
                     if (fbs.getUser().getCoin() < 10000){
@@ -157,11 +161,31 @@ public class EditProfileFragment extends Fragment {
                     }
                     else {
 
-                        user.setCoin( user.getCoin() - 10000);
-                        user.setUsername(etUname.getText().toString());
-                        user.setComment(etNote.getText().toString());
-                        Toast.makeText(getActivity(), "- 10,000", Toast.LENGTH_SHORT).show();
+                        dialog = new Dialog(getActivity());
+                        dialog.setContentView(R.layout.edit_dialog_popup);
+                        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                        dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                        dialog.show();
 
+                        Button edit = dialog.findViewById(R.id.btnEditProfile);
+                        edit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                user.setCoin( user.getCoin() - 10000);
+                                user.setUsername(etUname.getText().toString());
+                                user.setComment(etNote.getText().toString());
+                                Toast.makeText(getActivity(), " -10,000", Toast.LENGTH_SHORT).show();
+                                fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        fbs.setUser(user);
+                                    }
+                                });
+
+                                dialog.dismiss();
+                                GoToProfile();
+                            }
+                        });
                     }
                 }
                 else {
@@ -170,22 +194,43 @@ public class EditProfileFragment extends Fragment {
 
                 }
 
-                fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        fbs.setUser(user);
-                    }
-                });
+                if (finalUname.equals(etUname.getText().toString()) || fbs.getUser().getCoin() < 10000){
+                    fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            fbs.setUser(user);
+                        }
+                    });
 
-                GOToProfile();
-
+                    GoToProfile();
+                }
             }
         });
 
         ivGoBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GOToProfile();
+                if(!finalUname.equals(etUname.getText().toString()) || !fbs.getUser().getComment().equals(etNote.getText().toString())){
+
+                    dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.exit_edit_profile_dialog_popup);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                    dialog.show();
+
+                    Button exit = dialog.findViewById(R.id.btnExitEditProfile);
+
+                    exit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            GoToProfile();
+                        }
+                    });
+
+                }else {
+                    GoToProfile();
+                }
             }
         });
 
@@ -235,7 +280,7 @@ public class EditProfileFragment extends Fragment {
 
     }
 
-    private void GOToProfile() {
+    private void GoToProfile() {
 
         BottomNavigationView bnv = ((MainActivity) getActivity()).getBottomNavigationView();
         bnv.setSelectedItemId(R.id.nav_profile);

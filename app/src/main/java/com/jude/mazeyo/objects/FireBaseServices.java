@@ -6,6 +6,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.Stack;
+
 public class FireBaseServices {
 
     private  static FireBaseServices instance;
@@ -18,6 +20,15 @@ public class FireBaseServices {
 
     // -------------------------------
     private static String seeRank;
+    private static String CurrentPage;
+
+    public static String getCurrentPage() {
+        return CurrentPage;
+    }
+
+    public static void setCurrentPage(String currentPage) {
+        CurrentPage = currentPage;
+    }
 
     public static String getSeeRank() {
         return seeRank;
@@ -79,5 +90,4 @@ public class FireBaseServices {
         }
         return instance;
     }
-
 }

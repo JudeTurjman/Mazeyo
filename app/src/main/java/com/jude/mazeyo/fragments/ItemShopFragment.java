@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.jude.mazeyo.activities.MainActivity;
 import com.jude.mazeyo.objects.FireBaseServices;
 import com.jude.mazeyo.objects.Item;
 import com.jude.mazeyo.adapters.MapShopAdapter;
@@ -287,7 +288,7 @@ public class ItemShopFragment extends Fragment {
     }
 
     private void GoToProfile() {
-
+        ((MainActivity) getActivity()).getBottomNavigationView().setSelectedItemId(R.id.nav_profile);
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new ProfileFragment());
         ft.commit();
