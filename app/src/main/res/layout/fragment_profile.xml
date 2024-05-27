@@ -198,6 +198,7 @@
                 app:layout_constraintTop_toBottomOf="@id/rvMapProfile">
 
                 <LinearLayout
+                    android:id="@+id/llLogoutProfile"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/card_view_shadow">

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -37,7 +38,7 @@ public class ProfileFragment extends Fragment {
 
     private FireBaseServices fbs;
     TextView tvUsername, tvEasy, tvMedium, tvHard, tvComment;
-    CardView cvLogout;
+    LinearLayout llLogout;
     RecyclerView rvOwnedSkin;
     ArrayList<ItemOwned> iOwnedSkins;
     RecyclerView rvOwnedMap;
@@ -103,7 +104,7 @@ public class ProfileFragment extends Fragment {
         tvMedium = getView().findViewById(R.id.tvMediumProfile);
         tvHard = getView().findViewById(R.id.tvHardProfile);
         tvComment  = getView().findViewById(R.id.tvCommentProfile);
-        cvLogout = getView().findViewById(R.id.cvLogoutProfile);
+        llLogout = getView().findViewById(R.id.llLogoutProfile);
         rvOwnedSkin = getView().findViewById(R.id.rvSkinProfile);
         iOwnedSkins = new ArrayList<ItemOwned>();
         rvOwnedMap = getView().findViewById(R.id.rvMapProfile);
@@ -183,7 +184,7 @@ public class ProfileFragment extends Fragment {
             rvOwnedMap.setAdapter(new OwnedMapAdapter(getActivity(),iOwnedMaps));
         }
 
-        cvLogout.setOnClickListener(new View.OnClickListener() {
+        llLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {GoToLogin();}
         });
@@ -212,6 +213,7 @@ public class ProfileFragment extends Fragment {
 
         FragmentTransaction ft= getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.FrameLayoutMain, new LogInFragment());
+        fbs.setCurrentPage("Login");
         ft.commit();
     }
 }

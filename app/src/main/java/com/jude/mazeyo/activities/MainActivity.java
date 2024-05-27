@@ -88,10 +88,58 @@ public class MainActivity extends AppCompatActivity {
 
         String wherePage = fbs.getCurrentPage();
         if(!wherePage.equals("")){
+            if (wherePage.equals("Home")){
+                dialog = new Dialog(this);
+                dialog.setContentView(R.layout.exit_app_dialog_popup);
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                dialog.show();
 
-            // todo: if the user in the home don't lite him go to the login...
-            if (wherePage.equals("Home") || wherePage.equals("Login")){
-                super.onBackPressed();
+                Button exit = dialog.findViewById(R.id.btnExitApp);
+                Button stay = dialog.findViewById(R.id.btnExitExitApp);
+                exit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finishAffinity();
+                        dialog.dismiss();
+                    }
+                });
+                stay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+            } else if (wherePage.equals("Login")){
+                if (fbs.getAuth().getCurrentUser()!=null){
+                    bnv.setSelectedItemId(R.id.nav_home);
+                    bnv.setVisibility(View.VISIBLE);
+                    GoToHome();
+                }
+                else {
+                    dialog = new Dialog(this);
+                    dialog.setContentView(R.layout.exit_app_dialog_popup);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                    dialog.show();
+
+                    Button exit = dialog.findViewById(R.id.btnExitApp);
+                    Button stay = dialog.findViewById(R.id.btnExitExitApp);
+                    exit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finishAffinity();
+                            dialog.dismiss();
+                        }
+                    });
+                    stay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                }
 
             } else if (wherePage.equals("Shop") || wherePage.equals("Profile") || wherePage.equals("RankAll")) {
                 bnv.setSelectedItemId(R.id.nav_home);
@@ -155,6 +203,9 @@ public class MainActivity extends AppCompatActivity {
             } else if (wherePage.equals("SignUp") || wherePage.equals("ForgotPass")) {
                 GoToLogin();
 
+            }
+            else {
+                super.onBackPressed();
             }
         }
 
