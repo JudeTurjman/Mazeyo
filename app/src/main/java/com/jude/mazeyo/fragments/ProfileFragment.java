@@ -43,7 +43,7 @@ public class ProfileFragment extends Fragment {
     ArrayList<ItemOwned> iOwnedSkins;
     RecyclerView rvOwnedMap;
     ArrayList<ItemOwned> iOwnedMaps;
-    ImageView ivSetting, ivImage, ivSLNLogo;
+    ImageView ivSetting, ivImage, ivSLNLogo, ivActeenLogo;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,6 +97,7 @@ public class ProfileFragment extends Fragment {
 
         fbs = FireBaseServices.getInstance();
         ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoProfile);
+        ivActeenLogo = getView().findViewById(R.id.ivActeenLogoProfile);
         ivImage = getView().findViewById(R.id.ivImageProfile);
         tvUsername = getView().findViewById(R.id.tvUsernameProfile);
         ivSetting = getView().findViewById(R.id.ivGoToSettingProfile);
@@ -147,8 +148,13 @@ public class ProfileFragment extends Fragment {
 
                 if(user.getOwnedSkins().get(i).equals("Amber"))iOwnedSkins.add(new ItemOwned("Amber",false,R.color.Amber));
 
+                if(user.getOwnedSkins().get(i).equals("Acteen Yellow")){
+                    iOwnedSkins.add(new ItemOwned("Acteen Yellow", false, R.color.Gargoyle_Gas));
+                    ivActeenLogo.setVisibility(View.VISIBLE);
+                }
+
                 if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
-                    iOwnedSkins.add(new ItemOwned("CarSLn Blue", false, R.color.Blue700));
+                    iOwnedSkins.add(new ItemOwned("CarSLN Blue", false, R.color.Blue700));
                     ivSLNLogo.setVisibility(View.VISIBLE);
                 }
             }

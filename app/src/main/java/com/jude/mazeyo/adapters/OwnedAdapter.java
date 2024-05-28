@@ -64,7 +64,7 @@ public class OwnedAdapter extends RecyclerView.Adapter<OwnedAdapter.ViewHolderOw
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Try to chang your Use Color agan!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Try to change your Used Color agan!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

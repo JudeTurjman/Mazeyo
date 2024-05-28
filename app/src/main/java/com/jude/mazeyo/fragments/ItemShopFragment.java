@@ -38,8 +38,8 @@ public class ItemShopFragment extends Fragment {
     TextView tvMCoin, tvItemPrice, tvColorName;
     RecyclerView rvSkin, rvMap;
     ArrayList<Item> iSkins, iMaps;
-    ImageView ivProfile, ivSLNLogo;
-    boolean Black = false, LightOrange = false,Mango = false,Bronze = false, RedOrange = false,TurquoiseBlue = false,BlackBron = false,Amber = false,CarSLnBlue = false;
+    ImageView ivProfile, ivSLNLogo, ivActeenLogo;
+    boolean Black = false, LightOrange = false,Mango = false,Bronze = false, RedOrange = false,TurquoiseBlue = false,BlackBron = false,Amber = false,CarSLnBlue = false,ActeenYellow = false;
     boolean Nature = false,Water = false,Beach = false,Ice = false,Greek = false,Egyptian = false,World = false,Church = false,Aqsa = false;
 
 
@@ -98,6 +98,7 @@ public class ItemShopFragment extends Fragment {
 
         fbs = FireBaseServices.getInstance();
         ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoShop);
+        ivActeenLogo = getView().findViewById(R.id.ivActeenLogoShop);
         ivProfile = getView().findViewById(R.id.ivProfileShop);
         tvMCoin = getView().findViewById(R.id.tvMCoinCountShop);
         rvSkin = getView().findViewById(R.id.rvSkinShop);
@@ -203,14 +204,23 @@ public class ItemShopFragment extends Fragment {
                 Amber = true;
             }
         }
-        if(!Amber)iSkins.add(new Item("Amber",62000,R.color.Amber));
+        if(!Amber)iSkins.add(new Item("Amber",52000,R.color.Amber));
+
+        for (int i =0 ; i<user.getOwnedSkins().size(); i++) {
+            if (user.getOwnedSkins().get(i).equals("Acteen Yellow")) {
+                ActeenYellow = true;
+            }
+        }
+        if(!ActeenYellow)iSkins.add(new Item("Acteen Yellow", 69000, R.drawable.gargoyle_gas_acteen));
+        else ivActeenLogo.setVisibility(View.VISIBLE);
+
 
         for (int i =0 ; i<user.getOwnedSkins().size(); i++) {
             if (user.getOwnedSkins().get(i).equals("CarSLn Blue")) {
                 CarSLnBlue = true;
             }
         }
-        if(!CarSLnBlue)iSkins.add(new Item("CarSLn Blue", 88000, R.drawable.blue700_carsln));
+        if(!CarSLnBlue)iSkins.add(new Item("CarSLN Blue", 88000, R.drawable.blue700_carsln));
         else ivSLNLogo.setVisibility(View.VISIBLE);
 
         rvSkin.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.HORIZONTAL, false));

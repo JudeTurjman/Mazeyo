@@ -32,6 +32,15 @@
             android:src="@drawable/carsln_sln_logo"
             android:visibility="gone"/>
 
+        <ImageView
+            android:id="@+id/ivActeenLogoShop"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            app:layout_constraintStart_toStartOf="@+id/ivProfileShop"
+            app:layout_constraintBottom_toBottomOf="@id/ivProfileShop"
+            android:src="@drawable/acteen_logo"
+            android:visibility="gone"/>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cvMCoinShop"
             android:layout_width="wrap_content"

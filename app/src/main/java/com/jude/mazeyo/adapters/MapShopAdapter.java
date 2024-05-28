@@ -26,8 +26,10 @@ public class MapShopAdapter extends RecyclerView.Adapter<MapShopAdapter.ViewHold
     private FireBaseServices fbs;
     private Context context;
     private ArrayList<Item> lst;
+    Dialog dialog;
 
     public MapShopAdapter(Context context, ArrayList<Item> lst) {
+        fbs = FireBaseServices.getInstance();
         this.context = context;
         this.lst = lst;
     }
@@ -43,6 +45,58 @@ public class MapShopAdapter extends RecyclerView.Adapter<MapShopAdapter.ViewHold
     public void onBindViewHolder(@NonNull MapShopAdapter.ViewHolderShop holder, int position) {
         Item item = lst.get(position);
         holder.SetDetails(item);
+
+        holder.tvPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fbs.getUser().getCoin() < Integer.parseInt(holder.tvPrice.getText().toString())){
+                    Toast.makeText(context, "You don't have enough Mazeyo Coin", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    dialog = new Dialog(context);
+                    dialog.setContentView(R.layout.buy_dialog_popup);
+                    dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
+                    dialog.show();
+
+
+                    Button buy = dialog.findViewById(R.id.btnBuyItem);
+                    Button exit = dialog.findViewById(R.id.btnExitBuyItem);
+
+                    buy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            User user = fbs.getUser();
+                            user.getOwnedMaps().add(holder.tvName.getText().toString());
+                            user.setCoin(user.getCoin() - Integer.parseInt(holder.tvPrice.getText().toString()));
+
+                            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                    fbs.setUser(user);
+                                    // delete from current arraylist
+                                    lst.remove(holder.getAdapterPosition());
+
+                                    notifyDataSetChanged();
+                                }
+                            });
+
+                            dialog.dismiss();
+                        }
+                    });
+                    exit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+
+                }
+            }
+        });
     }
 
     @Override
@@ -50,11 +104,10 @@ public class MapShopAdapter extends RecyclerView.Adapter<MapShopAdapter.ViewHold
         return lst.size();
     }
 
-    public class ViewHolderShop extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolderShop extends RecyclerView.ViewHolder{
 
         private TextView tvName, tvPrice;
         private ImageView ivMap;
-        Dialog dialog;
 
         public ViewHolderShop(@NonNull View itemView) {
             super(itemView);
@@ -62,54 +115,7 @@ public class MapShopAdapter extends RecyclerView.Adapter<MapShopAdapter.ViewHold
             tvName = itemView.findViewById(R.id.tvNameItem);
             tvPrice = itemView.findViewById(R.id.tvPriceItem);
             ivMap = itemView.findViewById(R.id.ivColorItem);
-
-            fbs = FireBaseServices.getInstance();
-
-            tvPrice.setOnClickListener(this);
         }
-
-        @Override
-        public void onClick(View v) {
-            if (fbs.getUser().getCoin() < Integer.parseInt(tvPrice.getText().toString())) {
-                Toast.makeText(context, "You don't have enough Mazeyo Coin", Toast.LENGTH_SHORT).show();
-            } else {
-
-                dialog = new Dialog(context);
-                dialog.setContentView(R.layout.buy_dialog_popup);
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
-                dialog.show();
-
-
-                Button buy = dialog.findViewById(R.id.btnBuyItem);
-                Button exit = dialog.findViewById(R.id.btnExitBuyItem);
-
-                buy.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        User user = fbs.getUser();
-                        user.getOwnedMaps().add(tvName.getText().toString());
-                        user.setCoin(user.getCoin() - Integer.parseInt(tvPrice.getText().toString()));
-
-                        fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                fbs.setUser(user);
-                            }
-                        });
-
-                        dialog.dismiss();
-                    }
-                });
-                exit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-            }
-        }
-
         public void SetDetails(Item item) {
 
             tvName.setText(item.getName());

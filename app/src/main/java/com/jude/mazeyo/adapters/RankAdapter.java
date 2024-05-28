@@ -64,6 +64,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
 
 
                 ImageView ivSLNLogoPopUP = dialog.findViewById(R.id.ivCarSLNLogoUserPopUp);
+                ImageView ivActeenLogoPopUP = dialog.findViewById(R.id.ivActeenLogoUserPopUp);
                 ImageView ivProfilePhoto = dialog.findViewById(R.id.ivImageUserPopUp);
                 TextView tvUserName = dialog.findViewById(R.id.tvUsernameUserPopUp);
                 TextView tvComment = dialog.findViewById(R.id.tvCommentUserPopUp);
@@ -85,14 +86,19 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
                 tvHard.setText(String.valueOf(user.getHard()));
 
                 // put the CarSLN logo in the profile photo "SLN"
-                boolean haveSLN = false;
+                boolean haveSLN = false, haveActeen = false;
                 for (int i = 0; i < user.getOwnedSkins().size(); i++){
                     if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
                         ivSLNLogoPopUP.setVisibility(View.VISIBLE);
                         haveSLN = true;
                     }
+                    if(user.getOwnedSkins().get(i).equals("Acteen Yellow")){
+                        ivActeenLogoPopUP.setVisibility(View.VISIBLE);
+                        haveActeen = true;
+                    }
                 }
                 if (!haveSLN)ivSLNLogoPopUP.setVisibility(View.GONE);
+                if (!haveActeen)ivSLNLogoPopUP.setVisibility(View.GONE);
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -112,7 +118,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
     public class ViewRanking extends RecyclerView.ViewHolder{
 
         private TextView tvRank, tvUsername, tvCount;
-        private ImageView ivProfile, ivSLNLogo;
+        private ImageView ivProfile, ivSLNLogo, ivActeenLogo;
         private CardView cvRank, cvSeeTheUser;
 
         public ViewRanking(@NonNull View itemView) {
@@ -122,6 +128,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
             tvRank = itemView.findViewById(R.id.tvRankUser);
             tvUsername = itemView.findViewById(R.id.tvUserNameUser);
             ivSLNLogo = itemView.findViewById(R.id.ivCarSLNLogoUser);
+            ivActeenLogo = itemView.findViewById(R.id.ivActeenLogoUser);
             ivProfile = itemView.findViewById(R.id.ivRankUser);
             cvRank = itemView.findViewById(R.id.cvRankUser);
             cvSeeTheUser = itemView.findViewById(R.id.cvSeeTheUser);
@@ -156,6 +163,9 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
             for (int i = 0; i < user.getOwnedSkins().size(); i++){
                 if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
                     ivSLNLogo.setVisibility(View.VISIBLE);
+                }
+                if(user.getOwnedSkins().get(i).equals("Acteen Yellow")){
+                    ivActeenLogo.setVisibility(View.VISIBLE);
                 }
             }
 

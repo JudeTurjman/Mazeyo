@@ -78,8 +78,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolderShop
                                 public void onSuccess(Void unused) {
 
                                     fbs.setUser(user);
+                                    // delete from current arraylist
+                                    lst.remove(holder.getAdapterPosition());
 
-                                    // todo: delete the item that the user pays...
+                                    notifyDataSetChanged();
                                 }
                             });
 

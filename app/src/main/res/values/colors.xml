@@ -21,4 +21,5 @@
     <color name="Red"> #FFFF0000 </color>
     <color name="Light_Silver"> #D3D3D3 </color>
     <color name="Silver"> #C2BEBE </color>
+    <color name="Gargoyle_Gas">#F7DC37</color>
 </resources>

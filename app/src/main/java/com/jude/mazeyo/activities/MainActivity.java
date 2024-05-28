@@ -189,16 +189,17 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
+                            bnv.setVisibility(View.VISIBLE);
+                            bnv.setSelectedItemId(R.id.nav_profile);
                             GoToProfile();
                         }
                     });
 
                 }else {
+                    bnv.setVisibility(View.VISIBLE);
+                    bnv.setSelectedItemId(R.id.nav_profile);
                     GoToProfile();
                 }
-                bnv.setVisibility(View.VISIBLE);
-                bnv.setSelectedItemId(R.id.nav_profile);
-                GoToProfile();
 
             } else if (wherePage.equals("SignUp") || wherePage.equals("ForgotPass")) {
                 GoToLogin();

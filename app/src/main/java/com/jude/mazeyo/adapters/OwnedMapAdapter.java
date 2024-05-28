@@ -55,7 +55,7 @@ public class OwnedMapAdapter extends RecyclerView.Adapter<OwnedMapAdapter.ViewHo
                 fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(context, "You chang your Use Color", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "You change your Used Map", Toast.LENGTH_SHORT).show();
                         fbs.setUser(user);
 
                         notifyDataSetChanged();
@@ -63,7 +63,7 @@ public class OwnedMapAdapter extends RecyclerView.Adapter<OwnedMapAdapter.ViewHo
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context, "Try to chang your Use Color agan!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Try to change your Used Map agan!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

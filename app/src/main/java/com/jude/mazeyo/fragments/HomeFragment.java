@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
 
     private FireBaseServices fbs;
     CardView cvEasy, cvMedium, cvHard, cvDaily;
-    ImageView ivProfile, ivSLNLogo;
+    ImageView ivProfile, ivSLNLogo, ivActeenLogo;
     TextView tvMCoin, tvDailyCount;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -93,6 +93,7 @@ public class HomeFragment extends Fragment {
 
         fbs = FireBaseServices.getInstance();
         ivSLNLogo = getView().findViewById(R.id.ivCarSLNLogoHome);
+        ivActeenLogo = getView().findViewById(R.id.ivActeenLogoHome);
         cvEasy = getView().findViewById(R.id.cvEasyHome);
         cvMedium = getView().findViewById(R.id.cvMediumHome);
         cvHard = getView().findViewById(R.id.cvHardHome);
@@ -148,6 +149,9 @@ public class HomeFragment extends Fragment {
                         if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
                             ivSLNLogo.setVisibility(View.VISIBLE);
                         }
+                        if(user.getOwnedSkins().get(i).equals("Acteen Yellow")){
+                            ivActeenLogo.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             });
@@ -183,6 +187,9 @@ public class HomeFragment extends Fragment {
             for (int i = 0; i < fbs.getUser().getOwnedSkins().size(); i++){
                 if(fbs.getUser().getOwnedSkins().get(i).equals("CarSLn Blue")){
                     ivSLNLogo.setVisibility(View.VISIBLE);
+                }
+                if(fbs.getUser().getOwnedSkins().get(i).equals("Acteen Yellow")){
+                    ivActeenLogo.setVisibility(View.VISIBLE);
                 }
             }
 
