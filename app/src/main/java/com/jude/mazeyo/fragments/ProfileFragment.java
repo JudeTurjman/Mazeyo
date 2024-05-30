@@ -153,7 +153,7 @@ public class ProfileFragment extends Fragment {
                     ivActeenLogo.setVisibility(View.VISIBLE);
                 }
 
-                if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
+                if(user.getOwnedSkins().get(i).equals("CarSLN Blue")){
                     iOwnedSkins.add(new ItemOwned("CarSLN Blue", false, R.color.Blue700));
                     ivSLNLogo.setVisibility(View.VISIBLE);
                 }

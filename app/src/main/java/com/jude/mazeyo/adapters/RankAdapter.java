@@ -88,7 +88,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
                 // put the CarSLN logo in the profile photo "SLN"
                 boolean haveSLN = false, haveActeen = false;
                 for (int i = 0; i < user.getOwnedSkins().size(); i++){
-                    if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
+                    if(user.getOwnedSkins().get(i).equals("CarSLN Blue")){
                         ivSLNLogoPopUP.setVisibility(View.VISIBLE);
                         haveSLN = true;
                     }
@@ -98,7 +98,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
                     }
                 }
                 if (!haveSLN)ivSLNLogoPopUP.setVisibility(View.GONE);
-                if (!haveActeen)ivSLNLogoPopUP.setVisibility(View.GONE);
+                if (!haveActeen)ivActeenLogoPopUP.setVisibility(View.GONE);
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -161,7 +161,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewRanking> {
 
             // put the CarSLN logo in the profile photo "SLN"
             for (int i = 0; i < user.getOwnedSkins().size(); i++){
-                if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
+                if(user.getOwnedSkins().get(i).equals("CarSLN Blue")){
                     ivSLNLogo.setVisibility(View.VISIBLE);
                 }
                 if(user.getOwnedSkins().get(i).equals("Acteen Yellow")){

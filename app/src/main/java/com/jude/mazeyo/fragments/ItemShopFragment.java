@@ -216,7 +216,7 @@ public class ItemShopFragment extends Fragment {
 
 
         for (int i =0 ; i<user.getOwnedSkins().size(); i++) {
-            if (user.getOwnedSkins().get(i).equals("CarSLn Blue")) {
+            if (user.getOwnedSkins().get(i).equals("CarSLN Blue")) {
                 CarSLnBlue = true;
             }
         }

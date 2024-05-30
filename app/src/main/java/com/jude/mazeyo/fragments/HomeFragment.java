@@ -146,7 +146,7 @@ public class HomeFragment extends Fragment {
 
                     // put the CarSLN logo in the profile photo "SLN"
                     for (int i = 0; i < user.getOwnedSkins().size(); i++){
-                        if(user.getOwnedSkins().get(i).equals("CarSLn Blue")){
+                        if(user.getOwnedSkins().get(i).equals("CarSLN Blue")){
                             ivSLNLogo.setVisibility(View.VISIBLE);
                         }
                         if(user.getOwnedSkins().get(i).equals("Acteen Yellow")){
@@ -185,7 +185,7 @@ public class HomeFragment extends Fragment {
             tvDailyCount.setText(Integer.toString(fbs.getUser().getDailyCount()));
 
             for (int i = 0; i < fbs.getUser().getOwnedSkins().size(); i++){
-                if(fbs.getUser().getOwnedSkins().get(i).equals("CarSLn Blue")){
+                if(fbs.getUser().getOwnedSkins().get(i).equals("CarSLN Blue")){
                     ivSLNLogo.setVisibility(View.VISIBLE);
                 }
                 if(fbs.getUser().getOwnedSkins().get(i).equals("Acteen Yellow")){

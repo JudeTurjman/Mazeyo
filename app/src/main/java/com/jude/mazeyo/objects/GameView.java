@@ -102,7 +102,7 @@ public class GameView extends View {
             playerPaint.setColor(getResources().getColor(R.color.Amber));
         if (fbs.getUser().getInUse().equals("Acteen Yellow"))
             playerPaint.setColor(getResources().getColor(R.color.Gargoyle_Gas));
-        if (fbs.getUser().getInUse().equals("CarSLn Blue"))
+        if (fbs.getUser().getInUse().equals("CarSLN Blue"))
             playerPaint.setColor(getResources().getColor(R.color.Blue700));
 
         exitPaint = new Paint();
