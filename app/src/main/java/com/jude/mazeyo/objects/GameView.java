@@ -37,6 +37,8 @@ public class GameView extends View {
     private FireBaseServices fbs;
     Context contextView;
     Dialog dialog;
+
+    // enumeration is a data type of self defined constants
     private enum Direction{
         UP, DOWN, LEFT, RIGHT
     }
@@ -56,6 +58,7 @@ public class GameView extends View {
 
         fbs = FireBaseServices.getInstance();
 
+        // the walls color and thickness
         wallPaint = new Paint();
         wallPaint.setColor(Color.BLACK);
         wallPaint.setStrokeWidth(WALL_THICKNESS);
@@ -143,6 +146,7 @@ public class GameView extends View {
          createMaze();
     }
 
+    // this method is to see the unvisited neighbours and to choose one of them if there is one or more
     private Cell getNeighbour(Cell cell){
         ArrayList<Cell> neighbours = new ArrayList<>();
 
@@ -173,6 +177,7 @@ public class GameView extends View {
         return null;
     }
 
+    // this method is to remove the current and the next walls
     private void removeWall(Cell current, Cell next){
         if (current.col == next.col && current.row == next.row+1){
             current.topwall = false;
@@ -196,6 +201,7 @@ public class GameView extends View {
 
     }
 
+    // this method is to create the maze
     private void createMaze(){
 
         Stack<Cell> stack = new Stack<>();
@@ -227,6 +233,7 @@ public class GameView extends View {
 
     }
 
+    // to draw the maze on the screen
     @Override
     protected void onDraw(Canvas canvas) {
         if (backgroundMap == null || backgroundMap.toString().equals("White"))
@@ -303,6 +310,7 @@ public class GameView extends View {
                 exitPaint);
     }
 
+    // this method is to change the player position
     private void movePlayer(Direction direction){
         switch (direction){
             case UP:
@@ -327,12 +335,14 @@ public class GameView extends View {
         invalidate();
     }
 
+    // check if the player has reached the exit
     private void checkExit(){
 
         if (player == exit)
         {
             // add one Game Played to the current Difficulty! and Increase Coins Count.
             User user = fbs.getUser();
+            final boolean[] bool = {false};
 
             if(!dialog.isShowing()) dialog.show();
 
@@ -343,42 +353,48 @@ public class GameView extends View {
                 exit.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (user != null){
 
-                            int money = 150 + user.getDailyCount() * 50;
-                            user.setCoin(user.getCoin() + money);
-                            user.setDailyCount(user.getDailyCount() + 1);
-                            user.setDidDaily(true);
-                            user.setDatePlay(Calendar.getInstance().getTime());
-                            Toast.makeText(contextView, "You Got " + money + " Mazeyo Coins!", Toast.LENGTH_SHORT).show();
+                        if (!bool[0]) {
+                            if (user != null) {
 
-                            // go to the home
-                            fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
+                                int money = 150 + user.getDailyCount() * 50;
+                                user.setCoin(user.getCoin() + money);
+                                user.setDailyCount(user.getDailyCount() + 1);
+                                user.setDidDaily(true);
+                                user.setDatePlay(Calendar.getInstance().getTime());
+                                Toast.makeText(contextView, "You Got " + money + " Mazeyo Coins!", Toast.LENGTH_SHORT).show();
 
-                                    fbs.setUser(user);
+                                // go to the home
+                                fbs.getFirestore().collection("Users").document(fbs.getAuth().getCurrentUser().getEmail()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
 
-                                    fbs.setDifficulty("NoGame");
+                                        fbs.setUser(user);
 
-                                    FragmentManager fm = ((MainActivity) contextView).getSupportFragmentManager();
+                                        fbs.setDifficulty("NoGame");
 
-                                    BottomNavigationView bnv = ((MainActivity) contextView).getBottomNavigationView();
-                                    bnv.setVisibility(View.VISIBLE);
+                                        FragmentManager fm = ((MainActivity) contextView).getSupportFragmentManager();
 
-                                    FragmentTransaction ft = fm.beginTransaction();
-                                    ft.replace(R.id.FrameLayoutMain, new HomeFragment());
-                                    ft.commit();
+                                        BottomNavigationView bnv = ((MainActivity) contextView).getBottomNavigationView();
+                                        bnv.setVisibility(View.VISIBLE);
 
-                                    dialog.dismiss();
+                                        FragmentTransaction ft = fm.beginTransaction();
+                                        ft.replace(R.id.FrameLayoutMain, new HomeFragment());
+                                        ft.commit();
 
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
-                                }
-                            });
+                                        dialog.dismiss();
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(contextView, "Couldn't Update Stats, Try Again Later", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                            }
+
+                            bool[0] = true;
 
                         }
                     }
@@ -391,7 +407,6 @@ public class GameView extends View {
 
                 Button cont = dialog.findViewById(R.id.btnContinueWinner);
                 Button exit = dialog.findViewById(R.id.btnExitWinner);
-                final boolean[] bool = {false};
 
                 createMaze();
 
@@ -506,6 +521,7 @@ public class GameView extends View {
         }
     }
 
+    // this method is to let the screen touchable (you can move with it) and to move the player
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -548,6 +564,7 @@ public class GameView extends View {
         return super.onTouchEvent(event);
     }
 
+    // cell object, to hold the walls
     private static class Cell{
         boolean topwall = true;
         boolean leftwall = true;
